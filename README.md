@@ -17,8 +17,6 @@ This app is IN PROGRESS and  transforms your Android device into a virtual piano
     
     1. Clone this repository:
     git clone https://github.com/yourusername/MelodyKeys.git
-    
-    text
     2. Open the project in **Android Studio**. 🛠️
     3. Sync Gradle files and resolve dependencies. 🔄
     4. Build and run the app on your Android device or emulator. 📱

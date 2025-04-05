@@ -42,7 +42,7 @@ text
 
 ## 🎥 Demo
 
-![Demo GIF](https://your-demo-link.gif)
+=== IN PROGRESSS ===
 
 ---
 

@@ -6,6 +6,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity"
+    android:paddingRight="16dp"
+    android:paddingLeft="16dp"
+    android:paddingBottom="16dp"
+    android:gravity="top|center"
+    android:background="#815555"
     >
 
     <HorizontalScrollView
@@ -18,7 +23,7 @@
 
             <Button
                 android:id="@+id/button"
-                style = "@style/first_key_type_for_pink_key"/>
+                style = "@style/first_key_type_for_pink_key" />
 
         </RelativeLayout>
 

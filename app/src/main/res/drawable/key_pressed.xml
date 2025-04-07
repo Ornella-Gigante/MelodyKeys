@@ -1,4 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<selector xmlns:android="http://schemas.android.com/apk/res/android">
+<layer-list
 
-</selector>
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item>
+        <shape android:shape="rectangle">
+            <solid android:color="#000000"/>
+        </shape>
+    </item>
+
+    <item android:top="10dp">
+
+        <shape
+            android:layout_height="match_parent"
+            android:shape="rectangle">
+            <corners android:radius="5dp" />
+            <solid android:color="#f7bcbc" />
+        </shape>
+    </item>
+</layer-list>

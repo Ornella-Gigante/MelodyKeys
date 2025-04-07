@@ -16,7 +16,7 @@
 
         <!--CUSTOM DRAWABLE FILE-->
 
-        <item name="android:background"></item>
+        <item name="android:background">@drawable/pressed_and_normal_selector</item>
         <item name="android:stateListAnimator"> @null</item>
 
 

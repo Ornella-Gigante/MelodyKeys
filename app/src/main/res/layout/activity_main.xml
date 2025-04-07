@@ -10,7 +10,7 @@
     android:paddingLeft="16dp"
     android:paddingBottom="16dp"
     android:gravity="top|center"
-    android:background="#815555"
+    android:background="@color/colorPrimary"
     >
 
     <HorizontalScrollView

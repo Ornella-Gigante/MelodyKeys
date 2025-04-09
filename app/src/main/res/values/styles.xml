@@ -24,7 +24,7 @@
         <item name="android:layout_height">200dp</item>
         <item name="android:layout_marginTop">100dp</item>
         <!--CUSTOM DRAWABLE FILE -->
-        <item name="android:background"></item>
+        <item name="android:background">@drawable/pressed_and_normal_selector</item>
         <item name="android:stateListAnimator">@null</item>
     </style>
 </resources>

@@ -27,4 +27,19 @@
         <item name="android:background">@drawable/pressed_and_normal_selector</item>
         <item name="android:stateListAnimator">@null</item>
     </style>
+
+    <!--Rhis will be used for TextViews like C3, D3,E3,F3,G3,A3,B3 -->
+
+    <style name="style_for_TectView_ketText3">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:capitalize">characters</item>
+        <item name="android:typeface">sans</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColor">#0440a0</item>
+        <item name="android:layout_marginRight">10dp</item>
+        <item name="android:layout_marginTop">260dp</item>
+        <item name="android:layout_alignBottom">@id/button7</item>
+    </style>
+
 </resources>

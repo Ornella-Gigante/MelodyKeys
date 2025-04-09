@@ -180,6 +180,61 @@
                 android:textIsSelectable="false"
             />
 
+            <TextView
+
+                android:id="@+id/td3"
+                style="@style/style_for_TectView_ketText3"
+                android:text="D3"
+                android:layout_toLeftOf="@id/button3"
+                android:stateListAnimator="@null"
+                android:textIsSelectable="false"
+                />
+            <TextView
+
+                android:id="@+id/tf3"
+                style="@style/style_for_TectView_ketText3"
+                android:text="E3"
+                android:layout_toLeftOf="@id/button4"
+                android:stateListAnimator="@null"
+                android:textIsSelectable="false"
+                />
+            <TextView
+
+                android:id="@+id/tf3"
+                style="@style/style_for_TectView_ketText3"
+                android:text="F3"
+                android:layout_toLeftOf="@id/button5"
+                android:stateListAnimator="@null"
+                android:textIsSelectable="false"
+                />
+            <TextView
+
+                android:id="@+id/tg3"
+                style="@style/style_for_TectView_ketText3"
+                android:text="G3"
+                android:layout_toLeftOf="@id/button6"
+                android:stateListAnimator="@null"
+                android:textIsSelectable="false"
+                />
+            <TextView
+
+                android:id="@+id/ta3"
+                style="@style/style_for_TectView_ketText3"
+                android:text="A3"
+                android:layout_toLeftOf="@id/button7"
+                android:stateListAnimator="@null"
+                android:textIsSelectable="false"
+                />
+            <TextView
+
+                android:id="@+id/tb3"
+                style="@style/style_for_TectView_ketText3"
+                android:text="B3"
+                android:layout_toLeftOf="@id/button8"
+                android:stateListAnimator="@null"
+                android:textIsSelectable="false"
+                />
+
 
 
 

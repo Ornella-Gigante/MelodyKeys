@@ -45,7 +45,7 @@
             <Button
                 android:id="@+id/button4"
                 style="@style/common_key_style_for_rest_of_the_piano_keys"
-                android:layout_marginLeft="2dp"
+                android:layout_marginLeft="3dp"
                 android:layout_toEndOf="@id/button3" />
 
 
@@ -169,6 +169,16 @@
                 style="@style/common_key_style_for_rest_of_the_piano_keys"
                 android:layout_marginLeft="2dp"
                 android:layout_toEndOf="@id/button23" />
+
+            <TextView
+
+                android:id="@+id/tc3"
+                style="@style/style_for_TectView_ketText3"
+                android:text="C3"
+                android:layout_toLeftOf="@id/button2"
+                android:stateListAnimator="@null"
+                android:textIsSelectable="false"
+            />
 
 
 

@@ -236,6 +236,17 @@
                 />
 
 
+            <TextView
+
+                android:id="@+id/c4"
+                style="@style/style_for_TectView_ketText4"
+                android:text="C4"
+                android:layout_toLeftOf="@id/button9"
+                android:stateListAnimator="@null"
+                android:textIsSelectable="false"
+                />
+
+
 
 
 

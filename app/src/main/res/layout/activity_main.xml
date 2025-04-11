@@ -423,6 +423,62 @@
                 android:stateListAnimator="@null"
                 android:textIsSelectable="false" />
 
+            <TextView
+                android:id="@+id/tc7"
+                style="@style/style_for_TectView_ketText7"
+                android:text="C7"
+                android:layout_toLeftOf="@id/button30"
+                android:stateListAnimator="@null"
+                android:textIsSelectable="false" />
+
+            <TextView
+                android:id="@+id/td7"
+                style="@style/style_for_TectView_ketText7"
+                android:text="D7"
+                android:layout_toLeftOf="@id/button31"
+                android:stateListAnimator="@null"
+                android:textIsSelectable="false" />
+
+            <TextView
+                android:id="@+id/te7"
+                style="@style/style_for_TectView_ketText7"
+                android:text="E7"
+                android:layout_toLeftOf="@id/button32"
+                android:stateListAnimator="@null"
+                android:textIsSelectable="false" />
+
+            <TextView
+                android:id="@+id/tf7"
+                style="@style/style_for_TectView_ketText7"
+                android:text="F7"
+                android:layout_toLeftOf="@id/button33"
+                android:stateListAnimator="@null"
+                android:textIsSelectable="false" />
+
+            <TextView
+                android:id="@+id/tg7"
+                style="@style/style_for_TectView_ketText7"
+                android:text="G7"
+                android:layout_toLeftOf="@id/button34"
+                android:stateListAnimator="@null"
+                android:textIsSelectable="false" />
+
+            <TextView
+                android:id="@+id/ta7"
+                style="@style/style_for_TectView_ketText7"
+                android:text="A7"
+                android:layout_toLeftOf="@id/button35"
+                android:stateListAnimator="@null"
+                android:textIsSelectable="false" />
+
+            <TextView
+                android:id="@+id/tb7"
+                style="@style/style_for_TectView_ketText7"
+                android:text="B7"
+                android:layout_toLeftOf="@id/button36"
+                android:stateListAnimator="@null"
+                android:textIsSelectable="false" />
+
 
 
         </RelativeLayout>

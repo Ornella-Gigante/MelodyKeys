@@ -249,6 +249,12 @@
                 android:layout_marginLeft="2dp"
                 android:layout_toEndOf="@id/button35" />
 
+            <Button
+                android:id="@+id/button36"
+                style="@style/common_key_style_for_rest_of_the_piano_keys"
+                android:layout_marginLeft="2dp"
+                android:layout_toEndOf="@id/button36" />
+
 
             <TextView
 

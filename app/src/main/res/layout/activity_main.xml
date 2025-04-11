@@ -170,13 +170,6 @@
                 android:layout_marginLeft="2dp"
                 android:layout_toEndOf="@id/button23" />
 
-
-            <Button
-                android:id="@+id/button24"
-                style="@style/common_key_style_for_rest_of_the_piano_keys"
-                android:layout_marginLeft="2dp"
-                android:layout_toEndOf="@id/button23" />
-
             <Button
                 android:id="@+id/button25"
                 style="@style/common_key_style_for_rest_of_the_piano_keys"
@@ -242,18 +235,6 @@
                 style="@style/common_key_style_for_rest_of_the_piano_keys"
                 android:layout_marginLeft="2dp"
                 android:layout_toEndOf="@id/button34" />
-
-            <Button
-                android:id="@+id/button36"
-                style="@style/common_key_style_for_rest_of_the_piano_keys"
-                android:layout_marginLeft="2dp"
-                android:layout_toEndOf="@id/button35" />
-
-            <Button
-                android:id="@+id/button36"
-                style="@style/common_key_style_for_rest_of_the_piano_keys"
-                android:layout_marginLeft="2dp"
-                android:layout_toEndOf="@id/button36" />
 
 
             <TextView
@@ -560,11 +541,12 @@
             <TextView
                 android:id="@+id/tb7"
                 style="@style/style_for_TectView_ketText7"
-                android:text="B7"
-                android:layout_toLeftOf="@id/button36"
+                android:layout_marginRight="-32dp"
+                android:layout_marginBottom="7dp"
+                android:layout_toLeftOf="@id/button35"
                 android:stateListAnimator="@null"
+                android:text="B7"
                 android:textIsSelectable="false" />
-
 
 
         </RelativeLayout>

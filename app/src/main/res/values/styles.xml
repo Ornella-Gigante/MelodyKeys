@@ -115,7 +115,7 @@
 
         <!--CUSTOM DRAWABLE FILE -->
 
-        <item name="android:background"></item>
+        <item name="android:background">@drawable/black_piano_key_selector</item>
         <item name="android:layout_marginLeft">-14dp</item>
     </style>
 

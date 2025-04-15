@@ -28,10 +28,20 @@
                 android:id="@+id/button"
                 style="@style/first_key_type_for_pink_key" />
 
+            <Button
+                android:id="@+id/black_key1"
+                style="@style/black_piano_key_style"
+                android:layout_alignTop="@id/button"
+                android:layout_marginStart="-15dp"
+                android:layout_marginTop="0dp"
+                android:layout_toEndOf="@id/button"
+                android:textColorLink="#0D0D0D"
+                />
 
             <Button
                 android:id="@+id/button2"
                 style="@style/common_key_style_for_rest_of_the_piano_keys"
+                android:layout_marginStart="2dp"
                 android:layout_marginLeft="2dp"
                 android:layout_toEndOf="@id/button" />
 

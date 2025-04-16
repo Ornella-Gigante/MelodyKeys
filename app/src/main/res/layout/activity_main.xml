@@ -411,9 +411,25 @@
                 android:layout_toEndOf="@id/button33" />
 
             <Button
+                android:id="@+id/black_key24"
+                style="@style/black_piano_key_style"
+                android:layout_alignTop="@id/button33"
+                android:layout_marginStart="-13dp"
+                android:layout_marginTop="0dp"
+                android:layout_toEndOf="@id/button33" />
+
+            <Button
                 android:id="@+id/button35"
                 style="@style/common_key_style_for_rest_of_the_piano_keys"
                 android:layout_marginLeft="2dp"
+                android:layout_toEndOf="@id/button34" />
+
+            <Button
+                android:id="@+id/black_key25"
+                style="@style/black_piano_key_style"
+                android:layout_alignTop="@id/button33"
+                android:layout_marginStart="-13dp"
+                android:layout_marginTop="0dp"
                 android:layout_toEndOf="@id/button34" />
 
 

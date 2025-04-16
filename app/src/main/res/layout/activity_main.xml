@@ -46,6 +46,15 @@
                 android:layout_marginLeft="2dp"
                 android:layout_toEndOf="@id/button" />
 
+            <!-- Entre button2 y button3 -->
+            <Button
+                android:id="@+id/black_key2"
+                style="@style/black_piano_key_style"
+                android:layout_alignTop="@id/button2"
+                android:layout_marginStart="-13dp"
+                android:layout_marginTop="0dp"
+                android:layout_toEndOf="@id/button2" />
+
             <Button
                 android:id="@+id/button3"
                 style="@style/common_key_style_for_rest_of_the_piano_keys"
@@ -59,6 +68,14 @@
                 android:layout_marginLeft="3dp"
                 android:layout_toEndOf="@id/button3" />
 
+            <!-- Entre button4 y button5 -->
+            <Button
+                android:id="@+id/black_key4"
+                style="@style/black_piano_key_style"
+                android:layout_alignTop="@id/button4"
+                android:layout_marginStart="-13dp"
+                android:layout_marginTop="0dp"
+                android:layout_toEndOf="@id/button4" />
 
             <Button
                 android:id="@+id/button5"
@@ -66,12 +83,30 @@
                 android:layout_marginLeft="2dp"
                 android:layout_toEndOf="@id/button4" />
 
+            <!-- Entre button5 y button6 -->
+            <Button
+                android:id="@+id/black_key5"
+                style="@style/black_piano_key_style"
+                android:layout_alignTop="@id/button5"
+                android:layout_marginStart="-13dp"
+                android:layout_marginTop="0dp"
+                android:layout_toEndOf="@id/button5" />
 
             <Button
                 android:id="@+id/button6"
                 style="@style/common_key_style_for_rest_of_the_piano_keys"
                 android:layout_marginLeft="2dp"
                 android:layout_toEndOf="@id/button5" />
+
+            <!-- Entre button6 y button7 -->
+
+            <Button
+                android:id="@+id/black_key6"
+                style="@style/black_piano_key_style"
+                android:layout_alignTop="@id/button6"
+                android:layout_marginStart="-13dp"
+                android:layout_marginTop="0dp"
+                android:layout_toEndOf="@id/button6" />
 
             <Button
                 android:id="@+id/button7"
@@ -86,10 +121,27 @@
                 android:layout_toEndOf="@id/button7" />
 
             <Button
+                android:id="@+id/black_key7"
+                style="@style/black_piano_key_style"
+                android:layout_alignTop="@id/button8"
+                android:layout_marginStart="-13dp"
+                android:layout_marginTop="0dp"
+                android:layout_toEndOf="@id/button8" />
+
+
+            <Button
                 android:id="@+id/button9"
                 style="@style/common_key_style_for_rest_of_the_piano_keys"
                 android:layout_marginLeft="2dp"
                 android:layout_toEndOf="@id/button8" />
+
+            <Button
+                android:id="@+id/black_key8"
+                style="@style/black_piano_key_style"
+                android:layout_alignTop="@id/button9"
+                android:layout_marginStart="-13dp"
+                android:layout_marginTop="0dp"
+                android:layout_toEndOf="@id/button9" />
 
             <Button
                 android:id="@+id/button10"
@@ -103,11 +155,6 @@
                 android:layout_marginLeft="2dp"
                 android:layout_toEndOf="@id/button10" />
 
-            <Button
-                android:id="@+id/button12"
-                style="@style/common_key_style_for_rest_of_the_piano_keys"
-                android:layout_marginLeft="2dp"
-                android:layout_toEndOf="@id/button11" />
 
             <Button
                 android:id="@+id/button13"
@@ -116,10 +163,34 @@
                 android:layout_toEndOf="@id/button12" />
 
             <Button
+                android:id="@+id/black_key9"
+                style="@style/black_piano_key_style"
+                android:layout_alignTop="@id/button12"
+                android:layout_marginStart="-13dp"
+                android:layout_marginTop="0dp"
+                android:layout_toEndOf="@id/button12" />
+
+            <Button
                 android:id="@+id/button14"
                 style="@style/common_key_style_for_rest_of_the_piano_keys"
                 android:layout_marginLeft="2dp"
                 android:layout_toEndOf="@id/button13" />
+
+            <Button
+                android:id="@+id/black_key10"
+                style="@style/black_piano_key_style"
+                android:layout_alignTop="@id/button13"
+                android:layout_marginStart="-13dp"
+                android:layout_marginTop="0dp"
+                android:layout_toEndOf="@id/button13" />
+
+            <Button
+                android:id="@+id/black_key11"
+                style="@style/black_piano_key_style"
+                android:layout_alignTop="@id/button14"
+                android:layout_marginStart="-13dp"
+                android:layout_marginTop="0dp"
+                android:layout_toEndOf="@id/button14" />
 
             <Button
                 android:id="@+id/button15"
@@ -134,10 +205,26 @@
                 android:layout_toEndOf="@id/button15" />
 
             <Button
+                android:id="@+id/black_key12"
+                style="@style/black_piano_key_style"
+                android:layout_alignTop="@id/button16"
+                android:layout_marginStart="-13dp"
+                android:layout_marginTop="0dp"
+                android:layout_toEndOf="@id/button16" />
+
+            <Button
                 android:id="@+id/button17"
                 style="@style/common_key_style_for_rest_of_the_piano_keys"
                 android:layout_marginLeft="2dp"
                 android:layout_toEndOf="@id/button16" />
+
+            <Button
+                android:id="@+id/black_key13"
+                style="@style/black_piano_key_style"
+                android:layout_alignTop="@id/button17"
+                android:layout_marginStart="-13dp"
+                android:layout_marginTop="0dp"
+                android:layout_toEndOf="@id/button17" />
 
             <Button
                 android:id="@+id/button18"
@@ -158,16 +245,40 @@
                 android:layout_toEndOf="@id/button19" />
 
             <Button
+                android:id="@+id/black_key14"
+                style="@style/black_piano_key_style"
+                android:layout_alignTop="@id/button20"
+                android:layout_marginStart="-13dp"
+                android:layout_marginTop="0dp"
+                android:layout_toEndOf="@id/button20" />
+
+            <Button
                 android:id="@+id/button21"
                 style="@style/common_key_style_for_rest_of_the_piano_keys"
                 android:layout_marginLeft="2dp"
                 android:layout_toEndOf="@id/button20" />
 
             <Button
+                android:id="@+id/black_key15"
+                style="@style/black_piano_key_style"
+                android:layout_alignTop="@id/button21"
+                android:layout_marginStart="-13dp"
+                android:layout_marginTop="0dp"
+                android:layout_toEndOf="@id/button21" />
+
+            <Button
                 android:id="@+id/button22"
                 style="@style/common_key_style_for_rest_of_the_piano_keys"
                 android:layout_marginLeft="2dp"
                 android:layout_toEndOf="@id/button21" />
+
+            <Button
+                android:id="@+id/black_key16"
+                style="@style/black_piano_key_style"
+                android:layout_alignTop="@id/button22"
+                android:layout_marginStart="-13dp"
+                android:layout_marginTop="0dp"
+                android:layout_toEndOf="@id/button22" />
 
             <Button
                 android:id="@+id/button23"
@@ -182,10 +293,26 @@
                 android:layout_toEndOf="@id/button23" />
 
             <Button
+                android:id="@+id/black_key17"
+                style="@style/black_piano_key_style"
+                android:layout_alignTop="@id/button24"
+                android:layout_marginStart="-13dp"
+                android:layout_marginTop="0dp"
+                android:layout_toEndOf="@id/button24" />
+
+            <Button
                 android:id="@+id/button25"
                 style="@style/common_key_style_for_rest_of_the_piano_keys"
                 android:layout_marginLeft="2dp"
                 android:layout_toEndOf="@id/button24" />
+
+            <Button
+                android:id="@+id/black_key18"
+                style="@style/black_piano_key_style"
+                android:layout_alignTop="@id/button25"
+                android:layout_marginStart="-13dp"
+                android:layout_marginTop="0dp"
+                android:layout_toEndOf="@id/button25" />
 
             <Button
                 android:id="@+id/button26"
@@ -206,16 +333,41 @@
                 android:layout_toEndOf="@id/button27" />
 
             <Button
+                android:id="@+id/black_key19"
+                style="@style/black_piano_key_style"
+                android:layout_alignTop="@id/button28"
+                android:layout_marginStart="-13dp"
+                android:layout_marginTop="0dp"
+                android:layout_toEndOf="@id/button28" />
+
+
+            <Button
                 android:id="@+id/button29"
                 style="@style/common_key_style_for_rest_of_the_piano_keys"
                 android:layout_marginLeft="2dp"
                 android:layout_toEndOf="@id/button28" />
 
             <Button
+                android:id="@+id/black_key20"
+                style="@style/black_piano_key_style"
+                android:layout_alignTop="@id/button29"
+                android:layout_marginStart="-13dp"
+                android:layout_marginTop="0dp"
+                android:layout_toEndOf="@id/button29" />
+
+            <Button
                 android:id="@+id/button30"
                 style="@style/common_key_style_for_rest_of_the_piano_keys"
                 android:layout_marginLeft="2dp"
                 android:layout_toEndOf="@id/button29" />
+
+            <Button
+                android:id="@+id/black_key21"
+                style="@style/black_piano_key_style"
+                android:layout_alignTop="@id/button30"
+                android:layout_marginStart="-13dp"
+                android:layout_marginTop="0dp"
+                android:layout_toEndOf="@id/button30" />
 
             <Button
                 android:id="@+id/button31"
@@ -230,10 +382,27 @@
                 android:layout_toEndOf="@id/button31" />
 
             <Button
+                android:id="@+id/black_key22"
+                style="@style/black_piano_key_style"
+                android:layout_alignTop="@id/button32"
+                android:layout_marginStart="-13dp"
+                android:layout_marginTop="0dp"
+                android:layout_toEndOf="@id/button32" />
+
+
+            <Button
                 android:id="@+id/button33"
                 style="@style/common_key_style_for_rest_of_the_piano_keys"
                 android:layout_marginLeft="2dp"
                 android:layout_toEndOf="@id/button32" />
+
+            <Button
+                android:id="@+id/black_key23"
+                style="@style/black_piano_key_style"
+                android:layout_alignTop="@id/button33"
+                android:layout_marginStart="-13dp"
+                android:layout_marginTop="0dp"
+                android:layout_toEndOf="@id/button33" />
 
             <Button
                 android:id="@+id/button34"
@@ -558,6 +727,7 @@
                 android:stateListAnimator="@null"
                 android:text="B7"
                 android:textIsSelectable="false" />
+
 
 
         </RelativeLayout>

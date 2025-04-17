@@ -22,21 +22,19 @@ public class MainActivity extends AppCompatActivity {
     private Button keyC6, keyD6, keyE6, keyF6, keyG6, keyA6, keyB6;
     private Button keyC7, keyD7, keyE7, keyF7, keyG7, keyA7, keyB7;
 
-    // Black keys (example for 3 octaves, add more as needed)
+    // Black keys
     private Button keyCs3, keyDs3, keyFs3, keyGs3, keyAs3;
     private Button keyCs4, keyDs4, keyFs4, keyGs4, keyAs4;
     private Button keyCs5, keyDs5, keyFs5, keyGs5, keyAs5;
     private Button keyCs6, keyDs6, keyFs6, keyGs6, keyAs6;
     private Button keyCs7, keyDs7, keyFs7, keyGs7, keyAs7;
 
-    // TextViews
+    // TextViews (labels)
     private TextView labelC3, labelD3, labelE3, labelF3, labelG3, labelA3, labelB3;
     private TextView labelC4, labelD4, labelE4, labelF4, labelG4, labelA4, labelB4;
     private TextView labelC5, labelD5, labelE5, labelF5, labelG5, labelA5, labelB5;
     private TextView labelC6, labelD6, labelE6, labelF6, labelG6, labelA6, labelB6;
     private TextView labelC7, labelD7, labelE7, labelF7, labelG7, labelA7, labelB7;
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,17 +42,22 @@ public class MainActivity extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
 
-        // To inizialize the scroll view
         scrollView = findViewById(R.id.scrollView);
+
+        // All keys init
+        initializeAllPianoKeys();
+
+        // TextViews init
+        initializeTextViewLabelsOnPianoKeys();
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+    }
 
-
-
+    private void initializeAllPianoKeys() {
         // White keys
         keyC3 = findViewById(R.id.keyC3);
         keyD3 = findViewById(R.id.keyD3);
@@ -118,8 +121,9 @@ public class MainActivity extends AppCompatActivity {
         keyFs7 = findViewById(R.id.keyFs7);
         keyGs7 = findViewById(R.id.keyGs7);
         keyAs7 = findViewById(R.id.keyAs7);
+    }
 
-        //  TextViews
+    private void initializeTextViewLabelsOnPianoKeys() {
         labelC3 = findViewById(R.id.labelC3);
         labelD3 = findViewById(R.id.labelD3);
         labelE3 = findViewById(R.id.labelE3);
@@ -155,7 +159,5 @@ public class MainActivity extends AppCompatActivity {
         labelG7 = findViewById(R.id.labelG7);
         labelA7 = findViewById(R.id.labelA7);
         labelB7 = findViewById(R.id.labelB7);
-
     }
-
 }

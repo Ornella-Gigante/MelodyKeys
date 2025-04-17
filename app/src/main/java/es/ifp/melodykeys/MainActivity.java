@@ -110,5 +110,5 @@ public class MainActivity extends AppCompatActivity {
         keyGs7 = findViewById(R.id.keyGs7);
         keyAs7 = findViewById(R.id.keyAs7);
     }
-    
+
 }

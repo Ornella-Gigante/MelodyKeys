@@ -26,721 +26,259 @@
             android:layout_marginStart="20dp"
             android:layout_marginEnd="20dp">
 
-            <Button
-                android:id="@+id/button"
-                style="@style/first_key_type_for_pink_key" />
-
-            <Button
-                android:id="@+id/black_key1"
-                style="@style/black_piano_key_style"
-                android:layout_alignTop="@id/button"
-                android:layout_marginStart="-13dp"
-                android:layout_marginTop="0dp"
-                android:layout_toEndOf="@id/button"
-         />
-
-            <Button
-                android:id="@+id/button2"
-                style="@style/common_key_style_for_rest_of_the_piano_keys"
-                android:layout_marginStart="2dp"
-                android:layout_marginLeft="2dp"
-                android:layout_toEndOf="@id/button" />
-
-            <!-- Entre button2 y button3 -->
-            <Button
-                android:id="@+id/black_key2"
-                style="@style/black_piano_key_style"
-                android:layout_alignTop="@id/button2"
-                android:layout_marginStart="-13dp"
-                android:layout_marginTop="0dp"
-                android:layout_toEndOf="@id/button2" />
-
-            <Button
-                android:id="@+id/button3"
-                style="@style/common_key_style_for_rest_of_the_piano_keys"
-                android:layout_marginLeft="2dp"
-                android:layout_toEndOf="@id/button2" />
-
-
-            <Button
-                android:id="@+id/button4"
-                style="@style/common_key_style_for_rest_of_the_piano_keys"
-                android:layout_marginLeft="3dp"
-                android:layout_toEndOf="@id/button3" />
-
-            <!-- Entre button4 y button5 -->
-            <Button
-                android:id="@+id/black_key4"
-                style="@style/black_piano_key_style"
-                android:layout_alignTop="@id/button4"
-                android:layout_marginStart="-13dp"
-                android:layout_marginTop="0dp"
-                android:layout_toEndOf="@id/button4" />
-
-            <Button
-                android:id="@+id/button5"
-                style="@style/common_key_style_for_rest_of_the_piano_keys"
-                android:layout_marginLeft="2dp"
-                android:layout_toEndOf="@id/button4" />
-
-            <!-- Entre button5 y button6 -->
-            <Button
-                android:id="@+id/black_key5"
-                style="@style/black_piano_key_style"
-                android:layout_alignTop="@id/button5"
-                android:layout_marginStart="-13dp"
-                android:layout_marginTop="0dp"
-                android:layout_toEndOf="@id/button5" />
-
-            <Button
-                android:id="@+id/button6"
-                style="@style/common_key_style_for_rest_of_the_piano_keys"
-                android:layout_marginLeft="2dp"
-                android:layout_toEndOf="@id/button5" />
-
-            <!-- Entre button6 y button7 -->
-
-            <Button
-                android:id="@+id/black_key6"
-                style="@style/black_piano_key_style"
-                android:layout_alignTop="@id/button6"
-                android:layout_marginStart="-13dp"
-                android:layout_marginTop="0dp"
-                android:layout_toEndOf="@id/button6" />
-
-            <Button
-                android:id="@+id/button7"
-                style="@style/common_key_style_for_rest_of_the_piano_keys"
-                android:layout_marginLeft="2dp"
-                android:layout_toEndOf="@id/button6" />
-
-            <Button
-                android:id="@+id/button8"
-                style="@style/common_key_style_for_rest_of_the_piano_keys"
-                android:layout_marginLeft="2dp"
-                android:layout_toEndOf="@id/button7" />
-
-            <Button
-                android:id="@+id/black_key7"
-                style="@style/black_piano_key_style"
-                android:layout_alignTop="@id/button8"
-                android:layout_marginStart="-13dp"
-                android:layout_marginTop="0dp"
-                android:layout_toEndOf="@id/button8" />
-
-
-            <Button
-                android:id="@+id/button9"
-                style="@style/common_key_style_for_rest_of_the_piano_keys"
-                android:layout_marginLeft="2dp"
-                android:layout_toEndOf="@id/button8" />
-
-            <Button
-                android:id="@+id/black_key8"
-                style="@style/black_piano_key_style"
-                android:layout_alignTop="@id/button9"
-                android:layout_marginStart="-13dp"
-                android:layout_marginTop="0dp"
-                android:layout_toEndOf="@id/button9" />
-
-            <Button
-                android:id="@+id/button10"
-                style="@style/common_key_style_for_rest_of_the_piano_keys"
-                android:layout_marginLeft="2dp"
-                android:layout_toEndOf="@id/button9" />
-
-            <Button
-                android:id="@+id/button11"
-                style="@style/common_key_style_for_rest_of_the_piano_keys"
-                android:layout_marginLeft="2dp"
-                android:layout_toEndOf="@id/button10" />
-
-
-            <Button
-                android:id="@+id/button13"
-                style="@style/common_key_style_for_rest_of_the_piano_keys"
-                android:layout_marginLeft="2dp"
-                android:layout_toEndOf="@id/button12" />
-
-            <Button
-                android:id="@+id/button14"
-                style="@style/common_key_style_for_rest_of_the_piano_keys"
-                android:layout_marginLeft="2dp"
-                android:layout_toEndOf="@id/button13" />
-
-            <Button
-                android:id="@+id/black_key10"
-                style="@style/black_piano_key_style"
-                android:layout_alignTop="@id/button13"
-                android:layout_marginStart="-13dp"
-                android:layout_marginTop="0dp"
-                android:layout_toEndOf="@id/button13" />
-
-            <Button
-                android:id="@+id/black_key11"
-                style="@style/black_piano_key_style"
-                android:layout_alignTop="@id/button14"
-                android:layout_marginStart="-13dp"
-                android:layout_marginTop="0dp"
-                android:layout_toEndOf="@id/button14" />
-
-            <Button
-                android:id="@+id/button15"
-                style="@style/common_key_style_for_rest_of_the_piano_keys"
-                android:layout_marginLeft="2dp"
-                android:layout_toEndOf="@id/button14" />
-
-            <Button
-                android:id="@+id/button16"
-                style="@style/common_key_style_for_rest_of_the_piano_keys"
-                android:layout_marginLeft="3dp"
-                android:layout_toEndOf="@id/button15" />
-
-            <Button
-                android:id="@+id/black_key12"
-                style="@style/black_piano_key_style"
-                android:layout_alignTop="@id/button16"
-                android:layout_marginStart="-13dp"
-                android:layout_marginTop="0dp"
-                android:layout_toEndOf="@id/button16" />
-
-            <Button
-                android:id="@+id/button17"
-                style="@style/common_key_style_for_rest_of_the_piano_keys"
-                android:layout_marginLeft="2dp"
-                android:layout_toEndOf="@id/button16" />
-
-            <Button
-                android:id="@+id/black_key13"
-                style="@style/black_piano_key_style"
-                android:layout_alignTop="@id/button17"
-                android:layout_marginStart="-13dp"
-                android:layout_marginTop="0dp"
-                android:layout_toEndOf="@id/button17" />
-
-            <Button
-                android:id="@+id/button18"
-                style="@style/common_key_style_for_rest_of_the_piano_keys"
-                android:layout_marginLeft="2dp"
-                android:layout_toEndOf="@id/button17" />
-
-            <Button
-                android:id="@+id/button19"
-                style="@style/common_key_style_for_rest_of_the_piano_keys"
-                android:layout_marginLeft="2dp"
-                android:layout_toEndOf="@id/button18" />
-
-            <Button
-                android:id="@+id/button20"
-                style="@style/common_key_style_for_rest_of_the_piano_keys"
-                android:layout_marginLeft="2dp"
-                android:layout_toEndOf="@id/button19" />
-
-            <Button
-                android:id="@+id/black_key14"
-                style="@style/black_piano_key_style"
-                android:layout_alignTop="@id/button20"
-                android:layout_marginStart="-13dp"
-                android:layout_marginTop="0dp"
-                android:layout_toEndOf="@id/button20" />
-
-            <Button
-                android:id="@+id/button21"
-                style="@style/common_key_style_for_rest_of_the_piano_keys"
-                android:layout_marginLeft="2dp"
-                android:layout_toEndOf="@id/button20" />
-
-            <Button
-                android:id="@+id/black_key15"
-                style="@style/black_piano_key_style"
-                android:layout_alignTop="@id/button21"
-                android:layout_marginStart="-13dp"
-                android:layout_marginTop="0dp"
-                android:layout_toEndOf="@id/button21" />
-
-            <Button
-                android:id="@+id/button22"
-                style="@style/common_key_style_for_rest_of_the_piano_keys"
-                android:layout_marginLeft="2dp"
-                android:layout_toEndOf="@id/button21" />
-
-            <Button
-                android:id="@+id/black_key16"
-                style="@style/black_piano_key_style"
-                android:layout_alignTop="@id/button22"
-                android:layout_marginStart="-13dp"
-                android:layout_marginTop="0dp"
-                android:layout_toEndOf="@id/button22" />
-
-            <Button
-                android:id="@+id/button23"
-                style="@style/common_key_style_for_rest_of_the_piano_keys"
-                android:layout_marginLeft="2dp"
-                android:layout_toEndOf="@id/button22" />
-
-            <Button
-                android:id="@+id/button24"
-                style="@style/common_key_style_for_rest_of_the_piano_keys"
-                android:layout_marginLeft="2dp"
-                android:layout_toEndOf="@id/button23" />
-
-            <Button
-                android:id="@+id/black_key17"
-                style="@style/black_piano_key_style"
-                android:layout_alignTop="@id/button24"
-                android:layout_marginStart="-13dp"
-                android:layout_marginTop="0dp"
-                android:layout_toEndOf="@id/button24" />
-
-            <Button
-                android:id="@+id/button25"
-                style="@style/common_key_style_for_rest_of_the_piano_keys"
-                android:layout_marginLeft="2dp"
-                android:layout_toEndOf="@id/button24" />
-
-            <Button
-                android:id="@+id/black_key18"
-                style="@style/black_piano_key_style"
-                android:layout_alignTop="@id/button25"
-                android:layout_marginStart="-13dp"
-                android:layout_marginTop="0dp"
-                android:layout_toEndOf="@id/button25" />
-
-            <Button
-                android:id="@+id/button26"
-                style="@style/common_key_style_for_rest_of_the_piano_keys"
-                android:layout_marginLeft="2dp"
-                android:layout_toEndOf="@id/button25" />
-
-            <Button
-                android:id="@+id/button27"
-                style="@style/common_key_style_for_rest_of_the_piano_keys"
-                android:layout_marginLeft="2dp"
-                android:layout_toEndOf="@id/button26" />
-
-            <Button
-                android:id="@+id/button28"
-                style="@style/common_key_style_for_rest_of_the_piano_keys"
-                android:layout_marginLeft="2dp"
-                android:layout_toEndOf="@id/button27" />
-
-            <Button
-                android:id="@+id/black_key19"
-                style="@style/black_piano_key_style"
-                android:layout_alignTop="@id/button28"
-                android:layout_marginStart="-13dp"
-                android:layout_marginTop="0dp"
-                android:layout_toEndOf="@id/button28" />
-
-
-            <Button
-                android:id="@+id/button29"
-                style="@style/common_key_style_for_rest_of_the_piano_keys"
-                android:layout_marginLeft="2dp"
-                android:layout_toEndOf="@id/button28" />
-
-            <Button
-                android:id="@+id/black_key20"
-                style="@style/black_piano_key_style"
-                android:layout_alignTop="@id/button29"
-                android:layout_marginStart="-13dp"
-                android:layout_marginTop="0dp"
-                android:layout_toEndOf="@id/button29" />
-
-            <Button
-                android:id="@+id/button30"
-                style="@style/common_key_style_for_rest_of_the_piano_keys"
-                android:layout_marginLeft="2dp"
-                android:layout_toEndOf="@id/button29" />
-
-            <Button
-                android:id="@+id/black_key21"
-                style="@style/black_piano_key_style"
-                android:layout_alignTop="@id/button30"
-                android:layout_marginStart="-13dp"
-                android:layout_marginTop="0dp"
-                android:layout_toEndOf="@id/button30" />
-
-            <Button
-                android:id="@+id/button31"
-                style="@style/common_key_style_for_rest_of_the_piano_keys"
-                android:layout_marginLeft="2dp"
-                android:layout_toEndOf="@id/button30" />
-
-            <Button
-                android:id="@+id/button32"
-                style="@style/common_key_style_for_rest_of_the_piano_keys"
-                android:layout_marginLeft="2dp"
-                android:layout_toEndOf="@id/button31" />
-
-            <Button
-                android:id="@+id/black_key22"
-                style="@style/black_piano_key_style"
-                android:layout_alignTop="@id/button32"
-                android:layout_marginStart="-13dp"
-                android:layout_marginTop="0dp"
-                android:layout_toEndOf="@id/button32" />
-
-
-            <Button
-                android:id="@+id/button33"
-                style="@style/common_key_style_for_rest_of_the_piano_keys"
-                android:layout_marginLeft="2dp"
-                android:layout_toEndOf="@id/button32" />
-
-            <Button
-                android:id="@+id/black_key23"
-                style="@style/black_piano_key_style"
-                android:layout_alignTop="@id/button33"
-                android:layout_marginStart="-13dp"
-                android:layout_marginTop="0dp"
-                android:layout_toEndOf="@id/button33" />
-
-            <Button
-                android:id="@+id/button34"
-                style="@style/common_key_style_for_rest_of_the_piano_keys"
-                android:layout_marginLeft="2dp"
-                android:layout_toEndOf="@id/button33" />
-
-            <Button
-                android:id="@+id/black_key24"
-                style="@style/black_piano_key_style"
-                android:layout_alignTop="@id/button33"
-                android:layout_marginStart="-13dp"
-                android:layout_marginTop="0dp"
-                android:layout_toEndOf="@id/button33" />
-
-            <Button
-                android:id="@+id/button35"
-                style="@style/common_key_style_for_rest_of_the_piano_keys"
-                android:layout_marginLeft="2dp"
-                android:layout_toEndOf="@id/button34" />
-
-            <Button
-                android:id="@+id/black_key25"
-                style="@style/black_piano_key_style"
-                android:layout_alignTop="@id/button33"
-                android:layout_marginStart="-13dp"
-                android:layout_marginTop="0dp"
-                android:layout_toEndOf="@id/button34" />
-
-
-            <TextView
-
-                android:id="@+id/tc3"
-                style="@style/style_for_TectView_ketText3"
-                android:text="C3"
-                android:layout_toLeftOf="@id/button2"
-                android:stateListAnimator="@null"
-                android:textIsSelectable="false"
-            />
-
-            <TextView
-
-                android:id="@+id/td3"
-                style="@style/style_for_TectView_ketText3"
-                android:text="D3"
-                android:layout_toLeftOf="@id/button3"
-                android:stateListAnimator="@null"
-                android:textIsSelectable="false"
-                />
-            <TextView
-
-                android:id="@+id/tf3"
-                style="@style/style_for_TectView_ketText3"
-                android:text="E3"
-                android:layout_toLeftOf="@id/button4"
-                android:stateListAnimator="@null"
-                android:textIsSelectable="false"
-                />
-            <TextView
-
-                android:id="@+id/te3"
-                style="@style/style_for_TectView_ketText3"
-                android:text="F3"
-                android:layout_toLeftOf="@id/button5"
-                android:stateListAnimator="@null"
-                android:textIsSelectable="false"
-                />
-            <TextView
-
-                android:id="@+id/tg3"
-                style="@style/style_for_TectView_ketText3"
-                android:text="G3"
-                android:layout_toLeftOf="@id/button6"
-                android:stateListAnimator="@null"
-                android:textIsSelectable="false"
-                />
-            <TextView
-
-                android:id="@+id/ta3"
-                style="@style/style_for_TectView_ketText3"
-                android:text="A3"
-                android:layout_toLeftOf="@id/button7"
-                android:stateListAnimator="@null"
-                android:textIsSelectable="false"
-                />
-            <TextView
-
-                android:id="@+id/tb3"
-                style="@style/style_for_TectView_ketText3"
-                android:text="B3"
-                android:layout_toLeftOf="@id/button8"
-                android:stateListAnimator="@null"
-                android:textIsSelectable="false"
-                />
-
-
-            <TextView
-
-                android:id="@+id/tc4"
-                style="@style/style_for_TectView_ketText4"
-                android:text="C4"
-                android:layout_toLeftOf="@id/button9"
-                android:stateListAnimator="@null"
-                android:textIsSelectable="false"
-                />
-
-
-
-            <TextView
-
-                android:id="@+id/td4"
-                style="@style/style_for_TectView_ketText4"
-                android:text="D4"
-                android:layout_toLeftOf="@id/button10"
-                android:stateListAnimator="@null"
-                android:textIsSelectable="false"
-                />
-
-
-            <TextView
-
-                android:id="@+id/te4"
-                style="@style/style_for_TectView_ketText4"
-                android:text="E4"
-                android:layout_toLeftOf="@id/button11"
-                android:stateListAnimator="@null"
-                android:textIsSelectable="false"
-                />
-
-
-            <TextView
-
-                android:id="@+id/tf4"
-                style="@style/style_for_TectView_ketText4"
-                android:text="F4"
-                android:layout_toLeftOf="@id/button12"
-                android:stateListAnimator="@null"
-                android:textIsSelectable="false"
-                />
-
-
-
-            <TextView
-
-                android:id="@+id/tg4"
-                style="@style/style_for_TectView_ketText4"
-                android:text="G4"
-                android:layout_toLeftOf="@id/button13"
-                android:stateListAnimator="@null"
-                android:textIsSelectable="false"
-                />
-
-
-            <TextView
-
-                android:id="@+id/ta4"
-                style="@style/style_for_TectView_ketText4"
-                android:layout_toLeftOf="@id/button14"
-                android:stateListAnimator="@null"
-                android:text="A4"
-                android:textIsSelectable="false" />
-
-            <TextView
-
-                android:id="@+id/tb4"
-                style="@style/style_for_TectView_ketText4"
-                android:layout_toLeftOf="@id/button15"
-                android:stateListAnimator="@null"
-                android:text="B4"
-                android:textIsSelectable="false" />
-
-            <TextView
-                android:id="@+id/tc5"
-                style="@style/style_for_TectView_ketText5"
-                android:text="C5"
-                android:layout_toLeftOf="@id/button16"
-                android:stateListAnimator="@null"
-                android:textIsSelectable="false" />
-
-            <TextView
-                android:id="@+id/td5"
-                style="@style/style_for_TectView_ketText5"
-                android:text="D5"
-                android:layout_toLeftOf="@id/button17"
-                android:stateListAnimator="@null"
-                android:textIsSelectable="false" />
-
-            <TextView
-                android:id="@+id/te5"
-                style="@style/style_for_TectView_ketText5"
-                android:text="E5"
-                android:layout_toLeftOf="@id/button18"
-                android:stateListAnimator="@null"
-                android:textIsSelectable="false" />
-
-            <TextView
-                android:id="@+id/tf5"
-                style="@style/style_for_TectView_ketText5"
-                android:text="F5"
-                android:layout_toLeftOf="@id/button19"
-                android:stateListAnimator="@null"
-                android:textIsSelectable="false" />
-
-            <TextView
-                android:id="@+id/tg5"
-                style="@style/style_for_TectView_ketText5"
-                android:text="G5"
-                android:layout_toLeftOf="@id/button20"
-                android:stateListAnimator="@null"
-                android:textIsSelectable="false" />
-
-            <TextView
-                android:id="@+id/ta5"
-                style="@style/style_for_TectView_ketText5"
-                android:text="A5"
-                android:layout_toLeftOf="@id/button21"
-                android:stateListAnimator="@null"
-                android:textIsSelectable="false" />
-
-            <TextView
-                android:id="@+id/tb5"
-                style="@style/style_for_TectView_ketText5"
-                android:text="B5"
-                android:layout_toLeftOf="@id/button22"
-                android:stateListAnimator="@null"
-                android:textIsSelectable="false" />
-
-            <TextView
-                android:id="@+id/tc6"
-                style="@style/style_for_TectView_ketText6"
-                android:text="C6"
-                android:layout_toLeftOf="@id/button23"
-                android:stateListAnimator="@null"
-                android:textIsSelectable="false" />
-
-            <TextView
-                android:id="@+id/td6"
-                style="@style/style_for_TectView_ketText6"
-                android:text="D6"
-                android:layout_toLeftOf="@id/button24"
-                android:stateListAnimator="@null"
-                android:textIsSelectable="false" />
-
-            <TextView
-                android:id="@+id/te6"
-                style="@style/style_for_TectView_ketText6"
-                android:text="E6"
-                android:layout_toLeftOf="@id/button25"
-                android:stateListAnimator="@null"
-                android:textIsSelectable="false" />
-
-            <TextView
-                android:id="@+id/tf6"
-                style="@style/style_for_TectView_ketText6"
-                android:text="F6"
-                android:layout_toLeftOf="@id/button26"
-                android:stateListAnimator="@null"
-                android:textIsSelectable="false" />
-
-            <TextView
-                android:id="@+id/tg6"
-                style="@style/style_for_TectView_ketText6"
-                android:text="G6"
-                android:layout_toLeftOf="@id/button27"
-                android:stateListAnimator="@null"
-                android:textIsSelectable="false" />
-
-            <TextView
-                android:id="@+id/ta6"
-                style="@style/style_for_TectView_ketText6"
-                android:text="A6"
-                android:layout_toLeftOf="@id/button28"
-                android:stateListAnimator="@null"
-                android:textIsSelectable="false" />
-
-            <TextView
-                android:id="@+id/tb6"
-                style="@style/style_for_TectView_ketText6"
-                android:text="B6"
-                android:layout_toLeftOf="@id/button29"
-                android:stateListAnimator="@null"
-                android:textIsSelectable="false" />
-
-            <TextView
-                android:id="@+id/tc7"
-                style="@style/style_for_TectView_ketText7"
-                android:text="C7"
-                android:layout_toLeftOf="@id/button30"
-                android:stateListAnimator="@null"
-                android:textIsSelectable="false" />
-
-            <TextView
-                android:id="@+id/td7"
-                style="@style/style_for_TectView_ketText7"
-                android:text="D7"
-                android:layout_toLeftOf="@id/button31"
-                android:stateListAnimator="@null"
-                android:textIsSelectable="false" />
-
-            <TextView
-                android:id="@+id/te7"
-                style="@style/style_for_TectView_ketText7"
-                android:text="E7"
-                android:layout_toLeftOf="@id/button32"
-                android:stateListAnimator="@null"
-                android:textIsSelectable="false" />
-
-            <TextView
-                android:id="@+id/tf7"
-                style="@style/style_for_TectView_ketText7"
-                android:text="F7"
-                android:layout_toLeftOf="@id/button33"
-                android:stateListAnimator="@null"
-                android:textIsSelectable="false" />
-
-            <TextView
-                android:id="@+id/tg7"
-                style="@style/style_for_TectView_ketText7"
-                android:text="G7"
-                android:layout_toLeftOf="@id/button34"
-                android:stateListAnimator="@null"
-                android:textIsSelectable="false" />
-
-            <TextView
-                android:id="@+id/ta7"
-                style="@style/style_for_TectView_ketText7"
-                android:text="A7"
-                android:layout_toLeftOf="@id/button35"
-                android:stateListAnimator="@null"
-                android:textIsSelectable="false" />
-
-            <TextView
-                android:id="@+id/tb7"
-                style="@style/style_for_TectView_ketText7"
-                android:layout_marginRight="-32dp"
-                android:layout_marginBottom="7dp"
-                android:layout_toLeftOf="@id/button35"
-                android:stateListAnimator="@null"
-                android:text="B7"
-                android:textIsSelectable="false" />
-
-
+            <!-- White keys -->
+            <Button android:id="@+id/keyC3" style="@style/first_key_type_for_pink_key"/>
+            <Button android:id="@+id/keyD3" style="@style/common_key_style_for_rest_of_the_piano_keys"
+                android:layout_toEndOf="@id/keyC3" android:layout_marginLeft="2dp"/>
+            <Button android:id="@+id/keyE3" style="@style/common_key_style_for_rest_of_the_piano_keys"
+                android:layout_toEndOf="@id/keyD3" android:layout_marginLeft="2dp"/>
+            <Button android:id="@+id/keyF3" style="@style/common_key_style_for_rest_of_the_piano_keys"
+                android:layout_toEndOf="@id/keyE3" android:layout_marginLeft="3dp"/>
+            <Button android:id="@+id/keyG3" style="@style/common_key_style_for_rest_of_the_piano_keys"
+                android:layout_toEndOf="@id/keyF3" android:layout_marginLeft="2dp"/>
+            <Button android:id="@+id/keyA3" style="@style/common_key_style_for_rest_of_the_piano_keys"
+                android:layout_toEndOf="@id/keyG3" android:layout_marginLeft="2dp"/>
+            <Button android:id="@+id/keyB3" style="@style/common_key_style_for_rest_of_the_piano_keys"
+                android:layout_toEndOf="@id/keyA3" android:layout_marginLeft="2dp"/>
+            <Button android:id="@+id/keyC4" style="@style/common_key_style_for_rest_of_the_piano_keys"
+                android:layout_toEndOf="@id/keyB3" android:layout_marginLeft="2dp"/>
+            <Button android:id="@+id/keyD4" style="@style/common_key_style_for_rest_of_the_piano_keys"
+                android:layout_toEndOf="@id/keyC4" android:layout_marginLeft="2dp"/>
+            <Button android:id="@+id/keyE4" style="@style/common_key_style_for_rest_of_the_piano_keys"
+                android:layout_toEndOf="@id/keyD4" android:layout_marginLeft="2dp"/>
+            <Button android:id="@+id/keyF4" style="@style/common_key_style_for_rest_of_the_piano_keys"
+                android:layout_toEndOf="@id/keyE4" android:layout_marginLeft="2dp"/>
+            <Button android:id="@+id/keyG4" style="@style/common_key_style_for_rest_of_the_piano_keys"
+                android:layout_toEndOf="@id/keyF4" android:layout_marginLeft="2dp"/>
+            <Button android:id="@+id/keyA4" style="@style/common_key_style_for_rest_of_the_piano_keys"
+                android:layout_toEndOf="@id/keyG4" android:layout_marginLeft="2dp"/>
+            <Button android:id="@+id/keyB4" style="@style/common_key_style_for_rest_of_the_piano_keys"
+                android:layout_toEndOf="@id/keyA4" android:layout_marginLeft="2dp"/>
+            <Button android:id="@+id/keyC5" style="@style/common_key_style_for_rest_of_the_piano_keys"
+                android:layout_toEndOf="@id/keyB4" android:layout_marginLeft="2dp"/>
+            <Button android:id="@+id/keyD5" style="@style/common_key_style_for_rest_of_the_piano_keys"
+                android:layout_toEndOf="@id/keyC5" android:layout_marginLeft="2dp"/>
+            <Button android:id="@+id/keyE5" style="@style/common_key_style_for_rest_of_the_piano_keys"
+                android:layout_toEndOf="@id/keyD5" android:layout_marginLeft="2dp"/>
+            <Button android:id="@+id/keyF5" style="@style/common_key_style_for_rest_of_the_piano_keys"
+                android:layout_toEndOf="@id/keyE5" android:layout_marginLeft="2dp"/>
+            <Button android:id="@+id/keyG5" style="@style/common_key_style_for_rest_of_the_piano_keys"
+                android:layout_toEndOf="@id/keyF5" android:layout_marginLeft="2dp"/>
+            <Button android:id="@+id/keyA5" style="@style/common_key_style_for_rest_of_the_piano_keys"
+                android:layout_toEndOf="@id/keyG5" android:layout_marginLeft="2dp"/>
+            <Button android:id="@+id/keyB5" style="@style/common_key_style_for_rest_of_the_piano_keys"
+                android:layout_toEndOf="@id/keyA5" android:layout_marginLeft="2dp"/>
+            <Button android:id="@+id/keyC6" style="@style/common_key_style_for_rest_of_the_piano_keys"
+                android:layout_toEndOf="@id/keyB5" android:layout_marginLeft="2dp"/>
+            <Button android:id="@+id/keyD6" style="@style/common_key_style_for_rest_of_the_piano_keys"
+                android:layout_toEndOf="@id/keyC6" android:layout_marginLeft="2dp"/>
+            <Button android:id="@+id/keyE6" style="@style/common_key_style_for_rest_of_the_piano_keys"
+                android:layout_toEndOf="@id/keyD6" android:layout_marginLeft="2dp"/>
+            <Button android:id="@+id/keyF6" style="@style/common_key_style_for_rest_of_the_piano_keys"
+                android:layout_toEndOf="@id/keyE6" android:layout_marginLeft="2dp"/>
+            <Button android:id="@+id/keyG6" style="@style/common_key_style_for_rest_of_the_piano_keys"
+                android:layout_toEndOf="@id/keyF6" android:layout_marginLeft="2dp"/>
+            <Button android:id="@+id/keyA6" style="@style/common_key_style_for_rest_of_the_piano_keys"
+                android:layout_toEndOf="@id/keyG6" android:layout_marginLeft="2dp"/>
+            <Button android:id="@+id/keyB6" style="@style/common_key_style_for_rest_of_the_piano_keys"
+                android:layout_toEndOf="@id/keyA6" android:layout_marginLeft="2dp"/>
+            <Button android:id="@+id/keyC7" style="@style/common_key_style_for_rest_of_the_piano_keys"
+                android:layout_toEndOf="@id/keyB6" android:layout_marginLeft="2dp"/>
+            <Button android:id="@+id/keyD7" style="@style/common_key_style_for_rest_of_the_piano_keys"
+                android:layout_toEndOf="@id/keyC7" android:layout_marginLeft="2dp"/>
+            <Button android:id="@+id/keyE7" style="@style/common_key_style_for_rest_of_the_piano_keys"
+                android:layout_toEndOf="@id/keyD7" android:layout_marginLeft="2dp"/>
+            <Button android:id="@+id/keyF7" style="@style/common_key_style_for_rest_of_the_piano_keys"
+                android:layout_toEndOf="@id/keyE7" android:layout_marginLeft="2dp"/>
+            <Button android:id="@+id/keyG7" style="@style/common_key_style_for_rest_of_the_piano_keys"
+                android:layout_toEndOf="@id/keyF7" android:layout_marginLeft="2dp"/>
+            <Button android:id="@+id/keyA7" style="@style/common_key_style_for_rest_of_the_piano_keys"
+                android:layout_toEndOf="@id/keyG7" android:layout_marginLeft="2dp"/>
+            <Button android:id="@+id/keyB7" style="@style/common_key_style_for_rest_of_the_piano_keys"
+                android:layout_toEndOf="@id/keyA7" android:layout_marginLeft="2dp"/>
+
+            <!-- Black keys -->
+            <!-- C#3 -->
+            <Button android:id="@+id/keyCs3" style="@style/black_piano_key_style"
+                android:layout_alignTop="@id/keyC3" android:layout_toEndOf="@id/keyC3"
+                android:layout_marginStart="-13dp" android:layout_marginTop="0dp"/>
+            <!-- D#3 -->
+            <Button android:id="@+id/keyDs3" style="@style/black_piano_key_style"
+                android:layout_alignTop="@id/keyD3" android:layout_toEndOf="@id/keyD3"
+                android:layout_marginStart="-13dp" android:layout_marginTop="0dp"/>
+            <!-- F#3 -->
+            <Button android:id="@+id/keyFs3" style="@style/black_piano_key_style"
+                android:layout_alignTop="@id/keyF3" android:layout_toEndOf="@id/keyF3"
+                android:layout_marginStart="-13dp" android:layout_marginTop="0dp"/>
+            <!-- G#3 -->
+            <Button android:id="@+id/keyGs3" style="@style/black_piano_key_style"
+                android:layout_alignTop="@id/keyG3" android:layout_toEndOf="@id/keyG3"
+                android:layout_marginStart="-13dp" android:layout_marginTop="0dp"/>
+            <!-- A#3 -->
+            <Button android:id="@+id/keyAs3" style="@style/black_piano_key_style"
+                android:layout_alignTop="@id/keyA3" android:layout_toEndOf="@id/keyA3"
+                android:layout_marginStart="-13dp" android:layout_marginTop="0dp"/>
+
+            <!-- C#4 -->
+            <Button android:id="@+id/keyCs4" style="@style/black_piano_key_style"
+                android:layout_alignTop="@id/keyC4" android:layout_toEndOf="@id/keyC4"
+                android:layout_marginStart="-13dp" android:layout_marginTop="0dp"/>
+            <!-- D#4 -->
+            <Button android:id="@+id/keyDs4" style="@style/black_piano_key_style"
+                android:layout_alignTop="@id/keyD4" android:layout_toEndOf="@id/keyD4"
+                android:layout_marginStart="-13dp" android:layout_marginTop="0dp"/>
+            <!-- F#4 -->
+            <Button android:id="@+id/keyFs4" style="@style/black_piano_key_style"
+                android:layout_alignTop="@id/keyF4" android:layout_toEndOf="@id/keyF4"
+                android:layout_marginStart="-13dp" android:layout_marginTop="0dp"/>
+            <!-- G#4 -->
+            <Button android:id="@+id/keyGs4" style="@style/black_piano_key_style"
+                android:layout_alignTop="@id/keyG4" android:layout_toEndOf="@id/keyG4"
+                android:layout_marginStart="-13dp" android:layout_marginTop="0dp"/>
+            <!-- A#4 -->
+            <Button android:id="@+id/keyAs4" style="@style/black_piano_key_style"
+                android:layout_alignTop="@id/keyA4" android:layout_toEndOf="@id/keyA4"
+                android:layout_marginStart="-13dp" android:layout_marginTop="0dp"/>
+
+            <!-- C#5 -->
+            <Button android:id="@+id/keyCs5" style="@style/black_piano_key_style"
+                android:layout_alignTop="@id/keyC5" android:layout_toEndOf="@id/keyC5"
+                android:layout_marginStart="-13dp" android:layout_marginTop="0dp"/>
+            <!-- D#5 -->
+            <Button android:id="@+id/keyDs5" style="@style/black_piano_key_style"
+                android:layout_alignTop="@id/keyD5" android:layout_toEndOf="@id/keyD5"
+                android:layout_marginStart="-13dp" android:layout_marginTop="0dp"/>
+            <!-- F#5 -->
+            <Button android:id="@+id/keyFs5" style="@style/black_piano_key_style"
+                android:layout_alignTop="@id/keyF5" android:layout_toEndOf="@id/keyF5"
+                android:layout_marginStart="-13dp" android:layout_marginTop="0dp"/>
+            <!-- G#5 -->
+            <Button android:id="@+id/keyGs5" style="@style/black_piano_key_style"
+                android:layout_alignTop="@id/keyG5" android:layout_toEndOf="@id/keyG5"
+                android:layout_marginStart="-13dp" android:layout_marginTop="0dp"/>
+            <!-- A#5 -->
+            <Button android:id="@+id/keyAs5" style="@style/black_piano_key_style"
+                android:layout_alignTop="@id/keyA5" android:layout_toEndOf="@id/keyA5"
+                android:layout_marginStart="-13dp" android:layout_marginTop="0dp"/>
+
+            <!-- C#6 -->
+            <Button android:id="@+id/keyCs6" style="@style/black_piano_key_style"
+                android:layout_alignTop="@id/keyC6" android:layout_toEndOf="@id/keyC6"
+                android:layout_marginStart="-13dp" android:layout_marginTop="0dp"/>
+            <!-- D#6 -->
+            <Button android:id="@+id/keyDs6" style="@style/black_piano_key_style"
+                android:layout_alignTop="@id/keyD6" android:layout_toEndOf="@id/keyD6"
+                android:layout_marginStart="-13dp" android:layout_marginTop="0dp"/>
+            <!-- F#6 -->
+            <Button android:id="@+id/keyFs6" style="@style/black_piano_key_style"
+                android:layout_alignTop="@id/keyF6" android:layout_toEndOf="@id/keyF6"
+                android:layout_marginStart="-13dp" android:layout_marginTop="0dp"/>
+            <!-- G#6 -->
+            <Button android:id="@+id/keyGs6" style="@style/black_piano_key_style"
+                android:layout_alignTop="@id/keyG6" android:layout_toEndOf="@id/keyG6"
+                android:layout_marginStart="-13dp" android:layout_marginTop="0dp"/>
+            <!-- A#6 -->
+            <Button android:id="@+id/keyAs6" style="@style/black_piano_key_style"
+                android:layout_alignTop="@id/keyA6" android:layout_toEndOf="@id/keyA6"
+                android:layout_marginStart="-13dp" android:layout_marginTop="0dp"/>
+
+            <!-- C#7 -->
+            <Button android:id="@+id/keyCs7" style="@style/black_piano_key_style"
+                android:layout_alignTop="@id/keyC7" android:layout_toEndOf="@id/keyC7"
+                android:layout_marginStart="-13dp" android:layout_marginTop="0dp"/>
+            <!-- D#7 -->
+            <Button android:id="@+id/keyDs7" style="@style/black_piano_key_style"
+                android:layout_alignTop="@id/keyD7" android:layout_toEndOf="@id/keyD7"
+                android:layout_marginStart="-13dp" android:layout_marginTop="0dp"/>
+            <!-- F#7 -->
+            <Button android:id="@+id/keyFs7" style="@style/black_piano_key_style"
+                android:layout_alignTop="@id/keyF7" android:layout_toEndOf="@id/keyF7"
+                android:layout_marginStart="-13dp" android:layout_marginTop="0dp"/>
+            <!-- G#7 -->
+            <Button android:id="@+id/keyGs7" style="@style/black_piano_key_style"
+                android:layout_alignTop="@id/keyG7" android:layout_toEndOf="@id/keyG7"
+                android:layout_marginStart="-13dp" android:layout_marginTop="0dp"/>
+            <!-- A#7 -->
+            <Button android:id="@+id/keyAs7" style="@style/black_piano_key_style"
+                android:layout_alignTop="@id/keyA7" android:layout_toEndOf="@id/keyA7"
+                android:layout_marginStart="-13dp" android:layout_marginTop="0dp"/>
+
+            <!-- Note labels (TextViews) -->
+            <TextView android:id="@+id/labelC3" style="@style/style_for_TectView_ketText3" android:text="C3"
+                android:layout_toLeftOf="@id/keyD3" android:stateListAnimator="@null" android:textIsSelectable="false"/>
+            <TextView android:id="@+id/labelD3" style="@style/style_for_TectView_ketText3" android:text="D3"
+                android:layout_toLeftOf="@id/keyE3" android:stateListAnimator="@null" android:textIsSelectable="false"/>
+            <TextView android:id="@+id/labelE3" style="@style/style_for_TectView_ketText3" android:text="E3"
+                android:layout_toLeftOf="@id/keyF3" android:stateListAnimator="@null" android:textIsSelectable="false"/>
+            <TextView android:id="@+id/labelF3" style="@style/style_for_TectView_ketText3" android:text="F3"
+                android:layout_toLeftOf="@id/keyG3" android:stateListAnimator="@null" android:textIsSelectable="false"/>
+            <TextView android:id="@+id/labelG3" style="@style/style_for_TectView_ketText3" android:text="G3"
+                android:layout_toLeftOf="@id/keyA3" android:stateListAnimator="@null" android:textIsSelectable="false"/>
+            <TextView android:id="@+id/labelA3" style="@style/style_for_TectView_ketText3" android:text="A3"
+                android:layout_toLeftOf="@id/keyB3" android:stateListAnimator="@null" android:textIsSelectable="false"/>
+            <TextView android:id="@+id/labelB3" style="@style/style_for_TectView_ketText3" android:text="B3"
+                android:layout_toLeftOf="@id/keyC4" android:stateListAnimator="@null" android:textIsSelectable="false"/>
+
+            <TextView android:id="@+id/labelC4" style="@style/style_for_TectView_ketText4" android:text="C4"
+                android:layout_toLeftOf="@id/keyD4" android:stateListAnimator="@null" android:textIsSelectable="false"/>
+            <TextView android:id="@+id/labelD4" style="@style/style_for_TectView_ketText4" android:text="D4"
+                android:layout_toLeftOf="@id/keyE4" android:stateListAnimator="@null" android:textIsSelectable="false"/>
+            <TextView android:id="@+id/labelE4" style="@style/style_for_TectView_ketText4" android:text="E4"
+                android:layout_toLeftOf="@id/keyF4" android:stateListAnimator="@null" android:textIsSelectable="false"/>
+            <TextView android:id="@+id/labelF4" style="@style/style_for_TectView_ketText4" android:text="F4"
+                android:layout_toLeftOf="@id/keyG4" android:stateListAnimator="@null" android:textIsSelectable="false"/>
+            <TextView android:id="@+id/labelG4" style="@style/style_for_TectView_ketText4" android:text="G4"
+                android:layout_toLeftOf="@id/keyA4" android:stateListAnimator="@null" android:textIsSelectable="false"/>
+            <TextView android:id="@+id/labelA4" style="@style/style_for_TectView_ketText4" android:text="A4"
+                android:layout_toLeftOf="@id/keyB4" android:stateListAnimator="@null" android:textIsSelectable="false"/>
+            <TextView android:id="@+id/labelB4" style="@style/style_for_TectView_ketText4" android:text="B4"
+                android:layout_toLeftOf="@id/keyC5" android:stateListAnimator="@null" android:textIsSelectable="false"/>
+
+            <TextView android:id="@+id/labelC5" style="@style/style_for_TectView_ketText5" android:text="C5"
+                android:layout_toLeftOf="@id/keyD5" android:stateListAnimator="@null" android:textIsSelectable="false"/>
+            <TextView android:id="@+id/labelD5" style="@style/style_for_TectView_ketText5" android:text="D5"
+                android:layout_toLeftOf="@id/keyE5" android:stateListAnimator="@null" android:textIsSelectable="false"/>
+            <TextView android:id="@+id/labelE5" style="@style/style_for_TectView_ketText5" android:text="E5"
+                android:layout_toLeftOf="@id/keyF5" android:stateListAnimator="@null" android:textIsSelectable="false"/>
+            <TextView android:id="@+id/labelF5" style="@style/style_for_TectView_ketText5" android:text="F5"
+                android:layout_toLeftOf="@id/keyG5" android:stateListAnimator="@null" android:textIsSelectable="false"/>
+            <TextView android:id="@+id/labelG5" style="@style/style_for_TectView_ketText5" android:text="G5"
+                android:layout_toLeftOf="@id/keyA5" android:stateListAnimator="@null" android:textIsSelectable="false"/>
+            <TextView android:id="@+id/labelA5" style="@style/style_for_TectView_ketText5" android:text="A5"
+                android:layout_toLeftOf="@id/keyB5" android:stateListAnimator="@null" android:textIsSelectable="false"/>
+            <TextView android:id="@+id/labelB5" style="@style/style_for_TectView_ketText5" android:text="B5"
+                android:layout_toLeftOf="@id/keyC6" android:stateListAnimator="@null" android:textIsSelectable="false"/>
+
+            <TextView android:id="@+id/labelC6" style="@style/style_for_TectView_ketText6" android:text="C6"
+                android:layout_toLeftOf="@id/keyD6" android:stateListAnimator="@null" android:textIsSelectable="false"/>
+            <TextView android:id="@+id/labelD6" style="@style/style_for_TectView_ketText6" android:text="D6"
+                android:layout_toLeftOf="@id/keyE6" android:stateListAnimator="@null" android:textIsSelectable="false"/>
+            <TextView android:id="@+id/labelE6" style="@style/style_for_TectView_ketText6" android:text="E6"
+                android:layout_toLeftOf="@id/keyF6" android:stateListAnimator="@null" android:textIsSelectable="false"/>
+            <TextView android:id="@+id/labelF6" style="@style/style_for_TectView_ketText6" android:text="F6"
+                android:layout_toLeftOf="@id/keyG6" android:stateListAnimator="@null" android:textIsSelectable="false"/>
+            <TextView android:id="@+id/labelG6" style="@style/style_for_TectView_ketText6" android:text="G6"
+                android:layout_toLeftOf="@id/keyA6" android:stateListAnimator="@null" android:textIsSelectable="false"/>
+            <TextView android:id="@+id/labelA6" style="@style/style_for_TectView_ketText6" android:text="A6"
+                android:layout_toLeftOf="@id/keyB6" android:stateListAnimator="@null" android:textIsSelectable="false"/>
+            <TextView android:id="@+id/labelB6" style="@style/style_for_TectView_ketText6" android:text="B6"
+                android:layout_toLeftOf="@id/keyC7" android:stateListAnimator="@null" android:textIsSelectable="false"/>
+
+            <TextView android:id="@+id/labelC7" style="@style/style_for_TectView_ketText7" android:text="C7"
+                android:layout_toLeftOf="@id/keyD7" android:stateListAnimator="@null" android:textIsSelectable="false"/>
+            <TextView android:id="@+id/labelD7" style="@style/style_for_TectView_ketText7" android:text="D7"
+                android:layout_toLeftOf="@id/keyE7" android:stateListAnimator="@null" android:textIsSelectable="false"/>
+            <TextView android:id="@+id/labelE7" style="@style/style_for_TectView_ketText7" android:text="E7"
+                android:layout_toLeftOf="@id/keyF7" android:stateListAnimator="@null" android:textIsSelectable="false"/>
+            <TextView android:id="@+id/labelF7" style="@style/style_for_TectView_ketText7" android:text="F7"
+                android:layout_toLeftOf="@id/keyG7" android:stateListAnimator="@null" android:textIsSelectable="false"/>
+            <TextView android:id="@+id/labelG7" style="@style/style_for_TectView_ketText7" android:text="G7"
+                android:layout_toLeftOf="@id/keyA7" android:stateListAnimator="@null" android:textIsSelectable="false"/>
+            <TextView android:id="@+id/labelA7" style="@style/style_for_TectView_ketText7" android:text="A7"
+                android:layout_toLeftOf="@id/keyB7" android:stateListAnimator="@null" android:textIsSelectable="false"/>
+            <TextView android:id="@+id/labelB7" style="@style/style_for_TectView_ketText7" android:text="B7"
+                android:layout_toLeftOf="@id/keyC7" android:stateListAnimator="@null" android:textIsSelectable="false"/>
 
         </RelativeLayout>
-
     </HorizontalScrollView>
-
-
 </RelativeLayout>

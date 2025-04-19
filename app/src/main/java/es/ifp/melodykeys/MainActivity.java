@@ -1,6 +1,7 @@
 package es.ifp.melodykeys;
 
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.HorizontalScrollView;
 import android.widget.TextView;
@@ -11,7 +12,7 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener{
 
     private HorizontalScrollView scrollView;
 
@@ -159,5 +160,10 @@ public class MainActivity extends AppCompatActivity {
         labelG7 = findViewById(R.id.labelG7);
         labelA7 = findViewById(R.id.labelA7);
         labelB7 = findViewById(R.id.labelB7);
+    }
+
+    @Override
+    public void onClick(View view) {
+
     }
 }

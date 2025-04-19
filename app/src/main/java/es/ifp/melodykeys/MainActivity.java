@@ -126,41 +126,113 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private void initializeTextViewLabelsOnPianoKeys() {
         labelC3 = findViewById(R.id.labelC3);
+        labelC3.setOnClickListener(this);
+
         labelD3 = findViewById(R.id.labelD3);
+        labelD3.setOnClickListener(this);
+
         labelE3 = findViewById(R.id.labelE3);
+        labelE3.setOnClickListener(this);
+
         labelF3 = findViewById(R.id.labelF3);
+        labelF3.setOnClickListener(this);
+
         labelG3 = findViewById(R.id.labelG3);
+        labelG3.setOnClickListener(this);
+
         labelA3 = findViewById(R.id.labelA3);
+        labelA3.setOnClickListener(this);
+
         labelB3 = findViewById(R.id.labelB3);
+        labelB3.setOnClickListener(this);
+
         labelC4 = findViewById(R.id.labelC4);
+        labelC4.setOnClickListener(this);
+
         labelD4 = findViewById(R.id.labelD4);
+        labelD4.setOnClickListener(this);
+
         labelE4 = findViewById(R.id.labelE4);
+        labelE4.setOnClickListener(this);
+
         labelF4 = findViewById(R.id.labelF4);
+        labelF4.setOnClickListener(this);
+
         labelG4 = findViewById(R.id.labelG4);
+        labelG4.setOnClickListener(this);
+
         labelA4 = findViewById(R.id.labelA4);
+        labelA4.setOnClickListener(this);
+
         labelB4 = findViewById(R.id.labelB4);
+        labelB4.setOnClickListener(this);
+
         labelC5 = findViewById(R.id.labelC5);
+        labelC5.setOnClickListener(this);
+
         labelD5 = findViewById(R.id.labelD5);
+        labelD5.setOnClickListener(this);
+
         labelE5 = findViewById(R.id.labelE5);
+        labelE5.setOnClickListener(this);
+
         labelF5 = findViewById(R.id.labelF5);
+        labelF5.setOnClickListener(this);
+
         labelG5 = findViewById(R.id.labelG5);
+        labelG5.setOnClickListener(this);
+
         labelA5 = findViewById(R.id.labelA5);
+        labelA5.setOnClickListener(this);
+
         labelB5 = findViewById(R.id.labelB5);
+        labelB5.setOnClickListener(this);
+
         labelC6 = findViewById(R.id.labelC6);
+        labelC6.setOnClickListener(this);
+
         labelD6 = findViewById(R.id.labelD6);
+        labelD6.setOnClickListener(this);
+
         labelE6 = findViewById(R.id.labelE6);
+        labelE6.setOnClickListener(this);
+
         labelF6 = findViewById(R.id.labelF6);
+        labelF6.setOnClickListener(this);
+
         labelG6 = findViewById(R.id.labelG6);
+        labelG6.setOnClickListener(this);
+
         labelA6 = findViewById(R.id.labelA6);
+        labelA6.setOnClickListener(this);
+
         labelB6 = findViewById(R.id.labelB6);
+        labelB6.setOnClickListener(this);
+
         labelC7 = findViewById(R.id.labelC7);
+        labelC7.setOnClickListener(this);
+
         labelD7 = findViewById(R.id.labelD7);
+        labelD7.setOnClickListener(this);
+
         labelE7 = findViewById(R.id.labelE7);
+        labelE7.setOnClickListener(this);
+
         labelF7 = findViewById(R.id.labelF7);
+        labelF7.setOnClickListener(this);
+
         labelG7 = findViewById(R.id.labelG7);
+        labelG7.setOnClickListener(this);
+
         labelA7 = findViewById(R.id.labelA7);
+        labelA7.setOnClickListener(this);
+
         labelB7 = findViewById(R.id.labelB7);
+        labelB7.setOnClickListener(this);
     }
+
+
+
 
     @Override
     public void onClick(View view) {

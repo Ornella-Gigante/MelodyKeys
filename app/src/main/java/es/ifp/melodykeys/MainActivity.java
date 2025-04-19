@@ -61,67 +61,185 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private void initializeAllPianoKeys() {
         // White keys
         keyC3 = findViewById(R.id.keyC3);
+        keyC3.setOnClickListener(this);
+
         keyD3 = findViewById(R.id.keyD3);
+        keyD3.setOnClickListener(this);
+
         keyE3 = findViewById(R.id.keyE3);
+        keyE3.setOnClickListener(this);
+
         keyF3 = findViewById(R.id.keyF3);
+        keyF3.setOnClickListener(this);
+
         keyG3 = findViewById(R.id.keyG3);
+        keyG3.setOnClickListener(this);
+
         keyA3 = findViewById(R.id.keyA3);
+        keyA3.setOnClickListener(this);
+
         keyB3 = findViewById(R.id.keyB3);
+        keyB3.setOnClickListener(this);
+
         keyC4 = findViewById(R.id.keyC4);
+        keyC4.setOnClickListener(this);
+
         keyD4 = findViewById(R.id.keyD4);
+        keyD4.setOnClickListener(this);
+
         keyE4 = findViewById(R.id.keyE4);
+        keyE4.setOnClickListener(this);
+
         keyF4 = findViewById(R.id.keyF4);
+        keyF4.setOnClickListener(this);
+
         keyG4 = findViewById(R.id.keyG4);
+        keyG4.setOnClickListener(this);
+
         keyA4 = findViewById(R.id.keyA4);
+        keyA4.setOnClickListener(this);
+
         keyB4 = findViewById(R.id.keyB4);
+        keyB4.setOnClickListener(this);
+
         keyC5 = findViewById(R.id.keyC5);
+        keyC5.setOnClickListener(this);
+
         keyD5 = findViewById(R.id.keyD5);
+        keyD5.setOnClickListener(this);
+
         keyE5 = findViewById(R.id.keyE5);
+        keyE5.setOnClickListener(this);
+
         keyF5 = findViewById(R.id.keyF5);
+        keyF5.setOnClickListener(this);
+
         keyG5 = findViewById(R.id.keyG5);
+        keyG5.setOnClickListener(this);
+
         keyA5 = findViewById(R.id.keyA5);
+        keyA5.setOnClickListener(this);
+
         keyB5 = findViewById(R.id.keyB5);
+        keyB5.setOnClickListener(this);
+
         keyC6 = findViewById(R.id.keyC6);
+        keyC6.setOnClickListener(this);
+
         keyD6 = findViewById(R.id.keyD6);
+        keyD6.setOnClickListener(this);
+
         keyE6 = findViewById(R.id.keyE6);
+        keyE6.setOnClickListener(this);
+
         keyF6 = findViewById(R.id.keyF6);
+        keyF6.setOnClickListener(this);
+
         keyG6 = findViewById(R.id.keyG6);
+        keyG6.setOnClickListener(this);
+
         keyA6 = findViewById(R.id.keyA6);
+        keyA6.setOnClickListener(this);
+
         keyB6 = findViewById(R.id.keyB6);
+        keyB6.setOnClickListener(this);
+
         keyC7 = findViewById(R.id.keyC7);
+        keyC7.setOnClickListener(this);
+
         keyD7 = findViewById(R.id.keyD7);
+        keyD7.setOnClickListener(this);
+
         keyE7 = findViewById(R.id.keyE7);
+        keyE7.setOnClickListener(this);
+
         keyF7 = findViewById(R.id.keyF7);
+        keyF7.setOnClickListener(this);
+
         keyG7 = findViewById(R.id.keyG7);
+        keyG7.setOnClickListener(this);
+
         keyA7 = findViewById(R.id.keyA7);
+        keyA7.setOnClickListener(this);
+
         keyB7 = findViewById(R.id.keyB7);
+        keyB7.setOnClickListener(this);
 
         // Black keys
         keyCs3 = findViewById(R.id.keyCs3);
+        keyCs3.setOnClickListener(this);
+
         keyDs3 = findViewById(R.id.keyDs3);
+        keyDs3.setOnClickListener(this);
+
         keyFs3 = findViewById(R.id.keyFs3);
+        keyFs3.setOnClickListener(this);
+
         keyGs3 = findViewById(R.id.keyGs3);
+        keyGs3.setOnClickListener(this);
+
         keyAs3 = findViewById(R.id.keyAs3);
+        keyAs3.setOnClickListener(this);
+
         keyCs4 = findViewById(R.id.keyCs4);
+        keyCs4.setOnClickListener(this);
+
         keyDs4 = findViewById(R.id.keyDs4);
+        keyDs4.setOnClickListener(this);
+
         keyFs4 = findViewById(R.id.keyFs4);
+        keyFs4.setOnClickListener(this);
+
         keyGs4 = findViewById(R.id.keyGs4);
+        keyGs4.setOnClickListener(this);
+
         keyAs4 = findViewById(R.id.keyAs4);
+        keyAs4.setOnClickListener(this);
+
         keyCs5 = findViewById(R.id.keyCs5);
+        keyCs5.setOnClickListener(this);
+
         keyDs5 = findViewById(R.id.keyDs5);
+        keyDs5.setOnClickListener(this);
+
         keyFs5 = findViewById(R.id.keyFs5);
+        keyFs5.setOnClickListener(this);
+
         keyGs5 = findViewById(R.id.keyGs5);
+        keyGs5.setOnClickListener(this);
+
         keyAs5 = findViewById(R.id.keyAs5);
+        keyAs5.setOnClickListener(this);
+
         keyCs6 = findViewById(R.id.keyCs6);
+        keyCs6.setOnClickListener(this);
+
         keyDs6 = findViewById(R.id.keyDs6);
+        keyDs6.setOnClickListener(this);
+
         keyFs6 = findViewById(R.id.keyFs6);
+        keyFs6.setOnClickListener(this);
+
         keyGs6 = findViewById(R.id.keyGs6);
+        keyGs6.setOnClickListener(this);
+
         keyAs6 = findViewById(R.id.keyAs6);
+        keyAs6.setOnClickListener(this);
+
         keyCs7 = findViewById(R.id.keyCs7);
+        keyCs7.setOnClickListener(this);
+
         keyDs7 = findViewById(R.id.keyDs7);
+        keyDs7.setOnClickListener(this);
+
         keyFs7 = findViewById(R.id.keyFs7);
+        keyFs7.setOnClickListener(this);
+
         keyGs7 = findViewById(R.id.keyGs7);
+        keyGs7.setOnClickListener(this);
+
         keyAs7 = findViewById(R.id.keyAs7);
+        keyAs7.setOnClickListener(this);
     }
 
     private void initializeTextViewLabelsOnPianoKeys() {

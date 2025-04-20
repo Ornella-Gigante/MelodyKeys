@@ -33,7 +33,7 @@ public class Test extends AppCompatActivity implements View.OnClickListener{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        setContentView(R.layout.test); // Now correctly references test.xml
+        setContentView(R.layout.test);
 
 
         button =(Button)findViewById(R.id.button);
@@ -41,7 +41,7 @@ public class Test extends AppCompatActivity implements View.OnClickListener{
         button3 =(Button) findViewById(R.id.button3);
         button4 =(Button) findViewById(R.id.button4);
 
-        
+
         button.setOnClickListener(this);
         button2.setOnClickListener(this);
         button3.setOnClickListener(this);
@@ -57,6 +57,17 @@ public class Test extends AppCompatActivity implements View.OnClickListener{
 
     @Override
     public void onClick(View view) {
+        int id = view.getId();
 
+        if (id == R.id.button) {
+            // Acción para button
+        } else if (id == R.id.button2) {
+            // Acción para button2
+        } else if (id == R.id.button3) {
+            // Acción para button3
+        } else if (id == R.id.button4) {
+            // Acción para button4
+        }
     }
+
 }

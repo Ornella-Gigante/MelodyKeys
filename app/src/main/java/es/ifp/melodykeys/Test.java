@@ -1,8 +1,7 @@
-
 /**
  * This class defines the Test activity for the MelodyKeys application.
  *
- * It extends AppCompatActivity and sets up the layout defined in activity_test.xml.
+ * It extends AppCompatActivity and sets up the layout defined in test.xml.
  * The activity enables edge-to-edge display using EdgeToEdge.enable(this) to allow the UI
  * to draw behind system bars, providing a more immersive experience on modern Android devices.
  *
@@ -13,7 +12,6 @@
  * This setup is standard for activities that want to provide a modern, full-screen user experience
  * while maintaining proper layout and usability across different devices and Android versions.
  */
-
 
 package es.ifp.melodykeys;
 
@@ -31,7 +29,7 @@ public class Test extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_test);
+        setContentView(R.layout.test); // Now correctly references test.xml
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);

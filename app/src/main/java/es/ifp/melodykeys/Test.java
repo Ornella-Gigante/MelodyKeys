@@ -16,6 +16,7 @@
 package es.ifp.melodykeys;
 
 import android.media.MediaPlayer;
+import android.media.SoundPool;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -31,6 +32,10 @@ public class Test extends AppCompatActivity implements View.OnClickListener{
     Button button, button2, button3, button4;
 
     MediaPlayer mp;
+
+    SoundPool soundpool;
+
+    int c3, c3black;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +54,10 @@ public class Test extends AppCompatActivity implements View.OnClickListener{
         button2.setOnClickListener(this);
         button3.setOnClickListener(this);
         button4.setOnClickListener(this);
+
+        soundpool = new SoundPool.Builder().setMaxStreams(6).build();
+        c3 = soundpool.load(this, R.raw.c3,1);
+        c3black = soundpool.load(this,R.raw.c3black,1);
 
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
@@ -72,9 +81,13 @@ public class Test extends AppCompatActivity implements View.OnClickListener{
             mp.start();
 
         } else if (id == R.id.button3) {
-            // Acción para button3
+
+            soundpool.play(c3,1,1,0,0,1);
+
+
         } else if (id == R.id.button4) {
-            // Acción para button4
+
+            soundpool.play(c3black,1,1,0,0,1);
         }
     }
 

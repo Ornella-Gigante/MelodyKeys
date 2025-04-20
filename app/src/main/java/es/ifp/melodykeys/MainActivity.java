@@ -51,7 +51,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         // Test
 
-        gotoTestActivity();
+        // gotoTestActivity();
 
         // All keys init
         initializeAllPianoKeys();

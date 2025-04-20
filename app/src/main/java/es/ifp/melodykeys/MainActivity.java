@@ -53,8 +53,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         scrollView = findViewById(R.id.scrollView);
 
 
-        // Test
-
         // gotoTestActivity();
 
         // All keys init
@@ -62,6 +60,28 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         // TextViews init
         initializeTextViewLabelsOnPianoKeys();
+
+        // Code for the SoundPool
+
+        soundPool = new SoundPool.Builder().setMaxStreams(6).build();
+        c3 = soundPool.load(this, R.raw.c3,1);
+
+
+        // Upload all the sounds for each key 
+        c3       = soundPool.load(this, R.raw.c3, 1);
+        c3black  = soundPool.load(this, R.raw.c3black, 1);
+        d3       = soundPool.load(this, R.raw.d3, 1);
+        d3black  = soundPool.load(this, R.raw.d3black, 1);
+        e3       = soundPool.load(this, R.raw.e3, 1);
+        f3       = soundPool.load(this, R.raw.f3, 1);
+        f3black  = soundPool.load(this, R.raw.f3black, 1);
+        g3       = soundPool.load(this, R.raw.g3, 1);
+        g3black  = soundPool.load(this, R.raw.g3black, 1);
+        a3       = soundPool.load(this, R.raw.a3, 1);
+        a3black  = soundPool.load(this, R.raw.a3black, 1);
+        b3       = soundPool.load(this, R.raw.b3, 1);
+
+
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());

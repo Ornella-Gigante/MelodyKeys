@@ -33,6 +33,14 @@ public class Test extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.test); // Now correctly references test.xml
+
+
+        button =(Button)findViewById(R.id.button);
+        button2 = (Button)findViewById(R.id.button2);
+        button3 =(Button) findViewById(R.id.button3);
+        button4 =(Button) findViewById(R.id.button4);
+
+
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);

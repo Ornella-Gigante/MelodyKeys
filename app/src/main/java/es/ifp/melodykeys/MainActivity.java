@@ -18,6 +18,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private HorizontalScrollView scrollView;
 
+    private SoundPool soundPool;
+
+    private int c3, c3black, d3, d3black, e3, f3, f3black, g3, g3black, a3, a3black, b3;
+
 
     // White keys
     private Button keyC3, keyD3, keyE3, keyF3, keyG3, keyA3, keyB3;

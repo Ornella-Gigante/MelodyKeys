@@ -1,88 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:paddingLeft="32dp"
+    android:paddingRight="32dp"
+    android:paddingTop="48dp"
+    android:paddingBottom="32dp"
+    tools:context=".Test">
 
+    <!-- TextView superior centrado con espacio -->
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:text="MediaPlayer"
+        android:textAlignment="center"
+        android:textSize="24sp"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginBottom="32dp"/>
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:layout_editor_absoluteX="134dp"
-        tools:layout_editor_absoluteY="299dp">
-
-        <TextView
-            android:id="@+id/textView3"
-            android:layout_width="141dp"
-            android:layout_height="39dp"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentEnd="true"
-            android:layout_marginStart="108dp"
-            android:layout_marginEnd="162dp"
-            android:text="MediaPlayer"
-            android:textAlignment="center"
-            android:textSize="24sp" />
+    <!-- LinearLayout horizontal para los dos botones superiores -->
+    <LinearLayout
+        android:id="@+id/topButtonsLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textView3"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="24dp"
+        android:orientation="horizontal"
+        android:gravity="center">
 
         <Button
             android:id="@+id/button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentBottom="true"
-            android:layout_marginStart="140dp"
-            android:layout_marginEnd="63dp"
-            android:layout_marginBottom="529dp"
-            android:layout_toEndOf="@+id/button2"
-            android:text="Button" />
+            android:layout_width="120dp"
+            android:layout_height="48dp"
+            android:text="BUTTON"
+            android:layout_marginEnd="24dp"/>
 
         <Button
             android:id="@+id/button2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_marginStart="20dp"
-            android:layout_marginBottom="529dp"
-            android:text="Button" />
+            android:layout_width="120dp"
+            android:layout_height="48dp"
+            android:text="BUTTON"/>
+    </LinearLayout>
 
-        <TextView
-            android:id="@+id/textView4"
-            android:layout_width="158dp"
-            android:layout_height="54dp"
-            android:layout_below="@+id/textView3"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentBottom="true"
+    <!-- TextView central grande, debajo de los botones superiores -->
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:text="SoundPool"
+        android:textAlignment="center"
+        android:textSize="24sp"
+        android:layout_below="@id/topButtonsLayout"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="48dp"
+        android:layout_marginBottom="32dp"/>
 
-            android:layout_marginStart="106dp"
-            android:layout_marginTop="256dp"
-            android:layout_marginEnd="147dp"
-            android:layout_marginBottom="383dp"
-            android:text="SoundPool"
-            android:textAlignment="center"
-            android:textSize="24sp" />
+    <!-- LinearLayout horizontal para los dos botones inferiores -->
+    <LinearLayout
+        android:id="@+id/bottomButtonsLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textView4"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="24dp"
+        android:orientation="horizontal"
+        android:gravity="center">
 
         <Button
             android:id="@+id/button9"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="274dp"
-            android:layout_marginBottom="216dp"
-            android:text="Button" />
+            android:layout_width="120dp"
+            android:layout_height="48dp"
+            android:text="BUTTON"
+            android:layout_marginEnd="24dp"/>
 
         <Button
             android:id="@+id/button11"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentBottom="true"
-            android:layout_marginStart="138dp"
-            android:layout_marginEnd="63dp"
-            android:layout_marginBottom="217dp"
-            android:layout_toEndOf="@+id/button9"
-            android:text="Button" />
-
-    </RelativeLayout>
+            android:layout_width="120dp"
+            android:layout_height="48dp"
+            android:text="BUTTON"/>
+    </LinearLayout>
 
 </RelativeLayout>

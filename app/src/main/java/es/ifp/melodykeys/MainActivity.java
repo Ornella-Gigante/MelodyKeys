@@ -1,5 +1,6 @@
 package es.ifp.melodykeys;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -45,6 +46,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         scrollView = findViewById(R.id.scrollView);
 
+
+        // Test
+
+        gotoTestActivity();
+
         // All keys init
         initializeAllPianoKeys();
 
@@ -56,6 +62,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+    }
+
+    private void gotoTestActivity() {
+
+        Intent intent = new Intent(MainActivity.this, Test.class);
+        startActivity(intent);
     }
 
     private void initializeAllPianoKeys() {

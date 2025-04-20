@@ -16,6 +16,7 @@
 package es.ifp.melodykeys;
 
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 
 import androidx.activity.EdgeToEdge;
@@ -24,7 +25,7 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-public class Test extends AppCompatActivity {
+public class Test extends AppCompatActivity implements View.OnClickListener{
 
     Button button, button2, button3, button4;
 
@@ -40,11 +41,22 @@ public class Test extends AppCompatActivity {
         button3 =(Button) findViewById(R.id.button3);
         button4 =(Button) findViewById(R.id.button4);
 
+        
+        button.setOnClickListener(this);
+        button2.setOnClickListener(this);
+        button3.setOnClickListener(this);
+        button4.setOnClickListener(this);
+
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+    }
+
+    @Override
+    public void onClick(View view) {
+
     }
 }

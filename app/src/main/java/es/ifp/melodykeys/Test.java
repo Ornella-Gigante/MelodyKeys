@@ -16,6 +16,7 @@
 package es.ifp.melodykeys;
 
 import android.os.Bundle;
+import android.widget.Button;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -24,6 +25,8 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 public class Test extends AppCompatActivity {
+
+    Button button, button2, button3, button4;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

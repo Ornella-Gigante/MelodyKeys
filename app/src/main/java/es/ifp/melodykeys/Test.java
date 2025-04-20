@@ -15,6 +15,7 @@
 
 package es.ifp.melodykeys;
 
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -28,6 +29,8 @@ import androidx.core.view.WindowInsetsCompat;
 public class Test extends AppCompatActivity implements View.OnClickListener{
 
     Button button, button2, button3, button4;
+
+    MediaPlayer mp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,9 +63,14 @@ public class Test extends AppCompatActivity implements View.OnClickListener{
         int id = view.getId();
 
         if (id == R.id.button) {
-            // Acción para button
+            mp = MediaPlayer.create(getApplicationContext(), R.raw.c3);
+            mp.start();
+
         } else if (id == R.id.button2) {
-            // Acción para button2
+
+            mp= MediaPlayer.create(getApplicationContext(),R.raw.c3);
+            mp.start();
+
         } else if (id == R.id.button3) {
             // Acción para button3
         } else if (id == R.id.button4) {

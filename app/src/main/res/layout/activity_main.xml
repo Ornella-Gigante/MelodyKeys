@@ -278,14 +278,7 @@
             <TextView android:id="@+id/labelB7" style="@style/style_for_TectView_ketText7" android:text="B7"
                 android:layout_toLeftOf="@id/keyC7" android:stateListAnimator="@null" android:textIsSelectable="false"/>
 
-            <Button
-                android:id="@+id/bt_record"
-                android:layout_width="wrap_content"
-                android:layout_height="80dp"
-                android:layout_alignParentTop="true"
-                android:layout_marginStart="112dp"
-                android:layout_marginTop="3dp"
-                android:background="@drawable/record_button" />
+
 
 
         </RelativeLayout>
@@ -293,7 +286,18 @@
     
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation= "vertical">
+
+        <Button
+            android:id="@+id/bt_record"
+            android:layout_width="wrap_content"
+            android:layout_height="80dp"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="112dp"
+            android:layout_marginTop="11dp"
+            android:background="@drawable/record_button" />
 
         <Button
             android:id="@id/bt_left_navigation"
@@ -304,6 +308,8 @@
             android:layout_marginStart="15dp"
             android:layout_marginTop="10dp"
             android:background="@drawable/left_navigation_button" />
+
+
 
 
     </RelativeLayout>

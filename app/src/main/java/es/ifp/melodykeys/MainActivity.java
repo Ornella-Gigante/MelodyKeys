@@ -21,7 +21,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private SoundPool soundPool;
 
     private int c3, c3black, d3, d3black, e3, f3, f3black, g3, g3black, a3, a3black, b3;
-
+    private int c4, c4black, d4, d4black, e4, f4, f4black, g4, g4black, a4, a4black, b4;
+    private int c5, c5black, d5, d5black, e5, f5, f5black, g5, g5black, a5, a5black, b5;
+    private int c6, c6black, d6, d6black, e6, f6, f6black, g6, g6black, a6, a6black, b6;
+    private int c7, c7black, d7, d7black, e7, f7, f7black, g7, g7black, a7, a7black, b7;
 
     // White keys
     private Button keyC3, keyD3, keyE3, keyF3, keyG3, keyA3, keyB3;
@@ -67,7 +70,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         c3 = soundPool.load(this, R.raw.c3,1);
 
 
-        // Upload all the sounds for each key 
+        // Upload all the sounds for each key
         c3       = soundPool.load(this, R.raw.c3, 1);
         c3black  = soundPool.load(this, R.raw.c3black, 1);
         d3       = soundPool.load(this, R.raw.d3, 1);
@@ -89,6 +92,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             return insets;
         });
     }
+
 
     private void gotoTestActivity() {
 
@@ -392,6 +396,97 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onClick(View view) {
+
+
+        int id = view.getId();
+
+
+        // White Keys
+        if (id == R.id.keyC3 || id == R.id.labelC3) {
+            soundPool.play(c3, 1, 1, 0, 0, 1);
+        } else if (id == R.id.keyD3 || id == R.id.labelD3) {
+            soundPool.play(d3, 1, 1, 0, 0, 1);
+        } else if (id == R.id.keyE3 || id == R.id.labelE3) {
+            soundPool.play(e3, 1, 1, 0, 0, 1);
+        } else if (id == R.id.keyF3 || id == R.id.labelF3) {
+            soundPool.play(f3, 1, 1, 0, 0, 1);
+        } else if (id == R.id.keyG3 || id == R.id.labelG3) {
+            soundPool.play(g3, 1, 1, 0, 0, 1);
+        } else if (id == R.id.keyA3 || id == R.id.labelA3) {
+            soundPool.play(a3, 1, 1, 0, 0, 1);
+        } else if (id == R.id.keyB3 || id == R.id.labelB3) {
+            soundPool.play(b3, 1, 1, 0, 0, 1);
+        }
+
+        // Black Keys
+        else if (id == R.id.keyCs3) {
+            soundPool.play(c3black, 1, 1, 0, 0, 1);
+        } else if (id == R.id.keyDs3) {
+            soundPool.play(d3black, 1, 1, 0, 0, 1);
+        } else if (id == R.id.keyFs3) {
+            soundPool.play(f3black, 1, 1, 0, 0, 1);
+        } else if (id == R.id.keyGs3) {
+            soundPool.play(g3black, 1, 1, 0, 0, 1);
+        } else if (id == R.id.keyAs3) {
+            soundPool.play(a3black, 1, 1, 0, 0, 1);
+        }
+
+        // Octave 4
+        c4      = soundPool.load(this, R.raw.c4, 1);
+        c4black = soundPool.load(this, R.raw.c4black, 1);
+        d4      = soundPool.load(this, R.raw.d4, 1);
+        d4black = soundPool.load(this, R.raw.d4black, 1);
+        e4      = soundPool.load(this, R.raw.e4, 1);
+        f4      = soundPool.load(this, R.raw.f4, 1);
+        f4black = soundPool.load(this, R.raw.f4black, 1);
+        g4      = soundPool.load(this, R.raw.g4, 1);
+        g4black = soundPool.load(this, R.raw.g4black, 1);
+        a4      = soundPool.load(this, R.raw.a4, 1);
+        a4black = soundPool.load(this, R.raw.a4black, 1);
+        b4      = soundPool.load(this, R.raw.b4, 1);
+
+        // Octave 5
+        c5      = soundPool.load(this, R.raw.c5, 1);
+        c5black = soundPool.load(this, R.raw.c5black, 1);
+        d5      = soundPool.load(this, R.raw.d5, 1);
+        d5black = soundPool.load(this, R.raw.d5black, 1);
+        e5      = soundPool.load(this, R.raw.e5, 1);
+        f5      = soundPool.load(this, R.raw.f5, 1);
+        f5black = soundPool.load(this, R.raw.f5black, 1);
+        g5      = soundPool.load(this, R.raw.g5, 1);
+        g5black = soundPool.load(this, R.raw.g5black, 1);
+        a5      = soundPool.load(this, R.raw.a5, 1);
+        a5black = soundPool.load(this, R.raw.a5black, 1);
+        b5      = soundPool.load(this, R.raw.b5, 1);
+
+        // Octave 6
+        c6      = soundPool.load(this, R.raw.c6, 1);
+        c6black = soundPool.load(this, R.raw.c6black, 1);
+        d6      = soundPool.load(this, R.raw.d6, 1);
+        d6black = soundPool.load(this, R.raw.d6black, 1);
+        e6      = soundPool.load(this, R.raw.e6, 1);
+        f6      = soundPool.load(this, R.raw.f6, 1);
+        f6black = soundPool.load(this, R.raw.f6black, 1);
+        g6      = soundPool.load(this, R.raw.g6, 1);
+        g6black = soundPool.load(this, R.raw.g6black, 1);
+        a6      = soundPool.load(this, R.raw.a6, 1);
+        a6black = soundPool.load(this, R.raw.a6black, 1);
+        b6      = soundPool.load(this, R.raw.b6, 1);
+
+        // Octave 7
+        c7      = soundPool.load(this, R.raw.c7, 1);
+        c7black = soundPool.load(this, R.raw.c7black, 1);
+        d7      = soundPool.load(this, R.raw.d7, 1);
+        d7black = soundPool.load(this, R.raw.d7black, 1);
+        e7      = soundPool.load(this, R.raw.e7, 1);
+        f7      = soundPool.load(this, R.raw.f7, 1);
+        f7black = soundPool.load(this, R.raw.f7black, 1);
+        g7      = soundPool.load(this, R.raw.g7, 1);
+        g7black = soundPool.load(this, R.raw.g7black, 1);
+        a7      = soundPool.load(this, R.raw.a7, 1);
+        a7black = soundPool.load(this, R.raw.a7black, 1);
+        b7      = soundPool.load(this, R.raw.b7, 1);
+
 
     }
 }

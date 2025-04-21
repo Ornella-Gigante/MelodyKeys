@@ -96,7 +96,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private void gotoTestActivity() {
 
-        Intent intent = new Intent(MainActivity.this, Test.class);
+        Intent intent = new Intent(MainActivity.this, TestOgg.class);
         startActivity(intent);
     }
 

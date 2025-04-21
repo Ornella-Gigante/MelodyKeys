@@ -1,6 +1,88 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-             android:layout_width="match_parent"
-             android:layout_height="match_parent">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="32dp"
+    android:paddingRight="32dp"
+    android:paddingTop="48dp"
+    android:paddingBottom="32dp"
+    tools:context=".Playingmp3">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <!-- TextView superior centrado con espacio -->
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:text="MediaPlayer"
+        android:textAlignment="center"
+        android:textSize="24sp"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginBottom="32dp"/>
+
+    <!-- LinearLayout horizontal para los dos botones superiores -->
+    <LinearLayout
+        android:id="@+id/topButtonsLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textView3"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="24dp"
+        android:orientation="horizontal"
+        android:gravity="center">
+
+        <Button
+            android:id="@+id/button"
+            android:layout_width="120dp"
+            android:layout_height="48dp"
+            android:text="BUTTON"
+            android:layout_marginEnd="24dp"/>
+
+        <Button
+            android:id="@+id/button2"
+            android:layout_width="120dp"
+            android:layout_height="48dp"
+            android:text="BUTTON"/>
+    </LinearLayout>
+
+    <!-- TextView central grande, debajo de los botones superiores -->
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:text="SoundPool"
+        android:textAlignment="center"
+        android:textSize="24sp"
+        android:layout_below="@id/topButtonsLayout"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="48dp"
+        android:layout_marginBottom="32dp"/>
+
+    <!-- LinearLayout horizontal para los dos botones inferiores -->
+    <LinearLayout
+        android:id="@+id/bottomButtonsLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textView4"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="24dp"
+        android:orientation="horizontal"
+        android:gravity="center">
+
+        <Button
+            android:id="@+id/button3"
+            android:layout_width="120dp"
+            android:layout_height="48dp"
+            android:text="BUTTON"
+            android:layout_marginEnd="24dp"/>
+
+        <Button
+            android:id="@+id/button4"
+            android:layout_width="120dp"
+            android:layout_height="48dp"
+            android:text="BUTTON"/>
+    </LinearLayout>
+
+</RelativeLayout>

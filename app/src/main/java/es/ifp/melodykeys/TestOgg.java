@@ -27,7 +27,7 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-public class Test extends AppCompatActivity implements View.OnClickListener{
+public class TestOgg extends AppCompatActivity implements View.OnClickListener{
 
     Button button, button2, button3, button4;
 

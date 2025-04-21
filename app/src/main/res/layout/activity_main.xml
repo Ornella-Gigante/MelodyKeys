@@ -12,14 +12,12 @@
     android:background="@color/colorPrimary">
 
     <HorizontalScrollView
+        android:layout_marginTop="10dp"
         android:id="@+id/scrollView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="200dp"
-        android:layout_marginBottom="100dp"
-        android:layout_marginLeft="50dp"
-        android:layout_marginRight="50dp"
-        android:scrollbars="none">
+        android:layout_alignParentEnd="true"
+        >
 
         <RelativeLayout
             android:layout_width="wrap_content"
@@ -280,6 +278,33 @@
             <TextView android:id="@+id/labelB7" style="@style/style_for_TectView_ketText7" android:text="B7"
                 android:layout_toLeftOf="@id/keyC7" android:stateListAnimator="@null" android:textIsSelectable="false"/>
 
+            <Button
+                android:id="@+id/bt_record"
+                android:layout_width="wrap_content"
+                android:layout_height="80dp"
+                android:layout_alignParentTop="true"
+                android:layout_marginStart="112dp"
+                android:layout_marginTop="3dp"
+                android:background="@drawable/record_button" />
+
+
         </RelativeLayout>
     </HorizontalScrollView>
+    
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:id="@id/bt_left_navigation"
+            android:layout_width="wrap_content"
+            android:layout_height="80dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/left_navigation_button" />
+
+
+    </RelativeLayout>
 </RelativeLayout>

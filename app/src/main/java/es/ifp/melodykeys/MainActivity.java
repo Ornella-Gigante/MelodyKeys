@@ -97,6 +97,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         playButton = (Button) findViewById(R.id.bt_play_recording);
 
 
+
         // Listeners for buttons of right and left
         left_navigation.setOnClickListener(new View.OnClickListener(){
 
@@ -120,7 +121,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
 
         });
-
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());

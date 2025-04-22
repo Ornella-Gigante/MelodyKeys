@@ -55,6 +55,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
 
+        //Init ScrollView
         scrollView = findViewById(R.id.scrollView);
 
 
@@ -89,7 +90,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
         // Init buttons
-        
+
         left_navigation = (Button)findViewById(R.id.bt_left_navigation);
         right_navigation = (Button)findViewById(R.id.bt_right_navigation);
         recordButton = (Button)findViewById(R.id.bt_record);
@@ -102,6 +103,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             @Override
             public void onClick(View v){
 
+                scrollView.scrollTo(scrollView.getScrollX()-30, scrollView.getScrollX());
+
             }
 
         });
@@ -111,6 +114,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             @Override
             public void onClick(View v){
+
+                scrollView.scrollTo(scrollView.getScrollX() + 30, scrollView.getScrollY());
 
             }
 

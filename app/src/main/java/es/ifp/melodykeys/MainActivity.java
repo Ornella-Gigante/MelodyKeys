@@ -20,6 +20,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private SoundPool soundPool;
 
+    private Button left_navigation, right_navigation, recordButton, playButton;
+
     private int c3, c3black, d3, d3black, e3, f3, f3black, g3, g3black, a3, a3black, b3;
     private int c4, c4black, d4, d4black, e4, f4, f4black, g4, g4black, a4, a4black, b4;
     private int c5, c5black, d5, d5black, e5, f5, f5black, g5, g5black, a5, a5black, b5;

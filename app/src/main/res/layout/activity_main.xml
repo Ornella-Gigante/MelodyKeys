@@ -294,6 +294,7 @@
             android:id="@+id/bt_record"
             android:layout_width="wrap_content"
             android:layout_height="80dp"
+            android:onClick="record"
             android:layout_alignParentTop="true"
             android:layout_marginStart="112dp"
             android:layout_marginTop="11dp"

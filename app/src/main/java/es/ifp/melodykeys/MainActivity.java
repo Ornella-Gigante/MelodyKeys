@@ -493,4 +493,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     public void play(View view) {
     }
+
+    public void record(View view) {
+    }
 }

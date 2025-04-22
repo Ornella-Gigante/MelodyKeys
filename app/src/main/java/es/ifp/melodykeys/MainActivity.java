@@ -88,12 +88,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
 
+        // Init buttons
+        
         left_navigation = (Button)findViewById(R.id.bt_left_navigation);
         right_navigation = (Button)findViewById(R.id.bt_right_navigation);
         recordButton = (Button)findViewById(R.id.bt_record);
         playButton = (Button) findViewById(R.id.bt_play_recording);
 
 
+        // Listeners for buttons of right and left
         left_navigation.setOnClickListener(new View.OnClickListener(){
 
             @Override

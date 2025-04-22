@@ -88,6 +88,32 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
 
+        left_navigation = (Button)findViewById(R.id.bt_left_navigation);
+        right_navigation = (Button)findViewById(R.id.bt_right_navigation);
+        recordButton = (Button)findViewById(R.id.bt_record);
+        playButton = (Button) findViewById(R.id.bt_play_recording);
+
+
+        left_navigation.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View v){
+
+            }
+
+        });
+
+
+        right_navigation.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View v){
+
+            }
+
+        });
+
+
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);

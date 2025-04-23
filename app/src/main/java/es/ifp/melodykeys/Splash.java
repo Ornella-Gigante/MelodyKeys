@@ -132,12 +132,32 @@ public class Splash extends AppCompatActivity {
     }
 
 
-   private void proceedAfterPermission() {
+        @Override
+        protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+            super.onActivityResult(requestCode, resultCode, data);
 
-        Toast.makeText(this, "Got All Permissions", Toast.LENGTH_SHORT).show();
-        Intent intent = new Intent(this, MainActivity.class);
-        startActivity(intent);
+            if (requestCode == REQUEST_PERMISSION_SETTING) {
+                if (ActivityCompat.checkSelfPermission(Splash.this, permissionsRequired[0]) == PackageManager.PERMISSION_GRANTED) {
+                    // normal coding to get to the MainActivity
+                    proceedAfterPermission();
+                }
+            }
+        }
+
+
+        private void proceedAfterPermission() {
+            Toast.makeText(this, "Got All Permissions", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(this, MainActivity.class);
+            startActivity(intent);
+        }
+
+
     }
 
 
-}
+
+
+
+
+
+

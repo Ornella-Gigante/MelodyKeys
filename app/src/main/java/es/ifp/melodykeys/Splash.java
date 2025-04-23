@@ -2,10 +2,15 @@ package es.ifp.melodykeys;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.Manifest;
+import android.widget.Toast;
+
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
@@ -32,49 +37,52 @@ public class Splash extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_splash);
 
-        // Inicializa SharedPreferences para guardar el estado de los permisos
         permissionStatus = getSharedPreferences("permissionStatus", MODE_PRIVATE);
 
-        // Comprobación de permisos
-        AlertDialog.Builder builder = null;
         if (ActivityCompat.checkSelfPermission(Splash.this, permissionsRequired[0]) != PackageManager.PERMISSION_GRANTED
                 || ActivityCompat.checkSelfPermission(Splash.this, permissionsRequired[1]) != PackageManager.PERMISSION_GRANTED) {
 
-            // Si se debe mostrar una explicación al usuario
             if (ActivityCompat.shouldShowRequestPermissionRationale(Splash.this, permissionsRequired[0])
                     || ActivityCompat.shouldShowRequestPermissionRationale(Splash.this, permissionsRequired[1])) {
 
-                builder = new AlertDialog.Builder(Splash.this);
+                AlertDialog.Builder builder = new AlertDialog.Builder(Splash.this);
                 builder.setTitle("Need Multiple Permissions");
                 builder.setMessage("This app needs Storage and Record Audio Permissions");
                 builder.setPositiveButton("Grant", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        ActivityCompat.requestPermissions(Splash.this, permissionsRequired, PERMISSION_CONSTANT);
+                        dialog.cancel();
+                        sentToSettings = true;
+                        Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
+                        Uri uri = Uri.fromParts("package", getPackageName(), null);
+                        intent.setData(uri);
+                        startActivityForResult(intent, REQUEST_PERMISSION_SETTING);
+                    }
+                });
+                builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
                     }
                 });
                 builder.show();
 
             } else {
-                // Solicita los permisos directamente
                 ActivityCompat.requestPermissions(Splash.this, permissionsRequired, PERMISSION_CONSTANT);
             }
+        }else{
+
+            proceedAfterPermission();
         }
 
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
-        });
-
-        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                dialogInterface.cancel();
-            }
-        });
-
-        builder.show();
     }
+
+    private void proceedAfterPermission() {
+
+        Toast.makeText(this, "Got All Permissions", Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
+    }
+
 
 }

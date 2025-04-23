@@ -36,6 +36,7 @@ public class Splash extends AppCompatActivity {
         permissionStatus = getSharedPreferences("permissionStatus", MODE_PRIVATE);
 
         // Comprobación de permisos
+        AlertDialog.Builder builder = null;
         if (ActivityCompat.checkSelfPermission(Splash.this, permissionsRequired[0]) != PackageManager.PERMISSION_GRANTED
                 || ActivityCompat.checkSelfPermission(Splash.this, permissionsRequired[1]) != PackageManager.PERMISSION_GRANTED) {
 
@@ -43,7 +44,7 @@ public class Splash extends AppCompatActivity {
             if (ActivityCompat.shouldShowRequestPermissionRationale(Splash.this, permissionsRequired[0])
                     || ActivityCompat.shouldShowRequestPermissionRationale(Splash.this, permissionsRequired[1])) {
 
-                AlertDialog.Builder builder = new AlertDialog.Builder(Splash.this);
+                builder = new AlertDialog.Builder(Splash.this);
                 builder.setTitle("Need Multiple Permissions");
                 builder.setMessage("This app needs Storage and Record Audio Permissions");
                 builder.setPositiveButton("Grant", new DialogInterface.OnClickListener() {
@@ -66,7 +67,14 @@ public class Splash extends AppCompatActivity {
             return insets;
         });
 
-        
+        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                dialogInterface.cancel();
+            }
+        });
+
+        builder.show();
     }
 
 }

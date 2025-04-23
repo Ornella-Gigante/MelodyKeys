@@ -12,6 +12,7 @@ import android.Manifest;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.graphics.Insets;
@@ -77,7 +78,61 @@ public class Splash extends AppCompatActivity {
 
     }
 
-    private void proceedAfterPermission() {
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull
+                                           int[] grantResults){
+
+        super.onRequestPermissionsResult(requestCode,permissions,grantResults);
+
+        if(requestCode == PERMISSION_CONSTANT){
+
+            boolean allgranted = true;
+
+            for(int i =0; i<grantResults.length; i++){
+
+                if(grantResults[i] == PackageManager.PERMISSION_GRANTED){
+
+                    allgranted = true;
+                }else{
+                    allgranted = false;
+                }
+
+            }if(allgranted){
+                proceedAfterPermission();
+            }else if(ActivityCompat.shouldShowRequestPermissionRationale(Splash.this,permissionsRequired[0])
+                        || ActivityCompat.shouldShowRequestPermissionRationale(Splash.this,permissionsRequired[1])
+            ){
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(Splash.this);
+                builder.setTitle("Need Multiple Permissions");
+                builder.setMessage("This app needs Storage and Record Audio Permissions");
+                builder.setPositiveButton("Grant", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                        sentToSettings = true;
+                        Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
+                        Uri uri = Uri.fromParts("package", getPackageName(), null);
+                        intent.setData(uri);
+                        startActivityForResult(intent, REQUEST_PERMISSION_SETTING);
+                    }
+                });
+                builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                    }
+                });
+                builder.show();
+        }else{
+                Toast.makeText(this, "Unable to Get Permissions", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "App will not work properly", Toast.LENGTH_SHORT).show();
+            }
+    }
+
+
+   private void proceedAfterPermission() {
 
         Toast.makeText(this, "Got All Permissions", Toast.LENGTH_SHORT).show();
         Intent intent = new Intent(this, MainActivity.class);

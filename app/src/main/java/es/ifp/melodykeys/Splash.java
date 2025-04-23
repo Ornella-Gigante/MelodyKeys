@@ -15,9 +15,6 @@ import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 
 public class Splash extends AppCompatActivity {
 
@@ -71,38 +68,27 @@ public class Splash extends AppCompatActivity {
             } else {
                 ActivityCompat.requestPermissions(Splash.this, permissionsRequired, PERMISSION_CONSTANT);
             }
-        }else{
-
+        } else {
             proceedAfterPermission();
         }
-
     }
 
-
     @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull
-                                           int[] grantResults){
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
 
-        super.onRequestPermissionsResult(requestCode,permissions,grantResults);
-
-        if(requestCode == PERMISSION_CONSTANT){
-
+        if (requestCode == PERMISSION_CONSTANT) {
             boolean allgranted = true;
-
-            for(int i =0; i<grantResults.length; i++){
-
-                if(grantResults[i] == PackageManager.PERMISSION_GRANTED){
-
-                    allgranted = true;
-                }else{
+            for (int i = 0; i < grantResults.length; i++) {
+                if (grantResults[i] != PackageManager.PERMISSION_GRANTED) {
                     allgranted = false;
+                    break;
                 }
-
-            }if(allgranted){
+            }
+            if (allgranted) {
                 proceedAfterPermission();
-            }else if(ActivityCompat.shouldShowRequestPermissionRationale(Splash.this,permissionsRequired[0])
-                        || ActivityCompat.shouldShowRequestPermissionRationale(Splash.this,permissionsRequired[1])
-            ){
+            } else if (ActivityCompat.shouldShowRequestPermissionRationale(Splash.this, permissionsRequired[0])
+                    || ActivityCompat.shouldShowRequestPermissionRationale(Splash.this, permissionsRequired[1])) {
 
                 AlertDialog.Builder builder = new AlertDialog.Builder(Splash.this);
                 builder.setTitle("Need Multiple Permissions");
@@ -125,39 +111,29 @@ public class Splash extends AppCompatActivity {
                     }
                 });
                 builder.show();
-        }else{
+            } else {
                 Toast.makeText(this, "Unable to Get Permissions", Toast.LENGTH_SHORT).show();
                 Toast.makeText(this, "App will not work properly", Toast.LENGTH_SHORT).show();
             }
+        }
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
 
-        @Override
-        protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-            super.onActivityResult(requestCode, resultCode, data);
-
-            if (requestCode == REQUEST_PERMISSION_SETTING) {
-                if (ActivityCompat.checkSelfPermission(Splash.this, permissionsRequired[0]) == PackageManager.PERMISSION_GRANTED) {
-                    // normal coding to get to the MainActivity
-                    proceedAfterPermission();
-                }
+        if (requestCode == REQUEST_PERMISSION_SETTING) {
+            if (ActivityCompat.checkSelfPermission(Splash.this, permissionsRequired[0]) == PackageManager.PERMISSION_GRANTED
+                    && ActivityCompat.checkSelfPermission(Splash.this, permissionsRequired[1]) == PackageManager.PERMISSION_GRANTED) {
+                proceedAfterPermission();
             }
         }
-
-
-        private void proceedAfterPermission() {
-            Toast.makeText(this, "Got All Permissions", Toast.LENGTH_SHORT).show();
-            Intent intent = new Intent(this, MainActivity.class);
-            startActivity(intent);
-        }
-
-
     }
 
-
-
-
-
-
-
-
+    private void proceedAfterPermission() {
+        Toast.makeText(this, "Got All Permissions", Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
+        finish();
+    }
+}

@@ -188,23 +188,22 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         // The recording code for the piano keys 
         
         mFilename1 = getExternalCacheDir().getAbsolutePath();
-        mFilename1 = "audiorecoder1.3gp";
+        mFilename1 += "/audiorecordtest1.3gp";
 
         mFilename2 = getExternalCacheDir().getAbsolutePath();
-        mFilename2 = "audiorecoder1.3gp";
+        mFilename2 += "/audiorecordtest2.3gp";
 
         mFilename3 = getExternalCacheDir().getAbsolutePath();
-        mFilename3 = "audiorecoder1.3gp";
+        mFilename3 += "/audiorecordtest3.3gp";
 
         mFilename4 = getExternalCacheDir().getAbsolutePath();
-        mFilename4 = "audiorecoder1.3gp";
-
+        mFilename4 += "/audiorecordtest4.3gp";
 
         mFilename5 = getExternalCacheDir().getAbsolutePath();
-        mFilename5 = "audiorecoder1.3gp";
+        mFilename5 += "/audiorecordtest5.3gp";
 
         mFilename6 = getExternalCacheDir().getAbsolutePath();
-        mFilename6 = "audiorecoder1.3gp";
+        mFilename6 += "/audiorecordtest6.3gp";
 
         SharedPreferences prefs = getSharedPreferences("FILENO", MODE_PRIVATE);
         int recordingno = prefs.getInt("fileno", 1);

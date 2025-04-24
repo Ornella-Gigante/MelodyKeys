@@ -2,6 +2,7 @@ package es.ifp.melodykeys;
 
 import android.content.Intent;
 import android.media.AudioAttributes;
+import android.media.MediaRecorder;
 import android.media.SoundPool;
 import android.os.Build;
 import android.os.Bundle;
@@ -19,6 +20,19 @@ import androidx.core.view.WindowInsetsCompat;
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
 
     private HorizontalScrollView scrollView;
+
+    // The code for the recoding of the audio of the Piano Keys
+
+    private MediaRecorder mediaRecorder;
+    public static String mFilename1 = null;
+    public static String mFilename2 = null;
+    public static String mFilename3 = null;
+    public static String mFilename4 = null;
+    public static String mFilenam5 = null;
+    public static String mFilename6 = null;
+
+
+
 
     private SoundPool soundPool;
 

@@ -1,6 +1,7 @@
 package es.ifp.melodykeys;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.media.AudioAttributes;
 import android.media.MediaRecorder;
 import android.media.SoundPool;
@@ -28,11 +29,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public static String mFilename2 = null;
     public static String mFilename3 = null;
     public static String mFilename4 = null;
-    public static String mFilenam5 = null;
+    public static String mFilename5 = null;
     public static String mFilename6 = null;
-
-
-
+    
 
     private SoundPool soundPool;
 
@@ -185,6 +184,33 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 scrollView.scrollTo(scrollView.getScrollX() + 30, scrollView.getScrollY());
             }
         });
+        
+        // The recording code for the piano keys 
+        
+        mFilename1 = getExternalCacheDir().getAbsolutePath();
+        mFilename1 = "audiorecoder1.3gp";
+
+        mFilename2 = getExternalCacheDir().getAbsolutePath();
+        mFilename2 = "audiorecoder1.3gp";
+
+        mFilename3 = getExternalCacheDir().getAbsolutePath();
+        mFilename3 = "audiorecoder1.3gp";
+
+        mFilename4 = getExternalCacheDir().getAbsolutePath();
+        mFilename4 = "audiorecoder1.3gp";
+
+
+        mFilename5 = getExternalCacheDir().getAbsolutePath();
+        mFilename5 = "audiorecoder1.3gp";
+
+        mFilename6 = getExternalCacheDir().getAbsolutePath();
+        mFilename6 = "audiorecoder1.3gp";
+
+        SharedPreferences prefs = getSharedPreferences("FILENO", MODE_PRIVATE);
+        int recordingno = prefs.getInt("fileno", 1);
+
+
+
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());

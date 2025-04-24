@@ -5,7 +5,8 @@ This app is IN PROGRESS and  transforms your Android device into a virtual piano
 
 ---
 
-![Piano Demo](https://github.com/Ornella-Gigante/MelodyKeys/blob/main/piano_demo_pic.png?raw=true)
+<img src="https://github.com/Ornella-Gigante/MelodyKeys/blob/main/piano_demo_pic.png?raw=true" alt="Piano Demo" width="300"/>
+
 
 
 ## 🌟 Features

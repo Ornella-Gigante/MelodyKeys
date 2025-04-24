@@ -5,6 +5,9 @@ This app is IN PROGRESS and  transforms your Android device into a virtual piano
 
 ---
 
+![Piano Demo](https://github.com/Ornella-Gigante/MelodyKeys/blob/main/piano_demo_pic.png?raw=true)
+
+
 ## 🌟 Features
 - 🎹 **Interactive Piano Interface**: Play notes and chords on a beautifully designed virtual keyboard.
 - 🔊 **High-Quality Sound Playback**: Enjoy realistic piano sounds for every key.

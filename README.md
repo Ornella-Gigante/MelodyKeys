@@ -1,9 +1,19 @@
 # 🎹 MelodyKeys
 
+
+
 Welcome to **MelodyKeys**! 🎶✨
 This app is IN PROGRESS and  transforms your Android device into a virtual piano, offering a fun and interactive way to create music. Whether you're a beginner or an experienced musician, this app lets you unleash your creativity with ease! 🎵
 
+
 ---
+
+<div align="center">
+  <img src="https://github.com/Ornella-Gigante/MelodyKeys/blob/main/piano_demo_pic.png?raw=true" alt="Piano Demo" width="800"/>
+</div>
+
+
+
 
 ## 🌟 Features
 - 🎹 **Interactive Piano Interface**: Play notes and chords on a beautifully designed virtual keyboard.

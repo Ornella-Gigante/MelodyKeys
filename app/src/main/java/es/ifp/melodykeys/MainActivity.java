@@ -22,6 +22,7 @@ import androidx.core.view.WindowInsetsCompat;
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
 
     private HorizontalScrollView scrollView;
+    public int recordingno = 0;
 
     // The code for the recoding of the audio of the Piano Keys
 
@@ -207,7 +208,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mFilename6 += "/audiorecordtest6.3gp";
 
         SharedPreferences prefs = getSharedPreferences("FILENO", MODE_PRIVATE);
-        int recordingno = prefs.getInt("fileno", 1);
+         recordingno = prefs.getInt("fileno", 1);
 
 
 
@@ -426,7 +427,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     /**
      *  The startRecording() method code
-     *  
+     *
      */
 
     private void startRecording(){
@@ -434,6 +435,41 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mediaRecorder = new MediaRecorder();
         mediaRecorder.setAudioSource(MediaRecorder.AudioSource.DEFAULT);
         mediaRecorder.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP);
+
+
+        switch(recordingno){
+            case 1:
+                mediaRecorder.setOutputFile(mFilename1);
+                recordingno++;
+                if(recordingno == 7) recordingno = 1;
+                break;
+            case 2:
+                mediaRecorder.setOutputFile(mFilename2);
+                recordingno++;
+                if(recordingno == 7) recordingno = 1;
+                break;
+            case 3:
+                mediaRecorder.setOutputFile(mFilename3);
+                recordingno++;
+                if(recordingno == 7) recordingno = 1;
+                break;
+            case 4:
+                mediaRecorder.setOutputFile(mFilename4);
+                recordingno++;
+                if(recordingno == 7) recordingno = 1;
+                break;
+            case 5:
+                mediaRecorder.setOutputFile(mFilename5);
+                recordingno++;
+                if(recordingno == 7) recordingno = 1;
+                break;
+            case 6:
+                mediaRecorder.setOutputFile(mFilename6);
+                recordingno++;
+                if(recordingno == 7) recordingno = 1;
+                break;
+        }
+
 
 
 

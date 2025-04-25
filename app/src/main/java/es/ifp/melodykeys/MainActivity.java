@@ -426,6 +426,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     /**
      *  The startRecording() method code
+     *  
      */
 
     private void startRecording(){

@@ -8,6 +8,7 @@ import android.media.SoundPool;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.HorizontalScrollView;
@@ -18,6 +19,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+
+import java.io.IOException;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
 
@@ -470,7 +473,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
         }
 
+        SharedPreferences.Editor editor = getSharedPreferences("FILENO", MODE_PRIVATE).edit();
+        editor.putInt("fileno", recordingno);
+        editor.commit();
 
+        mediaRecorder.setAudioSource(MediaRecorder.AudioSource.MIC);
+
+        try{
+            mediaRecorder.prepare();
+        }catch(IOException e){
+            Log.e("prepare is fail", "Failed");
+        }
+
+        mediaRecorder.start();
 
 
     }

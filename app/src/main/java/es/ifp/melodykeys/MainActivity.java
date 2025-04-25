@@ -7,6 +7,7 @@ import android.media.MediaRecorder;
 import android.media.SoundPool;
 import android.os.Build;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.view.View;
 import android.widget.Button;
 import android.widget.HorizontalScrollView;
@@ -421,4 +422,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void record(View view) {
         // Implementación futura
     }
+
+
+    /**
+     *  The startRecording() method code
+     */
+
+    private void startRecording(){
+
+        mediaRecorder = new MediaRecorder();
+        mediaRecorder.setAudioSource(MediaRecorder.AudioSource.DEFAULT);
+        mediaRecorder.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP);
+
+
+
+    }
+
 }

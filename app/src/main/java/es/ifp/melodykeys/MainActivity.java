@@ -456,12 +456,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
      *
      */
 
-    private void startRecording(){
-
+    private void startRecording() {
         mediaRecorder = new MediaRecorder();
-        mediaRecorder.setAudioSource(MediaRecorder.AudioSource.DEFAULT);
+        mediaRecorder.setAudioSource(MediaRecorder.AudioSource.MIC); // Solo una vez, al principio
         mediaRecorder.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP);
-
 
         switch(recordingno){
             case 1:
@@ -500,17 +498,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         editor.putInt("fileno", recordingno);
         editor.commit();
 
-        mediaRecorder.setAudioSource(MediaRecorder.AudioSource.MIC);
+        mediaRecorder.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB); // Asegúrate de incluir esto
 
-        try{
+        try {
             mediaRecorder.prepare();
-        }catch(IOException e){
+        } catch(IOException e) {
             Log.e("prepare is fail", "Failed");
         }
 
         mediaRecorder.start();
-
-
     }
 
 

@@ -13,6 +13,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.HorizontalScrollView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -497,5 +498,23 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mediaRecorder.release();
         mediaRecorder = null;
     }
+
+
+    private void onRecord(boolean start) {
+        if (start) {
+            startRecording();
+        } else {
+            stopRecording();
+            if (recordingno == 1) {
+                Toast recordingmsg = Toast.makeText(getApplicationContext(), "Song" + 6 + " saved", Toast.LENGTH_SHORT);
+                recordingmsg.show();
+            } else {
+                int temprecordingno = recordingno - 1;
+                Toast recordingmsg = Toast.makeText(getApplicationContext(), "Song" + temprecordingno + " saved", Toast.LENGTH_SHORT);
+                recordingmsg.show();
+            }
+        }
+    }
+
 
 }

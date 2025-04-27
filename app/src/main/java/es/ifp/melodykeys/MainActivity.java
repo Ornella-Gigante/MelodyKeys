@@ -492,12 +492,25 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
 
+    /**
+     * Stop the audio recording
+     * Frees the res associated with MediaRecorder and makes reference null for not losing memory
+     */
+
+
     private void stopRecording(){
 
         mediaRecorder.stop();
         mediaRecorder.release();
         mediaRecorder = null;
     }
+
+    /**
+     * Starts or stops audio recording based on the 'start' parameter.
+     * When stopping, displays a Toast message indicating which song was saved.
+     *
+     * @param start true to start recording, false to stop and show notification
+     */
 
 
     private void onRecord(boolean start) {

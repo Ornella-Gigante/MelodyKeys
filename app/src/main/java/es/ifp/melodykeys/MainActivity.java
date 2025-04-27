@@ -490,4 +490,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     }
 
+
+    private void stopRecording(){
+
+        mediaRecorder.stop();
+        mediaRecorder.release();
+        mediaRecorder = null;
+    }
+
 }

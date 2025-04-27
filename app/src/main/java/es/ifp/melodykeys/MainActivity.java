@@ -41,6 +41,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private SoundPool soundPool;
 
+    boolean mStartRecording = true;
+
     private Button left_navigation, right_navigation, recordButton, playButton;
 
     private int c3, c3black, d3, d3black, e3, f3, f3black, g3, g3black, a3, a3black, b3;
@@ -422,10 +424,30 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     public void play(View view) {
         // Implementación futura
+
+
     }
 
+    /**
+     * Handles the record button click event.
+     * Toggles the recording state, updates the button text accordingly,
+     * and invokes the onRecord method to start or stop audio recording.
+     *
+     * @param view The view that triggered the event.
+     */
+
     public void record(View view) {
-        // Implementación futura
+
+        onRecord(mStartRecording);
+
+        if(mStartRecording){
+            recordButton.setText("Finish");
+        }else{
+            recordButton.setText("Record");
+        }
+
+        mStartRecording =! mStartRecording;
+
     }
 
 

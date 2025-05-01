@@ -82,4 +82,9 @@ public class PlayingActivity extends AppCompatActivity {
 
     public void play6(View view) {
     }
+
+
+    public void startPlaying(){
+        
+    }
 }

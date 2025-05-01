@@ -349,4 +349,17 @@ public class PlayingActivity extends AppCompatActivity {
         super.onStop();
         stopPlaying();
     }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+
+        if(mediaPlayer!=null){
+            mediaPlayer.release();
+            mediaPlayer = null;
+        }
+    }
+
+
+    
 }

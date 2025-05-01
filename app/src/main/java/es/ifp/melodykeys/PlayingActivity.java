@@ -40,6 +40,12 @@ public class PlayingActivity extends AppCompatActivity {
         record5 = (Button)findViewById(R.id.button_playing_5);
         record6 = (Button)findViewById(R.id.button_playing_6);
 
+        record1.setBackgroundResource(R.drawable.playsongshape);
+        record2.setBackgroundResource(R.drawable.playsongshape);
+        record3.setBackgroundResource(R.drawable.playsongshape);
+        record4.setBackgroundResource(R.drawable.playsongshape);
+        record5.setBackgroundResource(R.drawable.playsongshape);
+        record6.setBackgroundResource(R.drawable.playsongshape);
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());

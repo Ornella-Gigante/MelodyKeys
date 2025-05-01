@@ -1,6 +1,8 @@
 package es.ifp.melodykeys;
 
+import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.widget.Button;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -9,6 +11,11 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 public class PlayingActivity extends AppCompatActivity {
+
+    private MediaPlayer mediaPlayer;
+
+    private Button record1, record2, record3, record4, record5, record6;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

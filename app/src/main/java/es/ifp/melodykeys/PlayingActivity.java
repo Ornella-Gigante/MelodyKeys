@@ -32,6 +32,15 @@ public class PlayingActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_playing);
+
+        record1 = (Button)findViewById(R.id.button_playing_1);
+        record2 = (Button)findViewById(R.id.button_playing_2);
+        record3 = (Button)findViewById(R.id.button_playing_3);
+        record4 = (Button)findViewById(R.id.button_playing_4);
+        record5 = (Button)findViewById(R.id.button_playing_5);
+        record6 = (Button)findViewById(R.id.button_playing_6);
+
+
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);

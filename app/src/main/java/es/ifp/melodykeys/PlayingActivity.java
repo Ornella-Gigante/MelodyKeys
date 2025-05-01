@@ -29,13 +29,12 @@ public class PlayingActivity extends AppCompatActivity {
     private Button record1, record2, record3, record4, record5, record6;
 
     // boolean variables
-
-    private  boolean isplaying1;;
-    private  boolean isplaying2;
-    private  boolean isplaying3;
-    private  boolean isplaying4;
-    private  boolean isplaying5;
-    private  boolean isplaying6;
+    private boolean isplaying1;
+    private boolean isplaying2;
+    private boolean isplaying3;
+    private boolean isplaying4;
+    private boolean isplaying5;
+    private boolean isplaying6;
 
     private boolean isplaying;
 
@@ -61,7 +60,7 @@ public class PlayingActivity extends AppCompatActivity {
 
         isplaying = false;
         isplaying1 = false;
-        isplaying2 =false;
+        isplaying2 = false;
         isplaying3 = false;
         isplaying4 = false;
         isplaying5 = false;
@@ -74,16 +73,13 @@ public class PlayingActivity extends AppCompatActivity {
         });
     }
 
-
     public void play1(View view){
-
-        if (!isplaying1&&!isplaying){
+        if (!isplaying1 && !isplaying){
             record1.setBackgroundResource(R.drawable.playsongshapepressed);
             startplaying(1);
             isplaying = true;
             isplaying1 = true;
-
-        }else if(!isplaying1&&!isplaying){
+        } else if (!isplaying1 && isplaying){
             stopPlaying();
 
             record1.setBackgroundResource(R.drawable.playsongshape);
@@ -103,27 +99,22 @@ public class PlayingActivity extends AppCompatActivity {
             record1.setBackgroundResource(R.drawable.playsongshapepressed);
             startplaying(1);
             isplaying1 = true;
-
-        }else {
-
+            isplaying = true;
+        } else {
             record1.setBackgroundResource(R.drawable.playsongshape);
             stopPlaying();
             isplaying1 = false;
             isplaying = false;
-
         }
-
     }
 
     public void play2(View view){
-
-        if (!isplaying2&&!isplaying){
+        if (!isplaying2 && !isplaying){
             record2.setBackgroundResource(R.drawable.playsongshapepressed);
-            startplaying(1);
+            startplaying(2);
             isplaying = true;
             isplaying2 = true;
-
-        }else if(!isplaying2&&!isplaying){
+        } else if (!isplaying2 && isplaying){
             stopPlaying();
 
             record1.setBackgroundResource(R.drawable.playsongshape);
@@ -141,29 +132,24 @@ public class PlayingActivity extends AppCompatActivity {
             isplaying6 = false;
 
             record2.setBackgroundResource(R.drawable.playsongshapepressed);
-            startplaying(1);
+            startplaying(2);
             isplaying2 = true;
-
-        }else {
-
+            isplaying = true;
+        } else {
             record2.setBackgroundResource(R.drawable.playsongshape);
             stopPlaying();
             isplaying2 = false;
             isplaying = false;
-
         }
-
     }
 
     public void play3(View view){
-
-        if (!isplaying3&&!isplaying){
+        if (!isplaying3 && !isplaying){
             record3.setBackgroundResource(R.drawable.playsongshapepressed);
-            startplaying(1);
+            startplaying(3);
             isplaying = true;
             isplaying3 = true;
-
-        }else if(!isplaying3&&!isplaying){
+        } else if (!isplaying3 && isplaying){
             stopPlaying();
 
             record1.setBackgroundResource(R.drawable.playsongshape);
@@ -181,30 +167,24 @@ public class PlayingActivity extends AppCompatActivity {
             isplaying6 = false;
 
             record3.setBackgroundResource(R.drawable.playsongshapepressed);
-            startplaying(1);
+            startplaying(3);
             isplaying3 = true;
-
-        }else {
-
+            isplaying = true;
+        } else {
             record3.setBackgroundResource(R.drawable.playsongshape);
             stopPlaying();
             isplaying3 = false;
             isplaying = false;
-
         }
-
     }
 
-
     public void play4(View view){
-
-        if (!isplaying4&&!isplaying){
+        if (!isplaying4 && !isplaying){
             record4.setBackgroundResource(R.drawable.playsongshapepressed);
-            startplaying(1);
+            startplaying(4);
             isplaying = true;
             isplaying4 = true;
-
-        }else if(!isplaying4&&!isplaying){
+        } else if (!isplaying4 && isplaying){
             stopPlaying();
 
             record1.setBackgroundResource(R.drawable.playsongshape);
@@ -222,29 +202,24 @@ public class PlayingActivity extends AppCompatActivity {
             isplaying6 = false;
 
             record4.setBackgroundResource(R.drawable.playsongshapepressed);
-            startplaying(1);
+            startplaying(4);
             isplaying4 = true;
-
-        }else {
-
+            isplaying = true;
+        } else {
             record4.setBackgroundResource(R.drawable.playsongshape);
             stopPlaying();
             isplaying4 = false;
             isplaying = false;
-
         }
-
     }
 
     public void play5(View view){
-
-        if (!isplaying5&&!isplaying){
+        if (!isplaying5 && !isplaying){
             record5.setBackgroundResource(R.drawable.playsongshapepressed);
-            startplaying(1);
+            startplaying(5);
             isplaying = true;
             isplaying5 = true;
-
-        }else if(!isplaying5&&!isplaying){
+        } else if (!isplaying5 && isplaying){
             stopPlaying();
 
             record1.setBackgroundResource(R.drawable.playsongshape);
@@ -262,28 +237,24 @@ public class PlayingActivity extends AppCompatActivity {
             isplaying6 = false;
 
             record5.setBackgroundResource(R.drawable.playsongshapepressed);
-            startplaying(1);
+            startplaying(5);
             isplaying5 = true;
-
-        }else {
-
+            isplaying = true;
+        } else {
             record5.setBackgroundResource(R.drawable.playsongshape);
             stopPlaying();
             isplaying5 = false;
             isplaying = false;
-
         }
-
     }
-    public void play6(View view){
 
-        if (!isplaying6&&!isplaying){
+    public void play6(View view){
+        if (!isplaying6 && !isplaying){
             record6.setBackgroundResource(R.drawable.playsongshapepressed);
-            startPlaying(1);
+            startplaying(6);
             isplaying = true;
             isplaying6 = true;
-
-        }else if(!isplaying6&&!isplaying){
+        } else if (!isplaying6 && isplaying){
             stopPlaying();
 
             record1.setBackgroundResource(R.drawable.playsongshape);
@@ -301,70 +272,81 @@ public class PlayingActivity extends AppCompatActivity {
             isplaying6 = false;
 
             record6.setBackgroundResource(R.drawable.playsongshapepressed);
-            startPlaying(1);
+            startplaying(6);
             isplaying6 = true;
-
-        }else {
-
+            isplaying = true;
+        } else {
             record6.setBackgroundResource(R.drawable.playsongshape);
             stopPlaying();
             isplaying6 = false;
             isplaying = false;
-
         }
+    }
 
+    private void startplaying(int recordingno){
+        mediaPlayer = new MediaPlayer();
 
-        private void startplaying(int recordingno){
-
-            mediaPlayer = new MediaPlayer();
-
-            try{
-
-                switch (recordingno){
-
-                    case 1:
-                        mediaPlayer.setDataSource(mFilename1);
-                        break;
-                    case 2:
-                        mediaPlayer.setDataSource(mFilename2);
-                        break;
-
-                    case 3:
-                        mediaPlayer.setDataSource(mFilename3);
-                        break;
-
-                    case 4:
-                        mediaPlayer.setDataSource(mFilename4);
-                        break;
-
-                    case 5:
-                        mediaPlayer.setDataSource(mFilename5);
-                        break;
-                    case 6:
-                        mediaPlayer.setDataSource(mFilename6);
-                        break;
-                }
-
-                mediaPlayer.prepare();
-                mediaPlayer.start();
-
-
-            }catch (IOException e){
-
-                Log.e("failed","Failes");
+        try{
+            switch (recordingno){
+                case 1:
+                    mediaPlayer.setDataSource(mFilename1);
+                    break;
+                case 2:
+                    mediaPlayer.setDataSource(mFilename2);
+                    break;
+                case 3:
+                    mediaPlayer.setDataSource(mFilename3);
+                    break;
+                case 4:
+                    mediaPlayer.setDataSource(mFilename4);
+                    break;
+                case 5:
+                    mediaPlayer.setDataSource(mFilename5);
+                    break;
+                case 6:
+                    mediaPlayer.setDataSource(mFilename6);
+                    break;
             }
 
+            // Añadir listener para cuando termine la reproducción
+            mediaPlayer.setOnCompletionListener(mp -> {
+                resetPlaybackState();
+            });
 
+            mediaPlayer.prepare();
+            mediaPlayer.start();
+        } catch (IOException e){
+            Log.e("failed", "Failed to play recording");
         }
+    }
 
+    private void resetPlaybackState() {
+        record1.setBackgroundResource(R.drawable.playsongshape);
+        record2.setBackgroundResource(R.drawable.playsongshape);
+        record3.setBackgroundResource(R.drawable.playsongshape);
+        record4.setBackgroundResource(R.drawable.playsongshape);
+        record5.setBackgroundResource(R.drawable.playsongshape);
+        record6.setBackgroundResource(R.drawable.playsongshape);
 
-        public void stopPlaying(){
+        isplaying = false;
+        isplaying1 = false;
+        isplaying2 = false;
+        isplaying3 = false;
+        isplaying4 = false;
+        isplaying5 = false;
+        isplaying6 = false;
+    }
 
+    public void stopPlaying(){
+        if (mediaPlayer != null) {
             mediaPlayer.release();
             mediaPlayer = null;
         }
+    }
 
-        }
-
-
+    @Override
+    protected void onStop() {
+        super.onStop();
+        stopPlaying();
+    }
 }

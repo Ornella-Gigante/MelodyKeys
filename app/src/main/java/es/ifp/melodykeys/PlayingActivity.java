@@ -2,6 +2,7 @@ package es.ifp.melodykeys;
 
 import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 
 import androidx.activity.EdgeToEdge;
@@ -50,7 +51,7 @@ public class PlayingActivity extends AppCompatActivity {
         isplaying = false;
         isplaying1 = false;
         isplaying2 =false;
-        isplaying3 = false; 
+        isplaying3 = false;
         isplaying4 = false;
         isplaying5 = false;
         isplaying6 = false;
@@ -60,5 +61,25 @@ public class PlayingActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+    }
+
+    public void play1(View view){
+
+    }
+
+    public void play2(View view) {
+    }
+
+    public void play3(View view) {
+    }
+
+    public void play4(View view) {
+    }
+
+    public void play5(View view) {
+    }
+
+
+    public void play6(View view) {
     }
 }

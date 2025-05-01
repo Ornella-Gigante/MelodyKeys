@@ -16,6 +16,16 @@ public class PlayingActivity extends AppCompatActivity {
 
     private Button record1, record2, record3, record4, record5, record6;
 
+    // boolean variables
+
+    private  boolean isplaying1;;
+    private  boolean isplaying2;
+    private  boolean isplaying3;
+    private  boolean isplaying4;
+    private  boolean isplaying5;
+    private  boolean isplaying6;
+
+    private boolean isplaying;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

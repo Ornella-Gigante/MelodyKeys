@@ -2,6 +2,7 @@ package es.ifp.melodykeys;
 
 import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
@@ -10,6 +11,16 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+
+import java.io.IOException;
+
+import static es.ifp.melodykeys.MainActivity.mFilename1;
+import static es.ifp.melodykeys.MainActivity.mFilename2;
+import static es.ifp.melodykeys.MainActivity.mFilename3;
+import static es.ifp.melodykeys.MainActivity.mFilename4;
+import static es.ifp.melodykeys.MainActivity.mFilename5;
+import static es.ifp.melodykeys.MainActivity.mFilename6;
+
 
 public class PlayingActivity extends AppCompatActivity {
 
@@ -303,13 +314,53 @@ public class PlayingActivity extends AppCompatActivity {
         }
 
 
-    public void startPlaying(){
+        private void startplaying(int recordingno){
 
-    }
+            mediaPlayer = new MediaPlayer();
+
+            try{
+
+                switch (recordingno){
+
+                    case 1:
+                        mediaPlayer.setDataSource(mFilename1);
+                        break;
+                    case 2:
+                        mediaPlayer.setDataSource(mFilename2);
+                        break;
+
+                    case 3:
+                        mediaPlayer.setDataSource(mFilename3);
+                        break;
+
+                    case 4:
+                        mediaPlayer.setDataSource(mFilename4);
+                        break;
+
+                    case 5:
+                        mediaPlayer.setDataSource(mFilename5);
+                        break;
+                    case 6:
+                        mediaPlayer.setDataSource(mFilename6);
+                        break;
+                }
+
+                mediaPlayer.prepare();
+                mediaPlayer.start();
+
+
+            }catch (IOException e){
+
+                Log.e("failed","Failes");
+            }
+
+
+        }
 
 
 
-   public void stopPlaying(){
+
+        public void stopPlaying(){
 
         }
 

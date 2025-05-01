@@ -423,7 +423,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     public void play(View view) {
-        // Implementación futura
+
+        Intent intent = new Intent(MainActivity.this, PlayingActivity.class);
+        startActivity(intent);
 
 
     }
@@ -546,6 +548,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
         }
     }
+
+
+
 
 
 }

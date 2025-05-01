@@ -63,28 +63,255 @@ public class PlayingActivity extends AppCompatActivity {
         });
     }
 
+
     public void play1(View view){
 
+        if (!isplaying1&&!isplaying){
+            record1.setBackgroundResource(R.drawable.playsongshapepressed);
+            startplaying(1);
+            isplaying = true;
+            isplaying1 = true;
+
+        }else if(!isplaying1&&!isplaying){
+            stopPlaying();
+
+            record1.setBackgroundResource(R.drawable.playsongshape);
+            record2.setBackgroundResource(R.drawable.playsongshape);
+            record3.setBackgroundResource(R.drawable.playsongshape);
+            record4.setBackgroundResource(R.drawable.playsongshape);
+            record5.setBackgroundResource(R.drawable.playsongshape);
+            record6.setBackgroundResource(R.drawable.playsongshape);
+
+            isplaying1 = false;
+            isplaying2 = false;
+            isplaying3 = false;
+            isplaying4 = false;
+            isplaying5 = false;
+            isplaying6 = false;
+
+            record1.setBackgroundResource(R.drawable.playsongshapepressed);
+            startplaying(1);
+            isplaying1 = true;
+
+        }else {
+
+            record1.setBackgroundResource(R.drawable.playsongshape);
+            stopPlaying();
+            isplaying1 = false;
+            isplaying = false;
+
+        }
+
     }
 
-    public void play2(View view) {
+    public void play2(View view){
+
+        if (!isplaying2&&!isplaying){
+            record2.setBackgroundResource(R.drawable.playsongshapepressed);
+            startplaying(1);
+            isplaying = true;
+            isplaying2 = true;
+
+        }else if(!isplaying2&&!isplaying){
+            stopPlaying();
+
+            record1.setBackgroundResource(R.drawable.playsongshape);
+            record2.setBackgroundResource(R.drawable.playsongshape);
+            record3.setBackgroundResource(R.drawable.playsongshape);
+            record4.setBackgroundResource(R.drawable.playsongshape);
+            record5.setBackgroundResource(R.drawable.playsongshape);
+            record6.setBackgroundResource(R.drawable.playsongshape);
+
+            isplaying1 = false;
+            isplaying2 = false;
+            isplaying3 = false;
+            isplaying4 = false;
+            isplaying5 = false;
+            isplaying6 = false;
+
+            record2.setBackgroundResource(R.drawable.playsongshapepressed);
+            startplaying(1);
+            isplaying2 = true;
+
+        }else {
+
+            record2.setBackgroundResource(R.drawable.playsongshape);
+            stopPlaying();
+            isplaying2 = false;
+            isplaying = false;
+
+        }
+
     }
 
-    public void play3(View view) {
+    public void play3(View view){
+
+        if (!isplaying3&&!isplaying){
+            record3.setBackgroundResource(R.drawable.playsongshapepressed);
+            startplaying(1);
+            isplaying = true;
+            isplaying3 = true;
+
+        }else if(!isplaying3&&!isplaying){
+            stopPlaying();
+
+            record1.setBackgroundResource(R.drawable.playsongshape);
+            record2.setBackgroundResource(R.drawable.playsongshape);
+            record3.setBackgroundResource(R.drawable.playsongshape);
+            record4.setBackgroundResource(R.drawable.playsongshape);
+            record5.setBackgroundResource(R.drawable.playsongshape);
+            record6.setBackgroundResource(R.drawable.playsongshape);
+
+            isplaying1 = false;
+            isplaying2 = false;
+            isplaying3 = false;
+            isplaying4 = false;
+            isplaying5 = false;
+            isplaying6 = false;
+
+            record3.setBackgroundResource(R.drawable.playsongshapepressed);
+            startplaying(1);
+            isplaying3 = true;
+
+        }else {
+
+            record3.setBackgroundResource(R.drawable.playsongshape);
+            stopPlaying();
+            isplaying3 = false;
+            isplaying = false;
+
+        }
+
     }
 
-    public void play4(View view) {
+
+    public void play4(View view){
+
+        if (!isplaying4&&!isplaying){
+            record4.setBackgroundResource(R.drawable.playsongshapepressed);
+            startplaying(1);
+            isplaying = true;
+            isplaying4 = true;
+
+        }else if(!isplaying4&&!isplaying){
+            stopPlaying();
+
+            record1.setBackgroundResource(R.drawable.playsongshape);
+            record2.setBackgroundResource(R.drawable.playsongshape);
+            record3.setBackgroundResource(R.drawable.playsongshape);
+            record4.setBackgroundResource(R.drawable.playsongshape);
+            record5.setBackgroundResource(R.drawable.playsongshape);
+            record6.setBackgroundResource(R.drawable.playsongshape);
+
+            isplaying1 = false;
+            isplaying2 = false;
+            isplaying3 = false;
+            isplaying4 = false;
+            isplaying5 = false;
+            isplaying6 = false;
+
+            record4.setBackgroundResource(R.drawable.playsongshapepressed);
+            startplaying(1);
+            isplaying4 = true;
+
+        }else {
+
+            record4.setBackgroundResource(R.drawable.playsongshape);
+            stopPlaying();
+            isplaying4 = false;
+            isplaying = false;
+
+        }
+
     }
 
-    public void play5(View view) {
-    }
+    public void play5(View view){
 
+        if (!isplaying5&&!isplaying){
+            record5.setBackgroundResource(R.drawable.playsongshapepressed);
+            startplaying(1);
+            isplaying = true;
+            isplaying5 = true;
 
-    public void play6(View view) {
+        }else if(!isplaying5&&!isplaying){
+            stopPlaying();
+
+            record1.setBackgroundResource(R.drawable.playsongshape);
+            record2.setBackgroundResource(R.drawable.playsongshape);
+            record3.setBackgroundResource(R.drawable.playsongshape);
+            record4.setBackgroundResource(R.drawable.playsongshape);
+            record5.setBackgroundResource(R.drawable.playsongshape);
+            record6.setBackgroundResource(R.drawable.playsongshape);
+
+            isplaying1 = false;
+            isplaying2 = false;
+            isplaying3 = false;
+            isplaying4 = false;
+            isplaying5 = false;
+            isplaying6 = false;
+
+            record5.setBackgroundResource(R.drawable.playsongshapepressed);
+            startplaying(1);
+            isplaying5 = true;
+
+        }else {
+
+            record5.setBackgroundResource(R.drawable.playsongshape);
+            stopPlaying();
+            isplaying5 = false;
+            isplaying = false;
+
+        }
+
     }
+    public void play6(View view){
+
+        if (!isplaying6&&!isplaying){
+            record6.setBackgroundResource(R.drawable.playsongshapepressed);
+            startPlaying(1);
+            isplaying = true;
+            isplaying6 = true;
+
+        }else if(!isplaying6&&!isplaying){
+            stopPlaying();
+
+            record1.setBackgroundResource(R.drawable.playsongshape);
+            record2.setBackgroundResource(R.drawable.playsongshape);
+            record3.setBackgroundResource(R.drawable.playsongshape);
+            record4.setBackgroundResource(R.drawable.playsongshape);
+            record5.setBackgroundResource(R.drawable.playsongshape);
+            record6.setBackgroundResource(R.drawable.playsongshape);
+
+            isplaying1 = false;
+            isplaying2 = false;
+            isplaying3 = false;
+            isplaying4 = false;
+            isplaying5 = false;
+            isplaying6 = false;
+
+            record6.setBackgroundResource(R.drawable.playsongshapepressed);
+            startPlaying(1);
+            isplaying6 = true;
+
+        }else {
+
+            record6.setBackgroundResource(R.drawable.playsongshape);
+            stopPlaying();
+            isplaying6 = false;
+            isplaying = false;
+
+        }
 
 
     public void startPlaying(){
-        
+
     }
+
+
+
+   public void stopPlaying(){
+
+        }
+
+
 }

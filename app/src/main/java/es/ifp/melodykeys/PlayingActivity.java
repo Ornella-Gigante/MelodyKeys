@@ -358,9 +358,11 @@ public class PlayingActivity extends AppCompatActivity {
         }
 
 
-
-
         public void stopPlaying(){
+
+            mediaPlayer.release();
+            mediaPlayer = null;
+        }
 
         }
 

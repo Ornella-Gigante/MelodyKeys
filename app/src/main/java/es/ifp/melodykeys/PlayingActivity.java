@@ -345,12 +345,6 @@ public class PlayingActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onStop() {
-        super.onStop();
-        stopPlaying();
-    }
-
-    @Override
     protected void onPause() {
         super.onPause();
 
@@ -360,6 +354,14 @@ public class PlayingActivity extends AppCompatActivity {
         }
     }
 
+    @Override
+    protected void onStop() {
+        super.onStop();
 
-    
+        if (mediaPlayer != null) {
+            mediaPlayer.release();
+            mediaPlayer = null;
+        }
+    }
+
 }

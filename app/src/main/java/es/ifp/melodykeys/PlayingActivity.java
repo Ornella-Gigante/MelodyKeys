@@ -47,6 +47,14 @@ public class PlayingActivity extends AppCompatActivity {
         record5.setBackgroundResource(R.drawable.playsongshape);
         record6.setBackgroundResource(R.drawable.playsongshape);
 
+        isplaying = false;
+        isplaying1 = false;
+        isplaying2 =false;
+        isplaying3 = false; 
+        isplaying4 = false;
+        isplaying5 = false;
+        isplaying6 = false;
+
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);

@@ -182,7 +182,7 @@ public class PlayingActivity extends AppCompatActivity {
             stopPlaying();
             isplaying3 = false;
             isplaying = false;
-        } else if (!isplaying3 && isplaying) {
+        } else if (!isplaying3) {
             stopPlaying();
             resetAllButtons();
             if (checkFileExists(mFilename3)) {

@@ -36,7 +36,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     // Directorio base para archivos de grabación (interno)
     public static final String BASE_DIR = "/data/user/0/es.ifp.melodykeys/files/MelodyRecordings/";
-
     private HorizontalScrollView scrollView;
     public int recordingno = 0;
 

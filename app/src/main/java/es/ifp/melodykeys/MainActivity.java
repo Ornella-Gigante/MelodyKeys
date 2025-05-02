@@ -2,34 +2,49 @@ package es.ifp.melodykeys;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.media.AudioAttributes;
 import android.media.MediaRecorder;
 import android.media.SoundPool;
 import android.os.Build;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.HorizontalScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.Manifest;
 
 import androidx.activity.EdgeToEdge;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import java.io.File;
 import java.io.IOException;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener{
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+
+    private static final String TAG = "MainActivity";
+    private static final int PERMISSION_CODE = 100;
+
+    // Directorio base para archivos de grabación (interno)
+    public static final String BASE_DIR = "/data/user/0/es.ifp.melodykeys/files/MelodyRecordings/";
 
     private HorizontalScrollView scrollView;
     public int recordingno = 0;
 
-    // The code for the recoding of the audio of the Piano Keys
+    // Variables para UI
+    private Button recordButton;
+    private Button left_navigation, right_navigation, playButton;
 
+    // Variables para grabación
     private MediaRecorder mediaRecorder;
     public static String mFilename1 = null;
     public static String mFilename2 = null;
@@ -37,21 +52,40 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public static String mFilename4 = null;
     public static String mFilename5 = null;
     public static String mFilename6 = null;
-    
 
     private SoundPool soundPool;
-
     boolean mStartRecording = true;
 
-    private Button left_navigation, right_navigation, recordButton, playButton;
+    // Usa ActivityResultContracts para Android 13+
+    private ActivityResultLauncher<String> requestPermissionLauncher =
+            registerForActivityResult(new ActivityResultContracts.RequestPermission(), isGranted -> {
+                if (isGranted) {
+                    // Permiso concedido, ahora sí inicia la grabación
+                    onRecord(true);
+                    if (recordButton != null) {
+                        recordButton.setText("Finish");
+                    }
+                    mStartRecording = false;
+                } else {
+                    Toast.makeText(this, "Permiso de grabación requerido", Toast.LENGTH_SHORT).show();
+                }
+            });
 
-    private int c3, c3black, d3, d3black, e3, f3, f3black, g3, g3black, a3, a3black, b3;
-    private int c4, c4black, d4, d4black, e4, f4, f4black, g4, g4black, a4, a4black, b4;
-    private int c5, c5black, d5, d5black, e5, f5, f5black, g5, g5black, a5, a5black, b5;
-    private int c6, c6black, d6, d6black, e6, f6, f6black, g6, g6black, a6, a6black, b6;
-    private int c7, c7black, d7, d7black, e7, f7, f7black, g7, g7black, a7, a7black, b7;
+    // White key sounds
+    private int c3, d3, e3, f3, g3, a3, b3;
+    private int c4, d4, e4, f4, g4, a4, b4;
+    private int c5, d5, e5, f5, g5, a5, b5;
+    private int c6, d6, e6, f6, g6, a6, b6;
+    private int c7, d7, e7, f7, g7, a7, b7;
 
-    // White keys
+    // Black key sounds
+    private int c3black, d3black, f3black, g3black, a3black;
+    private int c4black, d4black, f4black, g4black, a4black;
+    private int c5black, d5black, f5black, g5black, a5black;
+    private int c6black, d6black, f6black, g6black, a6black;
+    private int c7black, d7black, f7black, g7black, a7black;
+
+    // Piano keys
     private Button keyC3, keyD3, keyE3, keyF3, keyG3, keyA3, keyB3;
     private Button keyC4, keyD4, keyE4, keyF4, keyG4, keyA4, keyB4;
     private Button keyC5, keyD5, keyE5, keyF5, keyG5, keyA5, keyB5;
@@ -78,8 +112,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
 
-        //Init ScrollView
+        // Init ScrollView
         scrollView = findViewById(R.id.scrollView);
+
+        // Setup file paths and ensure directories exist
+        setupRecordingPaths();
 
         // All keys init
         initializeAllPianoKeys();
@@ -87,7 +124,36 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         // TextViews init
         initializeTextViewLabelsOnPianoKeys();
 
-        // SoundPool initialization (with AudioAttributes for API 21+)
+        // Init SoundPool
+        initializeSoundPool();
+
+        // Init buttons
+        left_navigation = findViewById(R.id.bt_left_navigation);
+        right_navigation = findViewById(R.id.bt_right_navigation);
+        recordButton = findViewById(R.id.bt_record);
+        playButton = findViewById(R.id.bt_play_recording);
+
+        // Listeners for buttons of right and left
+        left_navigation.setOnClickListener(v -> {
+            scrollView.scrollTo(scrollView.getScrollX() - 30, scrollView.getScrollY());
+        });
+
+        right_navigation.setOnClickListener(v -> {
+            scrollView.scrollTo(scrollView.getScrollX() + 30, scrollView.getScrollY());
+        });
+
+        // Get current recording number from SharedPreferences
+        SharedPreferences prefs = getSharedPreferences("FILENO", MODE_PRIVATE);
+        recordingno = prefs.getInt("fileno", 1);
+
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
+            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
+            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
+            return insets;
+        });
+    }
+
+    private void initializeSoundPool() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             AudioAttributes audioAttributes = new AudioAttributes.Builder()
                     .setUsage(AudioAttributes.USAGE_ASSISTANCE_SONIFICATION)
@@ -101,134 +167,110 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             soundPool = new SoundPool(6, android.media.AudioManager.STREAM_MUSIC, 0);
         }
 
-        // Carga de sonidos para todas las octavas
-        // Octava 3
-        c3       = soundPool.load(this, R.raw.c3, 1);
-        c3black  = soundPool.load(this, R.raw.c3black, 1);
-        d3       = soundPool.load(this, R.raw.d3, 1);
-        d3black  = soundPool.load(this, R.raw.d3black, 1);
-        e3       = soundPool.load(this, R.raw.e3, 1);
-        f3       = soundPool.load(this, R.raw.f3, 1);
-        f3black  = soundPool.load(this, R.raw.f3black, 1);
-        g3       = soundPool.load(this, R.raw.g3, 1);
-        g3black  = soundPool.load(this, R.raw.g3black, 1);
-        a3       = soundPool.load(this, R.raw.a3, 1);
-        a3black  = soundPool.load(this, R.raw.a3black, 1);
-        b3       = soundPool.load(this, R.raw.b3, 1);
-
-        // Octava 4
-        c4       = soundPool.load(this, R.raw.c4, 1);
-        c4black  = soundPool.load(this, R.raw.c4black, 1);
-        d4       = soundPool.load(this, R.raw.d4, 1);
-        d4black  = soundPool.load(this, R.raw.d4black, 1);
-        e4       = soundPool.load(this, R.raw.e4, 1);
-        f4       = soundPool.load(this, R.raw.f4, 1);
-        f4black  = soundPool.load(this, R.raw.f4black, 1);
-        g4       = soundPool.load(this, R.raw.g4, 1);
-        g4black  = soundPool.load(this, R.raw.g4black, 1);
-        a4       = soundPool.load(this, R.raw.a4, 1);
-        a4black  = soundPool.load(this, R.raw.a4black, 1);
-        b4       = soundPool.load(this, R.raw.b4, 1);
-
-        // Octava 5
-        c5       = soundPool.load(this, R.raw.c5, 1);
-        c5black  = soundPool.load(this, R.raw.c5black, 1);
-        d5       = soundPool.load(this, R.raw.d5, 1);
-        d5black  = soundPool.load(this, R.raw.d5black, 1);
-        e5       = soundPool.load(this, R.raw.e5, 1);
-        f5       = soundPool.load(this, R.raw.f5, 1);
-        f5black  = soundPool.load(this, R.raw.f5black, 1);
-        g5       = soundPool.load(this, R.raw.g5, 1);
-        g5black  = soundPool.load(this, R.raw.g5black, 1);
-        a5       = soundPool.load(this, R.raw.a5, 1);
-        a5black  = soundPool.load(this, R.raw.a5black, 1);
-        b5       = soundPool.load(this, R.raw.b5, 1);
-
-        // Octava 6
-        c6       = soundPool.load(this, R.raw.c6, 1);
-        c6black  = soundPool.load(this, R.raw.c6black, 1);
-        d6       = soundPool.load(this, R.raw.d6, 1);
-        d6black  = soundPool.load(this, R.raw.d6black, 1);
-        e6       = soundPool.load(this, R.raw.e6, 1);
-        f6       = soundPool.load(this, R.raw.f6, 1);
-        f6black  = soundPool.load(this, R.raw.f6black, 1);
-        g6       = soundPool.load(this, R.raw.g6, 1);
-        g6black  = soundPool.load(this, R.raw.g6black, 1);
-        a6       = soundPool.load(this, R.raw.a6, 1);
-        a6black  = soundPool.load(this, R.raw.a6black, 1);
-        b6       = soundPool.load(this, R.raw.b6, 1);
-
-        // Octava 7
-        c7       = soundPool.load(this, R.raw.c7, 1);
-        c7black  = soundPool.load(this, R.raw.c7black, 1);
-        d7       = soundPool.load(this, R.raw.d7, 1);
-        d7black  = soundPool.load(this, R.raw.d7black, 1);
-        e7       = soundPool.load(this, R.raw.e7, 1);
-        f7       = soundPool.load(this, R.raw.f7, 1);
-        f7black  = soundPool.load(this, R.raw.f7black, 1);
-        g7       = soundPool.load(this, R.raw.g7, 1);
-        g7black  = soundPool.load(this, R.raw.g7black, 1);
-        a7       = soundPool.load(this, R.raw.a7, 1);
-        a7black  = soundPool.load(this, R.raw.a7black, 1);
-        b7       = soundPool.load(this, R.raw.b7, 1);
-
-        // Init buttons
-        left_navigation = findViewById(R.id.bt_left_navigation);
-        right_navigation = findViewById(R.id.bt_right_navigation);
-        recordButton = findViewById(R.id.bt_record);
-        playButton = findViewById(R.id.bt_play_recording);
-
-        // Listeners for buttons of right and left
-        left_navigation.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v){
-                scrollView.scrollTo(scrollView.getScrollX()-30, scrollView.getScrollY());
-            }
-        });
-
-        right_navigation.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v){
-                scrollView.scrollTo(scrollView.getScrollX() + 30, scrollView.getScrollY());
-            }
-        });
-        
-        // The recording code for the piano keys 
-        
-        mFilename1 = getExternalCacheDir().getAbsolutePath();
-        mFilename1 += "/audiorecordtest1.3gp";
-
-        mFilename2 = getExternalCacheDir().getAbsolutePath();
-        mFilename2 += "/audiorecordtest2.3gp";
-
-        mFilename3 = getExternalCacheDir().getAbsolutePath();
-        mFilename3 += "/audiorecordtest3.3gp";
-
-        mFilename4 = getExternalCacheDir().getAbsolutePath();
-        mFilename4 += "/audiorecordtest4.3gp";
-
-        mFilename5 = getExternalCacheDir().getAbsolutePath();
-        mFilename5 += "/audiorecordtest5.3gp";
-
-        mFilename6 = getExternalCacheDir().getAbsolutePath();
-        mFilename6 += "/audiorecordtest6.3gp";
-
-        SharedPreferences prefs = getSharedPreferences("FILENO", MODE_PRIVATE);
-         recordingno = prefs.getInt("fileno", 1);
-
-
-
-
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
-        });
+        // Load sounds for all octaves
+        loadSounds();
     }
 
-    private void gotoTestActivity() {
-        Intent intent = new Intent(MainActivity.this, TestOgg.class);
-        startActivity(intent);
+    private void setupRecordingPaths() {
+        // Crear directorio para las grabaciones en almacenamiento interno
+        File recordingsDir = new File(getFilesDir(), "MelodyRecordings");
+        if (!recordingsDir.exists()) {
+            boolean success = recordingsDir.mkdirs();
+            Log.d(TAG, "Directory creation result: " + success);
+        }
+
+        // Usar constante BASE_DIR para todas las rutas
+        mFilename1 = BASE_DIR + "audiorecordtest1.m4a";
+        mFilename2 = BASE_DIR + "audiorecordtest2.m4a";
+        mFilename3 = BASE_DIR + "audiorecordtest3.m4a";
+        mFilename4 = BASE_DIR + "audiorecordtest4.m4a";
+        mFilename5 = BASE_DIR + "audiorecordtest5.m4a";
+        mFilename6 = BASE_DIR + "audiorecordtest6.m4a";
+
+        Log.d(TAG, "Recording file paths initialized: " + mFilename1);
+    }
+
+    private void loadSounds() {
+        if (soundPool == null) {
+            Log.e(TAG, "Cannot load sounds, SoundPool is null");
+            return;
+        }
+
+        try {
+            // Octave 3
+            c3 = soundPool.load(this, R.raw.c3, 1);
+            c3black = soundPool.load(this, R.raw.c3black, 1);
+            d3 = soundPool.load(this, R.raw.d3, 1);
+            d3black = soundPool.load(this, R.raw.d3black, 1);
+            e3 = soundPool.load(this, R.raw.e3, 1);
+            f3 = soundPool.load(this, R.raw.f3, 1);
+            f3black = soundPool.load(this, R.raw.f3black, 1);
+            g3 = soundPool.load(this, R.raw.g3, 1);
+            g3black = soundPool.load(this, R.raw.g3black, 1);
+            a3 = soundPool.load(this, R.raw.a3, 1);
+            a3black = soundPool.load(this, R.raw.a3black, 1);
+            b3 = soundPool.load(this, R.raw.b3, 1);
+
+            // Octave 4
+            c4 = soundPool.load(this, R.raw.c4, 1);
+            c4black = soundPool.load(this, R.raw.c4black, 1);
+            d4 = soundPool.load(this, R.raw.d4, 1);
+            d4black = soundPool.load(this, R.raw.d4black, 1);
+            e4 = soundPool.load(this, R.raw.e4, 1);
+            f4 = soundPool.load(this, R.raw.f4, 1);
+            f4black = soundPool.load(this, R.raw.f4black, 1);
+            g4 = soundPool.load(this, R.raw.g4, 1);
+            g4black = soundPool.load(this, R.raw.g4black, 1);
+            a4 = soundPool.load(this, R.raw.a4, 1);
+            a4black = soundPool.load(this, R.raw.a4black, 1);
+            b4 = soundPool.load(this, R.raw.b4, 1);
+
+            // Octave 5
+            c5 = soundPool.load(this, R.raw.c5, 1);
+            c5black = soundPool.load(this, R.raw.c5black, 1);
+            d5 = soundPool.load(this, R.raw.d5, 1);
+            d5black = soundPool.load(this, R.raw.d5black, 1);
+            e5 = soundPool.load(this, R.raw.e5, 1);
+            f5 = soundPool.load(this, R.raw.f5, 1);
+            f5black = soundPool.load(this, R.raw.f5black, 1);
+            g5 = soundPool.load(this, R.raw.g5, 1);
+            g5black = soundPool.load(this, R.raw.g5black, 1);
+            a5 = soundPool.load(this, R.raw.a5, 1);
+            a5black = soundPool.load(this, R.raw.a5black, 1);
+            b5 = soundPool.load(this, R.raw.b5, 1);
+
+            // Octave 6
+            c6 = soundPool.load(this, R.raw.c6, 1);
+            c6black = soundPool.load(this, R.raw.c6black, 1);
+            d6 = soundPool.load(this, R.raw.d6, 1);
+            d6black = soundPool.load(this, R.raw.d6black, 1);
+            e6 = soundPool.load(this, R.raw.e6, 1);
+            f6 = soundPool.load(this, R.raw.f6, 1);
+            f6black = soundPool.load(this, R.raw.f6black, 1);
+            g6 = soundPool.load(this, R.raw.g6, 1);
+            g6black = soundPool.load(this, R.raw.g6black, 1);
+            a6 = soundPool.load(this, R.raw.a6, 1);
+            a6black = soundPool.load(this, R.raw.a6black, 1);
+            b6 = soundPool.load(this, R.raw.b6, 1);
+
+            // Octave 7
+            c7 = soundPool.load(this, R.raw.c7, 1);
+            c7black = soundPool.load(this, R.raw.c7black, 1);
+            d7 = soundPool.load(this, R.raw.d7, 1);
+            d7black = soundPool.load(this, R.raw.d7black, 1);
+            e7 = soundPool.load(this, R.raw.e7, 1);
+            f7 = soundPool.load(this, R.raw.f7, 1);
+            f7black = soundPool.load(this, R.raw.f7black, 1);
+            g7 = soundPool.load(this, R.raw.g7, 1);
+            g7black = soundPool.load(this, R.raw.g7black, 1);
+            a7 = soundPool.load(this, R.raw.a7, 1);
+            a7black = soundPool.load(this, R.raw.a7black, 1);
+            b7 = soundPool.load(this, R.raw.b7, 1);
+
+            Log.d(TAG, "All sounds loaded successfully");
+        } catch (Exception e) {
+            Log.e(TAG, "Error loading sounds: " + e.getMessage());
+        }
     }
 
     private void initializeAllPianoKeys() {
@@ -349,208 +391,275 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onClick(View view) {
+        // Verificar que soundPool no sea null antes de usarlo
+        if (soundPool == null) {
+            Log.e(TAG, "SoundPool is null in onClick");
+            Toast.makeText(this, "Error: SoundPool no inicializado", Toast.LENGTH_SHORT).show();
+            // Reintentar inicializar SoundPool
+            initializeSoundPool();
+            return;
+        }
+
         int id = view.getId();
 
-        // Octava 3
-        if (id == R.id.keyC3 || id == R.id.labelC3) soundPool.play(c3, 1, 1, 0, 0, 1);
-        else if (id == R.id.keyD3 || id == R.id.labelD3) soundPool.play(d3, 1, 1, 0, 0, 1);
-        else if (id == R.id.keyE3 || id == R.id.labelE3) soundPool.play(e3, 1, 1, 0, 0, 1);
-        else if (id == R.id.keyF3 || id == R.id.labelF3) soundPool.play(f3, 1, 1, 0, 0, 1);
-        else if (id == R.id.keyG3 || id == R.id.labelG3) soundPool.play(g3, 1, 1, 0, 0, 1);
-        else if (id == R.id.keyA3 || id == R.id.labelA3) soundPool.play(a3, 1, 1, 0, 0, 1);
-        else if (id == R.id.keyB3 || id == R.id.labelB3) soundPool.play(b3, 1, 1, 0, 0, 1);
-        else if (id == R.id.keyCs3) soundPool.play(c3black, 1, 1, 0, 0, 1);
-        else if (id == R.id.keyDs3) soundPool.play(d3black, 1, 1, 0, 0, 1);
-        else if (id == R.id.keyFs3) soundPool.play(f3black, 1, 1, 0, 0, 1);
-        else if (id == R.id.keyGs3) soundPool.play(g3black, 1, 1, 0, 0, 1);
-        else if (id == R.id.keyAs3) soundPool.play(a3black, 1, 1, 0, 0, 1);
+        try {
+            // Octave 3
+            if (id == R.id.keyC3 || id == R.id.labelC3) soundPool.play(c3, 1, 1, 0, 0, 1);
+            else if (id == R.id.keyD3 || id == R.id.labelD3) soundPool.play(d3, 1, 1, 0, 0, 1);
+            else if (id == R.id.keyE3 || id == R.id.labelE3) soundPool.play(e3, 1, 1, 0, 0, 1);
+            else if (id == R.id.keyF3 || id == R.id.labelF3) soundPool.play(f3, 1, 1, 0, 0, 1);
+            else if (id == R.id.keyG3 || id == R.id.labelG3) soundPool.play(g3, 1, 1, 0, 0, 1);
+            else if (id == R.id.keyA3 || id == R.id.labelA3) soundPool.play(a3, 1, 1, 0, 0, 1);
+            else if (id == R.id.keyB3 || id == R.id.labelB3) soundPool.play(b3, 1, 1, 0, 0, 1);
+            else if (id == R.id.keyCs3) soundPool.play(c3black, 1, 1, 0, 0, 1);
+            else if (id == R.id.keyDs3) soundPool.play(d3black, 1, 1, 0, 0, 1);
+            else if (id == R.id.keyFs3) soundPool.play(f3black, 1, 1, 0, 0, 1);
+            else if (id == R.id.keyGs3) soundPool.play(g3black, 1, 1, 0, 0, 1);
+            else if (id == R.id.keyAs3) soundPool.play(a3black, 1, 1, 0, 0, 1);
 
-            // Octava 4
-        else if (id == R.id.keyC4 || id == R.id.labelC4) soundPool.play(c4, 1, 1, 0, 0, 1);
-        else if (id == R.id.keyD4 || id == R.id.labelD4) soundPool.play(d4, 1, 1, 0, 0, 1);
-        else if (id == R.id.keyE4 || id == R.id.labelE4) soundPool.play(e4, 1, 1, 0, 0, 1);
-        else if (id == R.id.keyF4 || id == R.id.labelF4) soundPool.play(f4, 1, 1, 0, 0, 1);
-        else if (id == R.id.keyG4 || id == R.id.labelG4) soundPool.play(g4, 1, 1, 0, 0, 1);
-        else if (id == R.id.keyA4 || id == R.id.labelA4) soundPool.play(a4, 1, 1, 0, 0, 1);
-        else if (id == R.id.keyB4 || id == R.id.labelB4) soundPool.play(b4, 1, 1, 0, 0, 1);
-        else if (id == R.id.keyCs4) soundPool.play(c4black, 1, 1, 0, 0, 1);
-        else if (id == R.id.keyDs4) soundPool.play(d4black, 1, 1, 0, 0, 1);
-        else if (id == R.id.keyFs4) soundPool.play(f4black, 1, 1, 0, 0, 1);
-        else if (id == R.id.keyGs4) soundPool.play(g4black, 1, 1, 0, 0, 1);
-        else if (id == R.id.keyAs4) soundPool.play(a4black, 1, 1, 0, 0, 1);
+                // Octave 4
+            else if (id == R.id.keyC4 || id == R.id.labelC4) soundPool.play(c4, 1, 1, 0, 0, 1);
+            else if (id == R.id.keyD4 || id == R.id.labelD4) soundPool.play(d4, 1, 1, 0, 0, 1);
+            else if (id == R.id.keyE4 || id == R.id.labelE4) soundPool.play(e4, 1, 1, 0, 0, 1);
+            else if (id == R.id.keyF4 || id == R.id.labelF4) soundPool.play(f4, 1, 1, 0, 0, 1);
+            else if (id == R.id.keyG4 || id == R.id.labelG4) soundPool.play(g4, 1, 1, 0, 0, 1);
+            else if (id == R.id.keyA4 || id == R.id.labelA4) soundPool.play(a4, 1, 1, 0, 0, 1);
+            else if (id == R.id.keyB4 || id == R.id.labelB4) soundPool.play(b4, 1, 1, 0, 0, 1);
+            else if (id == R.id.keyCs4) soundPool.play(c4black, 1, 1, 0, 0, 1);
+            else if (id == R.id.keyDs4) soundPool.play(d4black, 1, 1, 0, 0, 1);
+            else if (id == R.id.keyFs4) soundPool.play(f4black, 1, 1, 0, 0, 1);
+            else if (id == R.id.keyGs4) soundPool.play(g4black, 1, 1, 0, 0, 1);
+            else if (id == R.id.keyAs4) soundPool.play(a4black, 1, 1, 0, 0, 1);
 
-            // Octava 5
-        else if (id == R.id.keyC5 || id == R.id.labelC5) soundPool.play(c5, 1, 1, 0, 0, 1);
-        else if (id == R.id.keyD5 || id == R.id.labelD5) soundPool.play(d5, 1, 1, 0, 0, 1);
-        else if (id == R.id.keyE5 || id == R.id.labelE5) soundPool.play(e5, 1, 1, 0, 0, 1);
-        else if (id == R.id.keyF5 || id == R.id.labelF5) soundPool.play(f5, 1, 1, 0, 0, 1);
-        else if (id == R.id.keyG5 || id == R.id.labelG5) soundPool.play(g5, 1, 1, 0, 0, 1);
-        else if (id == R.id.keyA5 || id == R.id.labelA5) soundPool.play(a5, 1, 1, 0, 0, 1);
-        else if (id == R.id.keyB5 || id == R.id.labelB5) soundPool.play(b5, 1, 1, 0, 0, 1);
-        else if (id == R.id.keyCs5) soundPool.play(c5black, 1, 1, 0, 0, 1);
-        else if (id == R.id.keyDs5) soundPool.play(d5black, 1, 1, 0, 0, 1);
-        else if (id == R.id.keyFs5) soundPool.play(f5black, 1, 1, 0, 0, 1);
-        else if (id == R.id.keyGs5) soundPool.play(g5black, 1, 1, 0, 0, 1);
-        else if (id == R.id.keyAs5) soundPool.play(a5black, 1, 1, 0, 0, 1);
+                // Octave 5
+            else if (id == R.id.keyC5 || id == R.id.labelC5) soundPool.play(c5, 1, 1, 0, 0, 1);
+            else if (id == R.id.keyD5 || id == R.id.labelD5) soundPool.play(d5, 1, 1, 0, 0, 1);
+            else if (id == R.id.keyE5 || id == R.id.labelE5) soundPool.play(e5, 1, 1, 0, 0, 1);
+            else if (id == R.id.keyF5 || id == R.id.labelF5) soundPool.play(f5, 1, 1, 0, 0, 1);
+            else if (id == R.id.keyG5 || id == R.id.labelG5) soundPool.play(g5, 1, 1, 0, 0, 1);
+            else if (id == R.id.keyA5 || id == R.id.labelA5) soundPool.play(a5, 1, 1, 0, 0, 1);
+            else if (id == R.id.keyB5 || id == R.id.labelB5) soundPool.play(b5, 1, 1, 0, 0, 1);
+            else if (id == R.id.keyCs5) soundPool.play(c5black, 1, 1, 0, 0, 1);
+            else if (id == R.id.keyDs5) soundPool.play(d5black, 1, 1, 0, 0, 1);
+            else if (id == R.id.keyFs5) soundPool.play(f5black, 1, 1, 0, 0, 1);
+            else if (id == R.id.keyGs5) soundPool.play(g5black, 1, 1, 0, 0, 1);
+            else if (id == R.id.keyAs5) soundPool.play(a5black, 1, 1, 0, 0, 1);
 
-            // Octava 6
-        else if (id == R.id.keyC6 || id == R.id.labelC6) soundPool.play(c6, 1, 1, 0, 0, 1);
-        else if (id == R.id.keyD6 || id == R.id.labelD6) soundPool.play(d6, 1, 1, 0, 0, 1);
-        else if (id == R.id.keyE6 || id == R.id.labelE6) soundPool.play(e6, 1, 1, 0, 0, 1);
-        else if (id == R.id.keyF6 || id == R.id.labelF6) soundPool.play(f6, 1, 1, 0, 0, 1);
-        else if (id == R.id.keyG6 || id == R.id.labelG6) soundPool.play(g6, 1, 1, 0, 0, 1);
-        else if (id == R.id.keyA6 || id == R.id.labelA6) soundPool.play(a6, 1, 1, 0, 0, 1);
-        else if (id == R.id.keyB6 || id == R.id.labelB6) soundPool.play(b6, 1, 1, 0, 0, 1);
-        else if (id == R.id.keyCs6) soundPool.play(c6black, 1, 1, 0, 0, 1);
-        else if (id == R.id.keyDs6) soundPool.play(d6black, 1, 1, 0, 0, 1);
-        else if (id == R.id.keyFs6) soundPool.play(f6black, 1, 1, 0, 0, 1);
-        else if (id == R.id.keyGs6) soundPool.play(g6black, 1, 1, 0, 0, 1);
-        else if (id == R.id.keyAs6) soundPool.play(a6black, 1, 1, 0, 0, 1);
+                // Octave 6
+            else if (id == R.id.keyC6 || id == R.id.labelC6) soundPool.play(c6, 1, 1, 0, 0, 1);
+            else if (id == R.id.keyD6 || id == R.id.labelD6) soundPool.play(d6, 1, 1, 0, 0, 1);
+            else if (id == R.id.keyE6 || id == R.id.labelE6) soundPool.play(e6, 1, 1, 0, 0, 1);
+            else if (id == R.id.keyF6 || id == R.id.labelF6) soundPool.play(f6, 1, 1, 0, 0, 1);
+            else if (id == R.id.keyG6 || id == R.id.labelG6) soundPool.play(g6, 1, 1, 0, 0, 1);
+            else if (id == R.id.keyA6 || id == R.id.labelA6) soundPool.play(a6, 1, 1, 0, 0, 1);
+            else if (id == R.id.keyB6 || id == R.id.labelB6) soundPool.play(b6, 1, 1, 0, 0, 1);
+            else if (id == R.id.keyCs6) soundPool.play(c6black, 1, 1, 0, 0, 1);
+            else if (id == R.id.keyDs6) soundPool.play(d6black, 1, 1, 0, 0, 1);
+            else if (id == R.id.keyFs6) soundPool.play(f6black, 1, 1, 0, 0, 1);
+            else if (id == R.id.keyGs6) soundPool.play(g6black, 1, 1, 0, 0, 1);
+            else if (id == R.id.keyAs6) soundPool.play(a6black, 1, 1, 0, 0, 1);
 
-            // Octava 7
-        else if (id == R.id.keyC7 || id == R.id.labelC7) soundPool.play(c7, 1, 1, 0, 0, 1);
-        else if (id == R.id.keyD7 || id == R.id.labelD7) soundPool.play(d7, 1, 1, 0, 0, 1);
-        else if (id == R.id.keyE7 || id == R.id.labelE7) soundPool.play(e7, 1, 1, 0, 0, 1);
-        else if (id == R.id.keyF7 || id == R.id.labelF7) soundPool.play(f7, 1, 1, 0, 0, 1);
-        else if (id == R.id.keyG7 || id == R.id.labelG7) soundPool.play(g7, 1, 1, 0, 0, 1);
-        else if (id == R.id.keyA7 || id == R.id.labelA7) soundPool.play(a7, 1, 1, 0, 0, 1);
-        else if (id == R.id.keyB7 || id == R.id.labelB7) soundPool.play(b7, 1, 1, 0, 0, 1);
-        else if (id == R.id.keyCs7) soundPool.play(c7black, 1, 1, 0, 0, 1);
-        else if (id == R.id.keyDs7) soundPool.play(d7black, 1, 1, 0, 0, 1);
-        else if (id == R.id.keyFs7) soundPool.play(f7black, 1, 1, 0, 0, 1);
-        else if (id == R.id.keyGs7) soundPool.play(g7black, 1, 1, 0, 0, 1);
-        else if (id == R.id.keyAs7) soundPool.play(a7black, 1, 1, 0, 0, 1);
+                // Octave 7
+            else if (id == R.id.keyC7 || id == R.id.labelC7) soundPool.play(c7, 1, 1, 0, 0, 1);
+            else if (id == R.id.keyD7 || id == R.id.labelD7) soundPool.play(d7, 1, 1, 0, 0, 1);
+            else if (id == R.id.keyE7 || id == R.id.labelE7) soundPool.play(e7, 1, 1, 0, 0, 1);
+            else if (id == R.id.keyF7 || id == R.id.labelF7) soundPool.play(f7, 1, 1, 0, 0, 1);
+            else if (id == R.id.keyG7 || id == R.id.labelG7) soundPool.play(g7, 1, 1, 0, 0, 1);
+            else if (id == R.id.keyA7 || id == R.id.labelA7) soundPool.play(a7, 1, 1, 0, 0, 1);
+            else if (id == R.id.keyB7 || id == R.id.labelB7) soundPool.play(b7, 1, 1, 0, 0, 1);
+            else if (id == R.id.keyCs7) soundPool.play(c7black, 1, 1, 0, 0, 1);
+            else if (id == R.id.keyDs7) soundPool.play(d7black, 1, 1, 0, 0, 1);
+            else if (id == R.id.keyFs7) soundPool.play(f7black, 1, 1, 0, 0, 1);
+            else if (id == R.id.keyGs7) soundPool.play(g7black, 1, 1, 0, 0, 1);
+            else if (id == R.id.keyAs7) soundPool.play(a7black, 1, 1, 0, 0, 1);
+        } catch (Exception e) {
+            Log.e(TAG, "Error playing sound: " + e.getMessage());
+        }
     }
 
     public void play(View view) {
+        // Verificar si hay al menos una grabación disponible
+        boolean hasRecordings = false;
 
-        Intent intent = new Intent(MainActivity.this, PlayingActivity.class);
-        startActivity(intent);
+        // Verificar todos los archivos, no solo el primero
+        File file1 = new File(mFilename1);
+        File file2 = new File(mFilename2);
+        File file3 = new File(mFilename3);
 
+        if ((file1.exists() && file1.length() > 0) ||
+                (file2.exists() && file2.length() > 0) ||
+                (file3.exists() && file3.length() > 0)) {
+            hasRecordings = true;
+        }
 
+        if (hasRecordings) {
+            Intent intent = new Intent(MainActivity.this, PlayingActivity.class);
+            startActivity(intent);
+        } else {
+            Toast.makeText(this, "No recordings available yet", Toast.LENGTH_SHORT).show();
+        }
     }
-
-    /**
-     * Handles the record button click event.
-     * Toggles the recording state, updates the button text accordingly,
-     * and invokes the onRecord method to start or stop audio recording.
-     *
-     * @param view The view that triggered the event.
-     */
 
     public void record(View view) {
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.RECORD_AUDIO)
+                == PackageManager.PERMISSION_GRANTED) {
+            // Ya tiene permisos, procede con la grabación
+            onRecord(mStartRecording);
 
-        onRecord(mStartRecording);
+            if (mStartRecording) {
+                recordButton.setText("Finish");
+            } else {
+                recordButton.setText("Record");
+            }
 
-        if(mStartRecording){
-            recordButton.setText("Finish");
-        }else{
-            recordButton.setText("Record");
+            mStartRecording = !mStartRecording;
+        } else {
+            // Solicitar permisos y esperar la respuesta
+            requestPermissionLauncher.launch(Manifest.permission.RECORD_AUDIO);
         }
-
-        mStartRecording =! mStartRecording;
-
     }
-
-
-    /**
-     *  The startRecording() method code
-     *
-     */
 
     private void startRecording() {
-        mediaRecorder = new MediaRecorder();
-        mediaRecorder.setAudioSource(MediaRecorder.AudioSource.MIC); // Solo una vez, al principio
-        mediaRecorder.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP);
-
-        switch(recordingno){
-            case 1:
-                mediaRecorder.setOutputFile(mFilename1);
-                recordingno++;
-                if(recordingno == 7) recordingno = 1;
-                break;
-            case 2:
-                mediaRecorder.setOutputFile(mFilename2);
-                recordingno++;
-                if(recordingno == 7) recordingno = 1;
-                break;
-            case 3:
-                mediaRecorder.setOutputFile(mFilename3);
-                recordingno++;
-                if(recordingno == 7) recordingno = 1;
-                break;
-            case 4:
-                mediaRecorder.setOutputFile(mFilename4);
-                recordingno++;
-                if(recordingno == 7) recordingno = 1;
-                break;
-            case 5:
-                mediaRecorder.setOutputFile(mFilename5);
-                recordingno++;
-                if(recordingno == 7) recordingno = 1;
-                break;
-            case 6:
-                mediaRecorder.setOutputFile(mFilename6);
-                recordingno++;
-                if(recordingno == 7) recordingno = 1;
-                break;
+        // Asegurar que el directorio existe
+        File directory = new File(getFilesDir(), "MelodyRecordings");
+        if (!directory.exists()) {
+            boolean success = directory.mkdirs();
+            Log.d(TAG, "Directory creation result: " + success);
         }
-
-        SharedPreferences.Editor editor = getSharedPreferences("FILENO", MODE_PRIVATE).edit();
-        editor.putInt("fileno", recordingno);
-        editor.commit();
-
-        mediaRecorder.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB); // Asegúrate de incluir esto
 
         try {
+            if (mediaRecorder != null) {
+                mediaRecorder.release();
+                mediaRecorder = null;
+            }
+
+            mediaRecorder = new MediaRecorder();
+            mediaRecorder.setAudioSource(MediaRecorder.AudioSource.MIC);
+            mediaRecorder.setOutputFormat(MediaRecorder.OutputFormat.MPEG_4);
+            mediaRecorder.setAudioEncoder(MediaRecorder.AudioEncoder.AAC);
+            mediaRecorder.setAudioSamplingRate(44100);
+            mediaRecorder.setOutputFile(getCurrentFilename());
+
             mediaRecorder.prepare();
-        } catch(IOException e) {
-            Log.e("prepare is fail", "Failed");
+            mediaRecorder.start();
+
+            Log.d(TAG, "Recording started to: " + getCurrentFilename());
+        } catch (IOException e) {
+            Log.e(TAG, "MediaRecorder prepare() failed: " + e.getMessage(), e);
+            Toast.makeText(this, "Failed to start recording", Toast.LENGTH_SHORT).show();
+            recordButton.setText("Record");
+            mStartRecording = true;
+        }
+    }
+
+    private void stopRecording() {
+        if (mediaRecorder != null) {
+            try {
+                mediaRecorder.stop();
+                mediaRecorder.reset();
+                mediaRecorder.release();
+
+                // Verificar que el archivo existe y tiene contenido
+                File recordedFile = new File(getCurrentFilename());
+                Log.d(TAG, "Recording saved: " + getCurrentFilename() + " Size: " + recordedFile.length() + " bytes");
+
+                if (recordedFile.length() == 0) {
+                    Log.w(TAG, "Warning: Recorded file is empty");
+                }
+            } catch (IllegalStateException e) {
+                Log.e(TAG, "Error stopping recorder: " + e.getMessage());
+                Toast.makeText(this, "Error saving recording", Toast.LENGTH_SHORT).show();
+            }
+            mediaRecorder = null;
+        }
+    }
+
+    private String getCurrentFilename() {
+        String currentFile;
+        switch (recordingno) {
+            case 1: currentFile = mFilename1; break;
+            case 2: currentFile = mFilename2; break;
+            case 3: currentFile = mFilename3; break;
+            case 4: currentFile = mFilename4; break;
+            case 5: currentFile = mFilename5; break;
+            case 6: currentFile = mFilename6; break;
+            default:
+                currentFile = mFilename1;
+                recordingno = 1;
+                break;
         }
 
-        mediaRecorder.start();
+        // Update for next recording
+        int nextRecordingNo = (recordingno % 6) + 1;
+
+        // Save the new recording number
+        SharedPreferences.Editor editor = getSharedPreferences("FILENO", MODE_PRIVATE).edit();
+        editor.putInt("fileno", nextRecordingNo);
+        editor.apply();
+
+        return currentFile;
     }
-
-
-    /**
-     * Stop the audio recording
-     * Frees the res associated with MediaRecorder and makes reference null for not losing memory
-     */
-
-
-    private void stopRecording(){
-
-        mediaRecorder.stop();
-        mediaRecorder.release();
-        mediaRecorder = null;
-    }
-
-    /**
-     * Starts or stops audio recording based on the 'start' parameter.
-     * When stopping, displays a Toast message indicating which song was saved.
-     *
-     * @param start true to start recording, false to stop and show notification
-     */
-
 
     private void onRecord(boolean start) {
         if (start) {
             startRecording();
         } else {
             stopRecording();
+
+            int songNumber;
             if (recordingno == 1) {
-                Toast recordingmsg = Toast.makeText(getApplicationContext(), "Song" + 6 + " saved", Toast.LENGTH_SHORT);
-                recordingmsg.show();
+                songNumber = 6;
             } else {
-                int temprecordingno = recordingno - 1;
-                Toast recordingmsg = Toast.makeText(getApplicationContext(), "Song" + temprecordingno + " saved", Toast.LENGTH_SHORT);
-                recordingmsg.show();
+                songNumber = recordingno - 1;
+            }
+
+            Toast.makeText(getApplicationContext(), "Song " + songNumber + " saved", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        // Reinicializar soundPool si es null
+        if (soundPool == null) {
+            Log.d(TAG, "Reinitializing SoundPool in onResume");
+            initializeSoundPool();
+        }
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        if (mediaRecorder != null && !mStartRecording) {
+            stopRecording();
+            mStartRecording = true;
+            recordButton.setText("Record");
+        }
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+
+        // Mejor manejo del soundPool
+        if (soundPool != null) {
+            try {
+                soundPool.release();
+            } catch (Exception e) {
+                Log.e(TAG, "Error releasing SoundPool: " + e.getMessage());
+            } finally {
+                soundPool = null;
             }
         }
     }
 
-
-
-
-
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (mediaRecorder != null) {
+            mediaRecorder.release();
+            mediaRecorder = null;
+        }
+    }
 }

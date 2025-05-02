@@ -1,33 +1,34 @@
 package es.ifp.melodykeys;
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
+import android.Manifest;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
-import android.Manifest;
 import android.widget.Toast;
-
 import androidx.activity.EdgeToEdge;
-import androidx.annotation.NonNull;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
 public class Splash extends AppCompatActivity {
 
-    private static final int PERMISSION_CONSTANT = 100;
-    private static final int REQUEST_PERMISSION_SETTING = 101;
-
-    String[] permissionsRequired = new String[]{
-            Manifest.permission.WRITE_EXTERNAL_STORAGE,
-            Manifest.permission.RECORD_AUDIO
-    };
-
     private SharedPreferences permissionStatus;
-    private boolean sentToSettings = false;
+    private String[] requiredPermissions;
+
+    private final ActivityResultLauncher<String[]> requestPermissionLauncher =
+            registerForActivityResult(new ActivityResultContracts.RequestMultiplePermissions(), permissions -> {
+                if (areAllPermissionsGranted()) {
+                    proceedAfterPermission();
+                } else {
+                    handleDeniedPermissions();
+                }
+            });
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,105 +36,101 @@ public class Splash extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_splash);
 
+        // Initialize requiredPermissions here instead of at field declaration
+        requiredPermissions = getRequiredPermissions();
         permissionStatus = getSharedPreferences("permissionStatus", MODE_PRIVATE);
 
-        if (ActivityCompat.checkSelfPermission(Splash.this, permissionsRequired[0]) != PackageManager.PERMISSION_GRANTED
-                || ActivityCompat.checkSelfPermission(Splash.this, permissionsRequired[1]) != PackageManager.PERMISSION_GRANTED) {
-
-            if (ActivityCompat.shouldShowRequestPermissionRationale(Splash.this, permissionsRequired[0])
-                    || ActivityCompat.shouldShowRequestPermissionRationale(Splash.this, permissionsRequired[1])) {
-
-                AlertDialog.Builder builder = new AlertDialog.Builder(Splash.this);
-                builder.setTitle("Need Multiple Permissions");
-                builder.setMessage("This app needs Storage and Record Audio Permissions");
-                builder.setPositiveButton("Grant", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.cancel();
-                        sentToSettings = true;
-                        Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
-                        Uri uri = Uri.fromParts("package", getPackageName(), null);
-                        intent.setData(uri);
-                        startActivityForResult(intent, REQUEST_PERMISSION_SETTING);
-                    }
-                });
-                builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.cancel();
-                    }
-                });
-                builder.show();
-
-            } else {
-                ActivityCompat.requestPermissions(Splash.this, permissionsRequired, PERMISSION_CONSTANT);
-            }
-        } else {
+        if (areAllPermissionsGranted()) {
             proceedAfterPermission();
+        } else {
+            requestPermissionsWithRationaleCheck();
         }
     }
 
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-
-        if (requestCode == PERMISSION_CONSTANT) {
-            boolean allgranted = true;
-            for (int i = 0; i < grantResults.length; i++) {
-                if (grantResults[i] != PackageManager.PERMISSION_GRANTED) {
-                    allgranted = false;
-                    break;
-                }
-            }
-            if (allgranted) {
-                proceedAfterPermission();
-            } else if (ActivityCompat.shouldShowRequestPermissionRationale(Splash.this, permissionsRequired[0])
-                    || ActivityCompat.shouldShowRequestPermissionRationale(Splash.this, permissionsRequired[1])) {
-
-                AlertDialog.Builder builder = new AlertDialog.Builder(Splash.this);
-                builder.setTitle("Need Multiple Permissions");
-                builder.setMessage("This app needs Storage and Record Audio Permissions");
-                builder.setPositiveButton("Grant", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.cancel();
-                        sentToSettings = true;
-                        Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
-                        Uri uri = Uri.fromParts("package", getPackageName(), null);
-                        intent.setData(uri);
-                        startActivityForResult(intent, REQUEST_PERMISSION_SETTING);
-                    }
-                });
-                builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.cancel();
-                    }
-                });
-                builder.show();
-            } else {
-                Toast.makeText(this, "Unable to Get Permissions", Toast.LENGTH_SHORT).show();
-                Toast.makeText(this, "App will not work properly", Toast.LENGTH_SHORT).show();
-            }
+    private String[] getRequiredPermissions() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            return new String[]{
+                    Manifest.permission.RECORD_AUDIO,
+                    Manifest.permission.READ_MEDIA_AUDIO
+            };
+        } else {
+            return new String[]{
+                    Manifest.permission.RECORD_AUDIO,
+                    Manifest.permission.WRITE_EXTERNAL_STORAGE
+            };
         }
     }
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
-        if (requestCode == REQUEST_PERMISSION_SETTING) {
-            if (ActivityCompat.checkSelfPermission(Splash.this, permissionsRequired[0]) == PackageManager.PERMISSION_GRANTED
-                    && ActivityCompat.checkSelfPermission(Splash.this, permissionsRequired[1]) == PackageManager.PERMISSION_GRANTED) {
-                proceedAfterPermission();
+    private boolean areAllPermissionsGranted() {
+        for (String permission : requiredPermissions) {
+            if (ContextCompat.checkSelfPermission(this, permission) != PackageManager.PERMISSION_GRANTED) {
+                return false;
             }
         }
+        return true;
+    }
+
+    private void requestPermissionsWithRationaleCheck() {
+        boolean shouldShowRationale = false;
+        for (String permission : requiredPermissions) {
+            if (shouldShowRequestPermissionRationale(permission)) {
+                shouldShowRationale = true;
+                break;
+            }
+        }
+
+        if (shouldShowRationale) {
+            showPermissionExplanationDialog();
+        } else {
+            requestPermissionLauncher.launch(requiredPermissions);
+        }
+    }
+
+    private void showPermissionExplanationDialog() {
+        new AlertDialog.Builder(this)
+                .setTitle("Permisos requeridos")
+                .setMessage("La aplicación necesita permisos de grabación de audio y acceso a archivos para funcionar correctamente")
+                .setPositiveButton("Aceptar", (dialog, which) -> {
+                    requestPermissionLauncher.launch(requiredPermissions);
+                    dialog.dismiss();
+                })
+                .setNegativeButton("Cancelar", (dialog, which) -> {
+                    Toast.makeText(this, "La funcionalidad estará limitada", Toast.LENGTH_SHORT).show();
+                    finish();
+                })
+                .setCancelable(false)
+                .show();
+    }
+
+    private void handleDeniedPermissions() {
+        if (!areAllPermissionsGranted()) {
+            new AlertDialog.Builder(this)
+                    .setTitle("Permisos requeridos")
+                    .setMessage("Algunos permisos esenciales fueron denegados. Por favor, active los permisos en configuración")
+                    .setPositiveButton("Abrir configuración", (dialog, which) -> openAppSettings())
+                    .setNegativeButton("Cancelar", (dialog, which) -> finish())
+                    .setCancelable(false)
+                    .show();
+        }
+    }
+
+    private void openAppSettings() {
+        Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
+        intent.setData(Uri.parse("package:" + getPackageName()));
+        startActivity(intent);
     }
 
     private void proceedAfterPermission() {
-        Toast.makeText(this, "Got All Permissions", Toast.LENGTH_SHORT).show();
-        Intent intent = new Intent(this, MainActivity.class);
-        startActivity(intent);
+        startActivity(new Intent(this, MainActivity.class));
         finish();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (areAllPermissionsGranted() && permissionStatus.getBoolean("pendingPermission", false)) {
+            proceedAfterPermission();
+            permissionStatus.edit().putBoolean("pendingPermission", false).apply();
+        }
     }
 }

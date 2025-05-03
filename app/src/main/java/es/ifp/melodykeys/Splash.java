@@ -4,6 +4,7 @@ import android.Manifest;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.media.Image;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -17,6 +18,8 @@ import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
+
+import org.w3c.dom.Text;
 
 public class Splash extends AppCompatActivity {
 
@@ -46,6 +49,8 @@ public class Splash extends AppCompatActivity {
         setContentView(R.layout.activity_splash);
 
 
+        imageViewS = (ImageView)findViewById(R.id.imageViewSplash);
+        textViewS =(TextView) findViewById(R.id.textViewSpash);
 
         // Initialize requiredPermissions here
         requiredPermissions = getRequiredPermissions();

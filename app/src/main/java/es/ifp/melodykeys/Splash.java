@@ -8,6 +8,8 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 import androidx.activity.EdgeToEdge;
 import androidx.activity.result.ActivityResultLauncher;
@@ -17,6 +19,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
 public class Splash extends AppCompatActivity {
+
+    // Variables for SplashActivity
+
+    ImageView imageViewS;
+    TextView textViewS;
+
+    //Variables for permissions 
 
     private SharedPreferences permissionStatus;
     private String[] requiredPermissions;

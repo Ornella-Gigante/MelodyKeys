@@ -46,6 +46,7 @@ public class Splash extends AppCompatActivity {
         setContentView(R.layout.activity_splash);
 
 
+
         // Initialize requiredPermissions here
         requiredPermissions = getRequiredPermissions();
         permissionStatus = getSharedPreferences("permissionStatus", MODE_PRIVATE);

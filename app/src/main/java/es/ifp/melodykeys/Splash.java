@@ -25,7 +25,7 @@ public class Splash extends AppCompatActivity {
     ImageView imageViewS;
     TextView textViewS;
 
-    //Variables for permissions 
+    //Variables for permissions
 
     private SharedPreferences permissionStatus;
     private String[] requiredPermissions;
@@ -45,7 +45,8 @@ public class Splash extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_splash);
 
-        // Initialize requiredPermissions here instead of at field declaration
+
+        // Initialize requiredPermissions here
         requiredPermissions = getRequiredPermissions();
         permissionStatus = getSharedPreferences("permissionStatus", MODE_PRIVATE);
 

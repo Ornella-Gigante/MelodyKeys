@@ -48,7 +48,7 @@ public class Splash extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_splash);
 
-        // Inizialize spash activity components on screen 
+        // Inizialize spash activity components on screen
 
         imageViewS = (ImageView)findViewById(R.id.imageViewSplash);
         textViewS =(TextView) findViewById(R.id.textViewSpash);

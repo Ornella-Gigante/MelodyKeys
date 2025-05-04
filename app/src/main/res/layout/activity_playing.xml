@@ -5,6 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/animated_gradient"
     tools:context=".PlayingActivity">
 
     <TextView
@@ -25,19 +26,22 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="PLAY SONG 1"
+        android:background="@drawable/gradient_2_with_border"
         android:onClick="play1"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.096"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.264" />
+        app:layout_constraintVertical_bias="0.264"
+        />
 
     <Button
         android:id="@+id/button_playing_2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="PLAY SONG 2"
+        android:background="@drawable/gradient_2_with_border"
         android:onClick="play2"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -50,6 +54,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="PLAY SONG 3"
+        android:background="@drawable/gradient_2_with_border"
         android:onClick="play3"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -63,6 +68,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="PLAY SONG 4"
+        android:background="@drawable/gradient_2_with_border"
         android:onClick="play4"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -75,6 +81,7 @@
         android:id="@+id/button_playing_5"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:background="@drawable/gradient_2_with_border"
         android:text="PLAY SONG 5"
         android:onClick="play5"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -86,6 +93,7 @@
 
     <Button
         android:id="@+id/button_playing_6"
+        android:background="@drawable/gradient_2_with_border"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="PLAY SONG 6"

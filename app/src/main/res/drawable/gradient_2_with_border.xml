@@ -1,4 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<selector xmlns:android="http://schemas.android.com/apk/res/android">
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Mantén el gradiente existente -->
+    <gradient
+        android:startColor="#3494E6"
+        android:endColor="#EC6EAD"
+        android:angle="135"
+        android:type="linear" />
 
-</selector>
+    <!-- Añade bordes redondeados -->
+    <corners android:radius="10dp" />
+
+    <!-- Añade el borde -->
+    <stroke
+        android:width="2dp"
+        android:color="#FFFFFF" />
+</shape>

@@ -1,6 +1,7 @@
 package es.ifp.melodykeys;
 
 import android.Manifest;
+import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
 import android.content.Intent;
@@ -11,12 +12,12 @@ import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Handler;
 import android.provider.Settings;
 import android.view.View;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -31,10 +32,12 @@ import androidx.core.content.ContextCompat;
 public class Splash extends AppCompatActivity {
 
     // Variables for SplashActivity
-    ImageView imageViewS;
-    TextView textViewS;
-
-    MediaPlayer mediaPlayer;
+    private ImageView imageViewS;
+    private TextView textViewS;
+    private Button btnStart;
+    private MediaPlayer mediaPlayer;
+    private AnimationDrawable animationDrawable;
+    private ObjectAnimator shineAnimator;
 
     // Variables for permissions
     private SharedPreferences permissionStatus;
@@ -43,7 +46,7 @@ public class Splash extends AppCompatActivity {
     private final ActivityResultLauncher<String[]> requestPermissionLauncher =
             registerForActivityResult(new ActivityResultContracts.RequestMultiplePermissions(), permissions -> {
                 if (areAllPermissionsGranted()) {
-                    proceedAfterPermission();
+                    startMainActivity();
                 } else {
                     handleDeniedPermissions();
                 }
@@ -55,43 +58,49 @@ public class Splash extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_splash);
 
-        // En el método onCreate después de setContentView
-// Iniciar animación de fondo
+        // Initialize splash activity components on screen
+        imageViewS = findViewById(R.id.imageViewSplash);
+        textViewS = findViewById(R.id.textViewSpash);
+        btnStart = findViewById(R.id.btnStart);
+
+        // Initialize requiredPermissions
+        requiredPermissions = getRequiredPermissions();
+        permissionStatus = getSharedPreferences("permissionStatus", MODE_PRIVATE);
+
+        // Set up animated background
         View backgroundView = findViewById(R.id.animated_background);
-        AnimationDrawable animationDrawable = (AnimationDrawable) backgroundView.getBackground();
+        animationDrawable = (AnimationDrawable) backgroundView.getBackground();
         animationDrawable.setEnterFadeDuration(2000);
         animationDrawable.setExitFadeDuration(4000);
         animationDrawable.start();
 
-// Animar efecto de brillo
+        // Set up shine effect animation
         View shineView = findViewById(R.id.shine_effect);
-        ObjectAnimator animator = ObjectAnimator.ofFloat(shineView, "translationX", -200f, getResources().getDisplayMetrics().widthPixels + 200f);
-        animator.setDuration(3000);
-        animator.setInterpolator(new AccelerateDecelerateInterpolator());
-        animator.setRepeatCount(ValueAnimator.INFINITE);
-        animator.start();
+        shineAnimator = ObjectAnimator.ofFloat(shineView, "translationX",
+                -200f, getResources().getDisplayMetrics().widthPixels + 200f);
+        shineAnimator.setDuration(3000);
+        shineAnimator.setInterpolator(new AccelerateDecelerateInterpolator());
+        shineAnimator.setRepeatCount(ValueAnimator.INFINITE);
+        shineAnimator.start();
 
-// Reproducir música de fondo
-        mediaPlayer = MediaPlayer.create(this, R.raw.background_music);
-        mediaPlayer.setLooping(true);
-        mediaPlayer.setVolume(0.5f, 0.5f);
-        mediaPlayer.start();
+        // Start background music
+        playBackgroundMusic();
 
+        // Set Start button click listener
+        btnStart.setOnClickListener(v -> {
+            if (areAllPermissionsGranted()) {
+                startMainActivity();
+            } else {
+                requestPermissionsWithRationaleCheck();
+            }
+        });
 
-        // Initialize splash activity components on screen
-        imageViewS = findViewById(R.id.imageViewSplash);
-        textViewS = findViewById(R.id.textViewSpash);
-
-        // Initialize requiredPermissions here
-        requiredPermissions = getRequiredPermissions();
-        permissionStatus = getSharedPreferences("permissionStatus", MODE_PRIVATE);
-
-        // Load and apply the fade-in animation
+        // Load and apply the fade-in animation for logo and text
         Animation fadeAnimation = AnimationUtils.loadAnimation(this, R.anim.transition);
         imageViewS.startAnimation(fadeAnimation);
         textViewS.startAnimation(fadeAnimation);
 
-        // Add animation listener to proceed after animation completes
+        // Add animation listener to show Start button after animation completes
         fadeAnimation.setAnimationListener(new Animation.AnimationListener() {
             @Override
             public void onAnimationStart(Animation animation) {
@@ -100,14 +109,8 @@ public class Splash extends AppCompatActivity {
 
             @Override
             public void onAnimationEnd(Animation animation) {
-                // Check permissions after animation ends
-                new Handler().postDelayed(() -> {
-                    if (areAllPermissionsGranted()) {
-                        proceedAfterPermission();
-                    } else {
-                        requestPermissionsWithRationaleCheck();
-                    }
-                }, 500); // Small delay after animation for better UX
+                // Show the Start button with a fade-in animation
+                showStartButton();
             }
 
             @Override
@@ -115,6 +118,29 @@ public class Splash extends AppCompatActivity {
                 // No action needed
             }
         });
+    }
+
+    private void showStartButton() {
+        ObjectAnimator fadeIn = ObjectAnimator.ofFloat(btnStart, "alpha", 0f, 1f);
+        ObjectAnimator scaleX = ObjectAnimator.ofFloat(btnStart, "scaleX", 0.7f, 1f);
+        ObjectAnimator scaleY = ObjectAnimator.ofFloat(btnStart, "scaleY", 0.7f, 1f);
+
+        AnimatorSet animatorSet = new AnimatorSet();
+        animatorSet.playTogether(fadeIn, scaleX, scaleY);
+        animatorSet.setDuration(800);
+        animatorSet.start();
+    }
+
+    private void playBackgroundMusic() {
+        try {
+            mediaPlayer = MediaPlayer.create(this, R.raw.background_music);
+            mediaPlayer.setLooping(true);
+            mediaPlayer.setVolume(0.5f, 0.5f);
+            mediaPlayer.start();
+        } catch (Exception e) {
+            // Handle the exception if the music file is not found or cannot be played
+            e.printStackTrace();
+        }
     }
 
     private String[] getRequiredPermissions() {
@@ -190,7 +216,7 @@ public class Splash extends AppCompatActivity {
         startActivity(intent);
     }
 
-    private void proceedAfterPermission() {
+    private void startMainActivity() {
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
         // Use a smooth transition between activities
@@ -202,8 +228,47 @@ public class Splash extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         if (areAllPermissionsGranted() && permissionStatus.getBoolean("pendingPermission", false)) {
-            proceedAfterPermission();
+            startMainActivity();
             permissionStatus.edit().putBoolean("pendingPermission", false).apply();
+        }
+
+        // Resume animations and music if they were paused
+        if (animationDrawable != null && !animationDrawable.isRunning()) {
+            animationDrawable.start();
+        }
+        if (shineAnimator != null && !shineAnimator.isStarted()) {
+            shineAnimator.resume();
+        }
+        if (mediaPlayer != null && !mediaPlayer.isPlaying()) {
+            mediaPlayer.start();
+        }
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        // Pause shine animation when the activity is paused
+        if (shineAnimator != null && shineAnimator.isStarted()) {
+            shineAnimator.pause();
+        }
+        // Pause the music when the activity is paused
+        if (mediaPlayer != null && mediaPlayer.isPlaying()) {
+            mediaPlayer.pause();
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        // Release resources when activity is destroyed
+        if (shineAnimator != null) {
+            shineAnimator.cancel();
+            shineAnimator = null;
+        }
+        if (mediaPlayer != null) {
+            mediaPlayer.stop();
+            mediaPlayer.release();
+            mediaPlayer = null;
         }
     }
 }

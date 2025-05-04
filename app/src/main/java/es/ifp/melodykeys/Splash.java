@@ -4,14 +4,17 @@ import android.Manifest;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
-import android.media.Image;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.provider.Settings;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import androidx.activity.EdgeToEdge;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
@@ -19,17 +22,13 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
-import org.w3c.dom.Text;
-
 public class Splash extends AppCompatActivity {
 
     // Variables for SplashActivity
-
     ImageView imageViewS;
     TextView textViewS;
 
-    //Variables for permissions
-
+    // Variables for permissions
     private SharedPreferences permissionStatus;
     private String[] requiredPermissions;
 
@@ -48,20 +47,43 @@ public class Splash extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_splash);
 
-        // Inizialize spash activity components on screen
-
-        imageViewS = (ImageView)findViewById(R.id.imageViewSplash);
-        textViewS =(TextView) findViewById(R.id.textViewSpash);
+        // Initialize splash activity components on screen
+        imageViewS = findViewById(R.id.imageViewSplash);
+        textViewS = findViewById(R.id.textViewSpash);
 
         // Initialize requiredPermissions here
         requiredPermissions = getRequiredPermissions();
         permissionStatus = getSharedPreferences("permissionStatus", MODE_PRIVATE);
 
-        if (areAllPermissionsGranted()) {
-            proceedAfterPermission();
-        } else {
-            requestPermissionsWithRationaleCheck();
-        }
+        // Load and apply the fade-in animation
+        Animation fadeAnimation = AnimationUtils.loadAnimation(this, R.anim.transition);
+        imageViewS.startAnimation(fadeAnimation);
+        textViewS.startAnimation(fadeAnimation);
+
+        // Add animation listener to proceed after animation completes
+        fadeAnimation.setAnimationListener(new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) {
+                // No action needed
+            }
+
+            @Override
+            public void onAnimationEnd(Animation animation) {
+                // Check permissions after animation ends
+                new Handler().postDelayed(() -> {
+                    if (areAllPermissionsGranted()) {
+                        proceedAfterPermission();
+                    } else {
+                        requestPermissionsWithRationaleCheck();
+                    }
+                }, 500); // Small delay after animation for better UX
+            }
+
+            @Override
+            public void onAnimationRepeat(Animation animation) {
+                // No action needed
+            }
+        });
     }
 
     private String[] getRequiredPermissions() {
@@ -106,8 +128,8 @@ public class Splash extends AppCompatActivity {
     private void showPermissionExplanationDialog() {
         new AlertDialog.Builder(this)
                 .setTitle("Permission required")
-                .setMessage("The apps needs permissions")
-                .setPositiveButton("Aceptar", (dialog, which) -> {
+                .setMessage("The app needs permissions for audio recording and storage")
+                .setPositiveButton("Accept", (dialog, which) -> {
                     requestPermissionLauncher.launch(requiredPermissions);
                     dialog.dismiss();
                 })
@@ -123,8 +145,8 @@ public class Splash extends AppCompatActivity {
         if (!areAllPermissionsGranted()) {
             new AlertDialog.Builder(this)
                     .setTitle("Permission required")
-                    .setMessage("Some permits were denied.Please, activate configuration permits")
-                    .setPositiveButton("Open Configuration", (dialog, which) -> openAppSettings())
+                    .setMessage("Some permits were denied. Please activate them in settings")
+                    .setPositiveButton("Open Settings", (dialog, which) -> openAppSettings())
                     .setNegativeButton("Cancel", (dialog, which) -> finish())
                     .setCancelable(false)
                     .show();
@@ -138,7 +160,10 @@ public class Splash extends AppCompatActivity {
     }
 
     private void proceedAfterPermission() {
-        startActivity(new Intent(this, MainActivity.class));
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
+        // Use a smooth transition between activities
+        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
         finish();
     }
 

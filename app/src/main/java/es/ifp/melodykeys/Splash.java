@@ -105,14 +105,14 @@ public class Splash extends AppCompatActivity {
 
     private void showPermissionExplanationDialog() {
         new AlertDialog.Builder(this)
-                .setTitle("Permisos requeridos")
-                .setMessage("La aplicación necesita permisos de grabación de audio y acceso a archivos para funcionar correctamente")
+                .setTitle("Permission required")
+                .setMessage("The apps needs permissions")
                 .setPositiveButton("Aceptar", (dialog, which) -> {
                     requestPermissionLauncher.launch(requiredPermissions);
                     dialog.dismiss();
                 })
-                .setNegativeButton("Cancelar", (dialog, which) -> {
-                    Toast.makeText(this, "La funcionalidad estará limitada", Toast.LENGTH_SHORT).show();
+                .setNegativeButton("Cancel", (dialog, which) -> {
+                    Toast.makeText(this, "Limited Functionality", Toast.LENGTH_SHORT).show();
                     finish();
                 })
                 .setCancelable(false)
@@ -122,10 +122,10 @@ public class Splash extends AppCompatActivity {
     private void handleDeniedPermissions() {
         if (!areAllPermissionsGranted()) {
             new AlertDialog.Builder(this)
-                    .setTitle("Permisos requeridos")
-                    .setMessage("Algunos permisos esenciales fueron denegados. Por favor, active los permisos en configuración")
-                    .setPositiveButton("Abrir configuración", (dialog, which) -> openAppSettings())
-                    .setNegativeButton("Cancelar", (dialog, which) -> finish())
+                    .setTitle("Permission required")
+                    .setMessage("Some permits were denied.Please, activate configuration permits")
+                    .setPositiveButton("Open Configuration", (dialog, which) -> openAppSettings())
+                    .setNegativeButton("Cancel", (dialog, which) -> finish())
                     .setCancelable(false)
                     .show();
         }

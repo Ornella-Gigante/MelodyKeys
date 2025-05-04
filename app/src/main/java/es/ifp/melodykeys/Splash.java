@@ -1,14 +1,20 @@
 package es.ifp.melodykeys;
 
 import android.Manifest;
+import android.animation.ObjectAnimator;
+import android.animation.ValueAnimator;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.graphics.drawable.AnimationDrawable;
+import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.provider.Settings;
+import android.view.View;
+import android.view.animation.AccelerateDecelerateInterpolator;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
@@ -28,6 +34,8 @@ public class Splash extends AppCompatActivity {
     ImageView imageViewS;
     TextView textViewS;
 
+    MediaPlayer mediaPlayer;
+
     // Variables for permissions
     private SharedPreferences permissionStatus;
     private String[] requiredPermissions;
@@ -46,6 +54,29 @@ public class Splash extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_splash);
+
+        // En el método onCreate después de setContentView
+// Iniciar animación de fondo
+        View backgroundView = findViewById(R.id.animated_background);
+        AnimationDrawable animationDrawable = (AnimationDrawable) backgroundView.getBackground();
+        animationDrawable.setEnterFadeDuration(2000);
+        animationDrawable.setExitFadeDuration(4000);
+        animationDrawable.start();
+
+// Animar efecto de brillo
+        View shineView = findViewById(R.id.shine_effect);
+        ObjectAnimator animator = ObjectAnimator.ofFloat(shineView, "translationX", -200f, getResources().getDisplayMetrics().widthPixels + 200f);
+        animator.setDuration(3000);
+        animator.setInterpolator(new AccelerateDecelerateInterpolator());
+        animator.setRepeatCount(ValueAnimator.INFINITE);
+        animator.start();
+
+// Reproducir música de fondo
+        mediaPlayer = MediaPlayer.create(this, R.raw.background_music);
+        mediaPlayer.setLooping(true);
+        mediaPlayer.setVolume(0.5f, 0.5f);
+        mediaPlayer.start();
+
 
         // Initialize splash activity components on screen
         imageViewS = findViewById(R.id.imageViewSplash);

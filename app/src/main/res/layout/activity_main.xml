@@ -82,7 +82,10 @@
             android:layout_gravity="center_vertical">
 
             <!-- White keys -->
-            <Button android:id="@+id/keyC3" style="@style/first_key_type_for_pink_key"/>
+            <Button
+                android:id="@+id/keyC3"
+                style="@style/first_key_type_for_pink_key" />
+
             <Button android:id="@+id/keyD3" style="@style/common_key_style_for_rest_of_the_piano_keys"
                 android:layout_toEndOf="@id/keyC3" android:layout_marginLeft="2dp"/>
             <Button android:id="@+id/keyE3" style="@style/common_key_style_for_rest_of_the_piano_keys"
@@ -149,10 +152,18 @@
                 android:layout_toEndOf="@id/keyF7" android:layout_marginLeft="2dp"/>
             <Button android:id="@+id/keyA7" style="@style/common_key_style_for_rest_of_the_piano_keys"
                 android:layout_toEndOf="@id/keyG7" android:layout_marginLeft="2dp"/>
-            <Button android:id="@+id/keyB7" style="@style/common_key_style_for_rest_of_the_piano_keys"
-                android:layout_toEndOf="@id/keyA7" android:layout_marginLeft="2dp"/>
 
             <!-- Black keys -->
+
+            <Button
+                android:id="@+id/keyB7"
+                style="@style/common_key_style_for_rest_of_the_piano_keys"
+                android:layout_alignTop="@id/keyA7"
+                android:layout_marginStart="3dp"
+                android:layout_marginLeft="2dp"
+                android:layout_marginTop="0dp"
+                android:layout_toEndOf="@id/keyA7" />
+
             <Button android:id="@+id/keyCs3" style="@style/black_piano_key_style"
                 android:layout_alignTop="@id/keyC3" android:layout_toEndOf="@id/keyC3"
                 android:layout_marginStart="-13dp" android:layout_marginTop="0dp"/>
@@ -310,9 +321,15 @@
             <TextView
                 android:id="@+id/labelB7"
                 style="@style/style_for_TectView_ketText7"
-                android:layout_toLeftOf="@id/keyC7"
+                android:text="B7"
+                android:layout_alignTop="@id/labelA7"
+                android:layout_toRightOf="@id/keyA7"
+                android:layout_marginLeft="-13dp"
                 android:stateListAnimator="@null"
-                android:textIsSelectable="false" />
+                android:textIsSelectable="false"/>
+
+
+
         </RelativeLayout>
     </HorizontalScrollView>
 </RelativeLayout>

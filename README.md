@@ -8,9 +8,6 @@ This app is IN PROGRESS and  transforms your Android device into a virtual piano
 
 ---
 
-<div align="center">
-  <img src="https://github.com/Ornella-Gigante/MelodyKeys/blob/main/image_1.png?raw=true" alt="Piano Demo" width="800"/>
-</div>
 
 <div align="center">
   <img src="https://github.com/Ornella-Gigante/MelodyKeys/blob/main/image_2.png?raw=true" alt="Piano Demo" width="800"/>

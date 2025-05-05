@@ -651,17 +651,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
-    // Modify the getCurrentFilename method
     private String getCurrentFilename() {
-        // Ensure recordingno is in valid range (1-6)
+        // Asegurar que recordingno esté en el rango válido (1-6)
         if (recordingno < 1 || recordingno > 6) {
             recordingno = 1;
         }
 
-        String currentFile;
-        int currentRecordingNumber = recordingno; // Store current number before incrementing
+        // Guardar el número actual antes de incrementarlo
+        int currentNumber = recordingno;
 
-        switch (currentRecordingNumber) {
+        String currentFile;
+        switch (currentNumber) {
             case 1: currentFile = mFilename1; break;
             case 2: currentFile = mFilename2; break;
             case 3: currentFile = mFilename3; break;
@@ -671,36 +671,63 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             default: currentFile = mFilename1; break;
         }
 
-        // Store the CURRENT recording number in SharedPreferences
-        SharedPreferences.Editor editor = getSharedPreferences("FILENO", MODE_PRIVATE).edit();
-        editor.putInt("CURRENT_RECORDING", currentRecordingNumber); // Store current number
-        editor.commit(); // Use commit() for immediate write
+        // Guardar el número actual en SharedPreferences
+        SharedPreferences.Editor editor = getSharedPreferences("RECORDING_DATA", MODE_PRIVATE).edit();
+        editor.putInt("LAST_RECORDED", currentNumber);
+        editor.commit(); // Usar commit() para escritura inmediata
 
-        // Increment for next recording with circular rotation
+        // Incrementar para la próxima grabación con rotación circular
         recordingno = (recordingno % 6) + 1;
 
-        // Store the NEXT recording number
-        editor = getSharedPreferences("FILENO", MODE_PRIVATE).edit();
-        editor.putInt("fileno", recordingno); // Store next number
-        editor.commit(); // Use commit() for immediate write
+        // Guardar el próximo número
+        editor = getSharedPreferences("RECORDING_DATA", MODE_PRIVATE).edit();
+        editor.putInt("NEXT_RECORDING", recordingno);
+        editor.commit();
 
         return currentFile;
     }
 
-    // Modify the onRecord method
     private void onRecord(boolean start) {
         if (start) {
             startRecording();
         } else {
             stopRecording();
+            // Get the CURRENT recording number
+            SharedPreferences prefs = getSharedPreferences("RECORDING_DATA", MODE_PRIVATE);
+            int currentRecording = prefs.getInt("LAST_RECORDED", 1);
 
-            // Get the CURRENT recording number (not the next one)
-            SharedPreferences prefs = getSharedPreferences("FILENO", MODE_PRIVATE);
-            int songNumber = prefs.getInt("CURRENT_RECORDING", 1);
-
-            Toast.makeText(getApplicationContext(), "Song " + songNumber + " saved", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "Record " + currentRecording + " saved", Toast.LENGTH_SHORT).show();
         }
     }
+    public void clearAllRecordings(View view) {
+        // Eliminar todos los archivos de grabación
+        File file1 = new File(mFilename1);
+        File file2 = new File(mFilename2);
+        File file3 = new File(mFilename3);
+        File file4 = new File(mFilename4);
+        File file5 = new File(mFilename5);
+        File file6 = new File(mFilename6);
+
+        if (file1.exists()) file1.delete();
+        if (file2.exists()) file2.delete();
+        if (file3.exists()) file3.delete();
+        if (file4.exists()) file4.delete();
+        if (file5.exists()) file5.delete();
+        if (file6.exists()) file6.delete();
+
+        // Reiniciar contador
+        recordingno = 1;
+
+        // Actualizar SharedPreferences
+        SharedPreferences.Editor editor = getSharedPreferences("RECORDING_DATA", MODE_PRIVATE).edit();
+        editor.putInt("NEXT_RECORDING", recordingno);
+        editor.putInt("LAST_RECORDED", -1);
+        editor.commit();
+
+        Toast.makeText(this, "All recordings cleared", Toast.LENGTH_SHORT).show();
+    }
+
+
 
     @Override
     protected void onResume() {

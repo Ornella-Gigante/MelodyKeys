@@ -2,6 +2,7 @@ package es.ifp.melodykeys;
 
 import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
+import android.content.SharedPreferences;
 import android.graphics.drawable.AnimationDrawable;
 import android.media.MediaPlayer;
 import android.os.Bundle;
@@ -30,6 +31,7 @@ import static es.ifp.melodykeys.MainActivity.mFilename5;
 import static es.ifp.melodykeys.MainActivity.mFilename6;
 
 public class PlayingActivity extends AppCompatActivity {
+
 
     private static final String TAG = "PlayingActivity";
     private MediaPlayer mediaPlayer;
@@ -114,14 +116,62 @@ public class PlayingActivity extends AppCompatActivity {
             return insets;
         });
 
-        // Verify existence of files at startup
-        checkAllFiles();
-
-        // Verify existence of files at startup and update button states
+        // Update button states based on file existence
         updateButtonStates();
+    }
 
-        // Update button labels to match recordings
-        updateButtonLabels();
+    /**
+     * Updates the visual state of buttons based on file availability
+     */
+    private void updateButtonStates() {
+        // Verify each file and update button state accordingly
+        updateButtonState(record1, mFilename1, 1);
+        updateButtonState(record2, mFilename2, 2);
+        updateButtonState(record3, mFilename3, 3);
+        updateButtonState(record4, mFilename4, 4);
+        updateButtonState(record5, mFilename5, 5);
+        updateButtonState(record6, mFilename6, 6);
+
+        // Highlight the last recorded button
+        SharedPreferences prefs = getSharedPreferences("RECORDING_DATA", MODE_PRIVATE);
+        int lastRecorded = prefs.getInt("LAST_RECORDED", -1);
+
+        if (lastRecorded > 0 && lastRecorded <= 6) {
+            Button lastButton = null;
+            switch (lastRecorded) {
+                case 1: lastButton = record1; break;
+                case 2: lastButton = record2; break;
+                case 3: lastButton = record3; break;
+                case 4: lastButton = record4; break;
+                case 5: lastButton = record5; break;
+                case 6: lastButton = record6; break;
+            }
+
+            if (lastButton != null) {
+                // Optionally highlight the last recorded button
+                // lastButton.setBackgroundResource(R.drawable.last_recorded_button);
+                Log.d(TAG, "Last recorded button: " + lastRecorded);
+            }
+        }
+
+        Log.d(TAG, "Button states updated based on file existence");
+    }
+
+    /**
+     * Updates a single button's state based on file existence
+     */
+    private void updateButtonState(Button button, String filename, int recordNumber) {
+        File file = new File(filename);
+        boolean exists = file.exists() && file.length() > 0;
+
+        button.setEnabled(exists);
+        button.setAlpha(exists ? 1.0f : 0.5f);
+
+        if (exists) {
+            button.setText("PLAY SONG " + recordNumber);
+        } else {
+            button.setText("NO SONG " + recordNumber);
+        }
     }
 
     /**
@@ -397,88 +447,6 @@ public class PlayingActivity extends AppCompatActivity {
         }
     }
 
-
-
-    /**
-     * Updates the visual state of buttons based on file availability
-     */
-    private void updateButtonStates() {
-        // Check each file and update button appearance accordingly
-        boolean file1Exists = new File(mFilename1).exists() && new File(mFilename1).length() > 0;
-        boolean file2Exists = new File(mFilename2).exists() && new File(mFilename2).length() > 0;
-        boolean file3Exists = new File(mFilename3).exists() && new File(mFilename3).length() > 0;
-        boolean file4Exists = new File(mFilename4).exists() && new File(mFilename4).length() > 0;
-        boolean file5Exists = new File(mFilename5).exists() && new File(mFilename5).length() > 0;
-        boolean file6Exists = new File(mFilename6).exists() && new File(mFilename6).length() > 0;
-
-        // Update button appearance based on file existence
-        record1.setEnabled(file1Exists);
-        record2.setEnabled(file2Exists);
-        record3.setEnabled(file3Exists);
-        record4.setEnabled(file4Exists);
-        record5.setEnabled(file5Exists);
-        record6.setEnabled(file6Exists);
-
-        // Optional: Set alpha for disabled buttons to visually indicate status
-        record1.setAlpha(file1Exists ? 1.0f : 0.5f);
-        record2.setAlpha(file2Exists ? 1.0f : 0.5f);
-        record3.setAlpha(file3Exists ? 1.0f : 0.5f);
-        record4.setAlpha(file4Exists ? 1.0f : 0.5f);
-        record5.setAlpha(file5Exists ? 1.0f : 0.5f);
-        record6.setAlpha(file6Exists ? 1.0f : 0.5f);
-
-        Log.d(TAG, "Button states updated based on file existence");
-    }
-
-    private void updateButtonLabels() {
-        // Check each file and update button text accordingly
-        for (int i = 1; i <= 6; i++) {
-            String filename = null;
-            Button button = null;
-
-            switch (i) {
-                case 1:
-                    filename = mFilename1;
-                    button = record1;
-                    break;
-                case 2:
-                    filename = mFilename2;
-                    button = record2;
-                    break;
-                case 3:
-                    filename = mFilename3;
-                    button = record3;
-                    break;
-                case 4:
-                    filename = mFilename4;
-                    button = record4;
-                    break;
-                case 5:
-                    filename = mFilename5;
-                    button = record5;
-                    break;
-                case 6:
-                    filename = mFilename6;
-                    button = record6;
-                    break;
-            }
-
-            if (filename != null && button != null) {
-                File file = new File(filename);
-                if (file.exists() && file.length() > 0) {
-                    button.setText("PLAY SONG " + i);
-                    button.setEnabled(true);
-                    button.setAlpha(1.0f);
-                } else {
-                    button.setText("NO SONG " + i);
-                    button.setEnabled(false);
-                    button.setAlpha(0.5f);
-                }
-            }
-        }
-    }
-
-
     /**
      * Stops playback and releases resources
      */
@@ -508,6 +476,9 @@ public class PlayingActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
 
+        // Update button states when returning to this activity
+        updateButtonStates();
+
         // Resume animations if they exist
         if (animationDrawable != null && !animationDrawable.isRunning()) {
             animationDrawable.start();
@@ -516,8 +487,6 @@ public class PlayingActivity extends AppCompatActivity {
         if (shineAnimator != null && shineAnimator.isPaused()) {
             shineAnimator.resume();
         }
-
-
     }
 
     @Override
@@ -564,12 +533,5 @@ public class PlayingActivity extends AppCompatActivity {
             shineAnimator.cancel();
             shineAnimator = null;
         }
-
-
     }
-
-
 }
-
-
-

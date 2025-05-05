@@ -651,6 +651,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
+    // Modify the getCurrentFilename method
     private String getCurrentFilename() {
         // Ensure recordingno is in valid range (1-6)
         if (recordingno < 1 || recordingno > 6) {
@@ -658,7 +659,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
 
         String currentFile;
-        switch (recordingno) {
+        int currentRecordingNumber = recordingno; // Store current number before incrementing
+
+        switch (currentRecordingNumber) {
             case 1: currentFile = mFilename1; break;
             case 2: currentFile = mFilename2; break;
             case 3: currentFile = mFilename3; break;
@@ -668,32 +671,37 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             default: currentFile = mFilename1; break;
         }
 
-        // Save the current recording number BEFORE incrementing
+        // Store the CURRENT recording number in SharedPreferences
         SharedPreferences.Editor editor = getSharedPreferences("FILENO", MODE_PRIVATE).edit();
-        editor.putInt("fileno", recordingno);
-        // Use commit() instead of apply() for immediate synchronization
-        editor.commit();
+        editor.putInt("CURRENT_RECORDING", currentRecordingNumber); // Store current number
+        editor.commit(); // Use commit() for immediate write
 
         // Increment for next recording with circular rotation
         recordingno = (recordingno % 6) + 1;
 
+        // Store the NEXT recording number
+        editor = getSharedPreferences("FILENO", MODE_PRIVATE).edit();
+        editor.putInt("fileno", recordingno); // Store next number
+        editor.commit(); // Use commit() for immediate write
+
         return currentFile;
     }
 
-    // Modify onRecord method to properly handle recording state
+    // Modify the onRecord method
     private void onRecord(boolean start) {
         if (start) {
             startRecording();
         } else {
             stopRecording();
 
-            // Get the current recording number (not the next one)
+            // Get the CURRENT recording number (not the next one)
             SharedPreferences prefs = getSharedPreferences("FILENO", MODE_PRIVATE);
-            int songNumber = prefs.getInt("fileno", 1);
+            int songNumber = prefs.getInt("CURRENT_RECORDING", 1);
 
             Toast.makeText(getApplicationContext(), "Song " + songNumber + " saved", Toast.LENGTH_SHORT).show();
         }
     }
+
     @Override
     protected void onResume() {
         super.onResume();
@@ -712,6 +720,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if (shineAnimator != null && shineAnimator.isPaused()) {
             shineAnimator.resume();
         }
+
     }
 
     @Override

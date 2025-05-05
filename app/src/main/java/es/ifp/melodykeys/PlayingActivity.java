@@ -119,6 +119,9 @@ public class PlayingActivity extends AppCompatActivity {
 
         // Verify existence of files at startup and update button states
         updateButtonStates();
+
+        // Update button labels to match recordings
+        updateButtonLabels();
     }
 
     /**
@@ -427,6 +430,54 @@ public class PlayingActivity extends AppCompatActivity {
         Log.d(TAG, "Button states updated based on file existence");
     }
 
+    private void updateButtonLabels() {
+        // Check each file and update button text accordingly
+        for (int i = 1; i <= 6; i++) {
+            String filename = null;
+            Button button = null;
+
+            switch (i) {
+                case 1:
+                    filename = mFilename1;
+                    button = record1;
+                    break;
+                case 2:
+                    filename = mFilename2;
+                    button = record2;
+                    break;
+                case 3:
+                    filename = mFilename3;
+                    button = record3;
+                    break;
+                case 4:
+                    filename = mFilename4;
+                    button = record4;
+                    break;
+                case 5:
+                    filename = mFilename5;
+                    button = record5;
+                    break;
+                case 6:
+                    filename = mFilename6;
+                    button = record6;
+                    break;
+            }
+
+            if (filename != null && button != null) {
+                File file = new File(filename);
+                if (file.exists() && file.length() > 0) {
+                    button.setText("PLAY SONG " + i);
+                    button.setEnabled(true);
+                    button.setAlpha(1.0f);
+                } else {
+                    button.setText("NO SONG " + i);
+                    button.setEnabled(false);
+                    button.setAlpha(0.5f);
+                }
+            }
+        }
+    }
+
 
     /**
      * Stops playback and releases resources
@@ -465,6 +516,8 @@ public class PlayingActivity extends AppCompatActivity {
         if (shineAnimator != null && shineAnimator.isPaused()) {
             shineAnimator.resume();
         }
+
+
     }
 
     @Override

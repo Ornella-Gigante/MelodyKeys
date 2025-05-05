@@ -1,9 +1,13 @@
 package es.ifp.melodykeys;
 
+import android.animation.ObjectAnimator;
+import android.animation.ValueAnimator;
+import android.graphics.drawable.AnimationDrawable;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.animation.AccelerateDecelerateInterpolator;
 import android.widget.Button;
 import android.widget.Toast;
 
@@ -29,10 +33,12 @@ public class PlayingActivity extends AppCompatActivity {
 
     private static final String TAG = "PlayingActivity";
     private MediaPlayer mediaPlayer;
+    private AnimationDrawable animationDrawable;
+    private ObjectAnimator shineAnimator;
 
     private Button record1, record2, record3, record4, record5, record6;
 
-    // boolean variables
+    // Boolean variables for tracking playback state
     private boolean isplaying1;
     private boolean isplaying2;
     private boolean isplaying3;
@@ -48,7 +54,7 @@ public class PlayingActivity extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_playing);
 
-        // Log para verificar rutas de archivos
+        // Log to verify file paths
         Log.d(TAG, "File paths: " +
                 "\n1: " + mFilename1 +
                 "\n2: " + mFilename2 +
@@ -57,6 +63,7 @@ public class PlayingActivity extends AppCompatActivity {
                 "\n5: " + mFilename5 +
                 "\n6: " + mFilename6);
 
+        // Initialize buttons
         record1 = findViewById(R.id.button_playing_1);
         record2 = findViewById(R.id.button_playing_2);
         record3 = findViewById(R.id.button_playing_3);
@@ -64,6 +71,7 @@ public class PlayingActivity extends AppCompatActivity {
         record5 = findViewById(R.id.button_playing_5);
         record6 = findViewById(R.id.button_playing_6);
 
+        // Set button backgrounds
         record1.setBackgroundResource(R.drawable.playsongshape);
         record2.setBackgroundResource(R.drawable.playsongshape);
         record3.setBackgroundResource(R.drawable.playsongshape);
@@ -71,6 +79,7 @@ public class PlayingActivity extends AppCompatActivity {
         record5.setBackgroundResource(R.drawable.playsongshape);
         record6.setBackgroundResource(R.drawable.playsongshape);
 
+        // Initialize playback state
         isplaying = false;
         isplaying1 = false;
         isplaying2 = false;
@@ -79,18 +88,41 @@ public class PlayingActivity extends AppCompatActivity {
         isplaying5 = false;
         isplaying6 = false;
 
+        // Initialize animated background if it exists
+        View backgroundView = findViewById(R.id.animated_background);
+        if (backgroundView != null) {
+            animationDrawable = (AnimationDrawable) backgroundView.getBackground();
+            animationDrawable.setEnterFadeDuration(2000);
+            animationDrawable.setExitFadeDuration(4000);
+            animationDrawable.start();
+        }
+
+        // Initialize shine effect if it exists
+        View shineView = findViewById(R.id.shine_effect);
+        if (shineView != null) {
+            shineAnimator = ObjectAnimator.ofFloat(shineView, "translationX",
+                    -200f, getResources().getDisplayMetrics().widthPixels + 200f);
+            shineAnimator.setDuration(3000);
+            shineAnimator.setInterpolator(new AccelerateDecelerateInterpolator());
+            shineAnimator.setRepeatCount(ValueAnimator.INFINITE);
+            shineAnimator.start();
+        }
+
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
 
-        // Verificar existencia de archivos al inicio
+        // Verify existence of files at startup
         checkAllFiles();
     }
 
+    /**
+     * Checks all recording files and logs their status
+     */
     private void checkAllFiles() {
-        // Usar rutas directas con BASE_DIR
+        // Use direct paths with BASE_DIR
         File file1 = new File(mFilename1);
         File file2 = new File(mFilename2);
         File file3 = new File(mFilename3);
@@ -107,6 +139,9 @@ public class PlayingActivity extends AppCompatActivity {
                 "\nFile6 exists: " + file6.exists() + " size: " + file6.length());
     }
 
+    /**
+     * Checks if a specific file exists and has content
+     */
     private boolean checkFileExists(String filePath) {
         File file = new File(filePath);
         boolean exists = file.exists() && file.length() > 0;
@@ -182,7 +217,7 @@ public class PlayingActivity extends AppCompatActivity {
             stopPlaying();
             isplaying3 = false;
             isplaying = false;
-        } else if (!isplaying3) {
+        } else if (!isplaying3 && isplaying) {
             stopPlaying();
             resetAllButtons();
             if (checkFileExists(mFilename3)) {
@@ -269,6 +304,9 @@ public class PlayingActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Resets all buttons to their default state
+     */
     private void resetAllButtons() {
         record1.setBackgroundResource(R.drawable.playsongshape);
         record2.setBackgroundResource(R.drawable.playsongshape);
@@ -285,18 +323,21 @@ public class PlayingActivity extends AppCompatActivity {
         isplaying6 = false;
     }
 
+    /**
+     * Starts playing the selected recording
+     */
     private void startplaying(int recordingno) {
-        // Asegurar liberación de recursos previos
+        // Ensure previous resources are released
         if (mediaPlayer != null) {
             stopPlaying();
         }
 
         mediaPlayer = new MediaPlayer();
 
-        // Establecer volumen máximo
+        // Set maximum volume
         mediaPlayer.setVolume(1.0f, 1.0f);
 
-        // Añadir listener de error
+        // Add error listener
         mediaPlayer.setOnErrorListener((mp, what, extra) -> {
             Log.e(TAG, "MediaPlayer Error: " + what + ", " + extra);
             Toast.makeText(this, "Error playing recording", Toast.LENGTH_SHORT).show();
@@ -308,7 +349,7 @@ public class PlayingActivity extends AppCompatActivity {
         String fileToPlay = null;
 
         try {
-            // Determinar qué archivo reproducir
+            // Determine which file to play
             switch (recordingno) {
                 case 1: fileToPlay = mFilename1; break;
                 case 2: fileToPlay = mFilename2; break;
@@ -321,19 +362,19 @@ public class PlayingActivity extends AppCompatActivity {
             Log.d(TAG, "Starting playback for recording #" + recordingno);
             Log.d(TAG, "Playing file: " + fileToPlay + " size: " + new File(fileToPlay).length());
 
-            // Usar FileInputStream para mejor compatibilidad
+            // Use FileInputStream for better compatibility
             FileInputStream fis = new FileInputStream(new File(fileToPlay));
             mediaPlayer.setDataSource(fis.getFD());
             fis.close();
 
-            // Añadir listener para cuando termine la reproducción
+            // Add listener for when playback completes
             mediaPlayer.setOnCompletionListener(mp -> {
                 Log.d(TAG, "Playback completed");
                 resetAllButtons();
                 isplaying = false;
             });
 
-            // Usar prepare() síncrono para archivos locales
+            // Use synchronous prepare() for local files
             mediaPlayer.prepare();
             mediaPlayer.start();
 
@@ -350,6 +391,9 @@ public class PlayingActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Stops playback and releases resources
+     */
     private void stopPlaying() {
         if (mediaPlayer != null) {
             try {
@@ -373,12 +417,31 @@ public class PlayingActivity extends AppCompatActivity {
     }
 
     @Override
+    protected void onResume() {
+        super.onResume();
+
+        // Resume animations if they exist
+        if (animationDrawable != null && !animationDrawable.isRunning()) {
+            animationDrawable.start();
+        }
+
+        if (shineAnimator != null && shineAnimator.isPaused()) {
+            shineAnimator.resume();
+        }
+    }
+
+    @Override
     protected void onPause() {
         Log.d(TAG, "onPause called");
         super.onPause();
         stopPlaying();
         resetAllButtons();
         isplaying = false;
+
+        // Pause animations
+        if (shineAnimator != null) {
+            shineAnimator.pause();
+        }
     }
 
     @Override
@@ -388,6 +451,13 @@ public class PlayingActivity extends AppCompatActivity {
         stopPlaying();
         resetAllButtons();
         isplaying = false;
+
+        // Ensure complete release of MediaPlayer
+        if (mediaPlayer != null) {
+            mediaPlayer.reset();
+            mediaPlayer.release();
+            mediaPlayer = null;
+        }
     }
 
     @Override
@@ -398,5 +468,12 @@ public class PlayingActivity extends AppCompatActivity {
             mediaPlayer.release();
             mediaPlayer = null;
         }
+
+        // Clean up animations
+        if (shineAnimator != null) {
+            shineAnimator.cancel();
+            shineAnimator = null;
+        }
     }
 }
+

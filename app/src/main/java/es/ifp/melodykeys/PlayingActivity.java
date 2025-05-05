@@ -116,6 +116,9 @@ public class PlayingActivity extends AppCompatActivity {
 
         // Verify existence of files at startup
         checkAllFiles();
+
+        // Verify existence of files at startup and update button states
+        updateButtonStates();
     }
 
     /**
@@ -391,6 +394,40 @@ public class PlayingActivity extends AppCompatActivity {
         }
     }
 
+
+
+    /**
+     * Updates the visual state of buttons based on file availability
+     */
+    private void updateButtonStates() {
+        // Check each file and update button appearance accordingly
+        boolean file1Exists = new File(mFilename1).exists() && new File(mFilename1).length() > 0;
+        boolean file2Exists = new File(mFilename2).exists() && new File(mFilename2).length() > 0;
+        boolean file3Exists = new File(mFilename3).exists() && new File(mFilename3).length() > 0;
+        boolean file4Exists = new File(mFilename4).exists() && new File(mFilename4).length() > 0;
+        boolean file5Exists = new File(mFilename5).exists() && new File(mFilename5).length() > 0;
+        boolean file6Exists = new File(mFilename6).exists() && new File(mFilename6).length() > 0;
+
+        // Update button appearance based on file existence
+        record1.setEnabled(file1Exists);
+        record2.setEnabled(file2Exists);
+        record3.setEnabled(file3Exists);
+        record4.setEnabled(file4Exists);
+        record5.setEnabled(file5Exists);
+        record6.setEnabled(file6Exists);
+
+        // Optional: Set alpha for disabled buttons to visually indicate status
+        record1.setAlpha(file1Exists ? 1.0f : 0.5f);
+        record2.setAlpha(file2Exists ? 1.0f : 0.5f);
+        record3.setAlpha(file3Exists ? 1.0f : 0.5f);
+        record4.setAlpha(file4Exists ? 1.0f : 0.5f);
+        record5.setAlpha(file5Exists ? 1.0f : 0.5f);
+        record6.setAlpha(file6Exists ? 1.0f : 0.5f);
+
+        Log.d(TAG, "Button states updated based on file existence");
+    }
+
+
     /**
      * Stops playback and releases resources
      */
@@ -474,6 +511,12 @@ public class PlayingActivity extends AppCompatActivity {
             shineAnimator.cancel();
             shineAnimator = null;
         }
+
+
     }
+
+
 }
+
+
 

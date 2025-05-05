@@ -668,34 +668,32 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             default: currentFile = mFilename1; break;
         }
 
-        // Increment for next recording with circular rotation
-        recordingno = (recordingno % 6) + 1;
-
-        // Save the new recording number
+        // Save the current recording number BEFORE incrementing
         SharedPreferences.Editor editor = getSharedPreferences("FILENO", MODE_PRIVATE).edit();
         editor.putInt("fileno", recordingno);
-        editor.apply();
+        // Use commit() instead of apply() for immediate synchronization
+        editor.commit();
+
+        // Increment for next recording with circular rotation
+        recordingno = (recordingno % 6) + 1;
 
         return currentFile;
     }
 
+    // Modify onRecord method to properly handle recording state
     private void onRecord(boolean start) {
         if (start) {
             startRecording();
         } else {
             stopRecording();
 
-            int songNumber;
-            if (recordingno == 1) {
-                songNumber = 6;
-            } else {
-                songNumber = recordingno - 1;
-            }
+            // Get the current recording number (not the next one)
+            SharedPreferences prefs = getSharedPreferences("FILENO", MODE_PRIVATE);
+            int songNumber = prefs.getInt("fileno", 1);
 
             Toast.makeText(getApplicationContext(), "Song " + songNumber + " saved", Toast.LENGTH_SHORT).show();
         }
     }
-
     @Override
     protected void onResume() {
         super.onResume();
@@ -719,10 +717,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onPause() {
         super.onPause();
+
+        // Ensure recording is stopped when leaving the activity
         if (mediaRecorder != null && !mStartRecording) {
             stopRecording();
             mStartRecording = true;
-            recordButton.setText("Record");
+            if (recordButton != null) {
+                recordButton.setText("Record");
+            }
+
+            // Force commit the current recording state
+            SharedPreferences.Editor editor = getSharedPreferences("FILENO", MODE_PRIVATE).edit();
+            editor.commit();
         }
 
         // Pause animations
@@ -730,6 +736,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             shineAnimator.pause();
         }
     }
+
 
     @Override
     protected void onStop() {

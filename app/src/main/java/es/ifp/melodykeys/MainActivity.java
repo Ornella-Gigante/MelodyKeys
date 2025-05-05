@@ -15,12 +15,15 @@ import android.widget.HorizontalScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.Manifest;
+import android.animation.ObjectAnimator;
+import android.animation.ValueAnimator;
+import android.graphics.drawable.AnimationDrawable;
+import android.view.animation.AccelerateDecelerateInterpolator;
 
 import androidx.activity.EdgeToEdge;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
@@ -34,16 +37,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private static final String TAG = "MainActivity";
     private static final int PERMISSION_CODE = 100;
 
-    // Directorio base para archivos de grabación (interno)
+    // Base directory for recording files (internal)
     public static final String BASE_DIR = "/data/user/0/es.ifp.melodykeys/files/MelodyRecordings/";
     private HorizontalScrollView scrollView;
     public int recordingno = 0;
 
-    // Variables para UI
+    // UI variables
     private Button recordButton;
     private Button left_navigation, right_navigation, playButton;
+    private AnimationDrawable animationDrawable;
+    private ObjectAnimator shineAnimator;
 
-    // Variables para grabación
+    // Recording variables
     private MediaRecorder mediaRecorder;
     public static String mFilename1 = null;
     public static String mFilename2 = null;
@@ -55,18 +60,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private SoundPool soundPool;
     boolean mStartRecording = true;
 
-    // Usa ActivityResultContracts para Android 13+
+    // Use ActivityResultContracts for Android 13+
     private ActivityResultLauncher<String> requestPermissionLauncher =
             registerForActivityResult(new ActivityResultContracts.RequestPermission(), isGranted -> {
                 if (isGranted) {
-                    // Permiso concedido, ahora sí inicia la grabación
+                    // Permission granted, start recording
                     onRecord(true);
                     if (recordButton != null) {
                         recordButton.setText("Finish");
                     }
                     mStartRecording = false;
                 } else {
-                    Toast.makeText(this, "Permiso de grabación requerido", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, "Recording permission required", Toast.LENGTH_SHORT).show();
                 }
             });
 
@@ -132,7 +137,40 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         recordButton = findViewById(R.id.bt_record);
         playButton = findViewById(R.id.bt_play_recording);
 
-        // Listeners for buttons of right and left
+        // Ensure MediaRecorder is clean at startup
+        if (mediaRecorder != null) {
+            mediaRecorder.reset();
+            mediaRecorder.release();
+            mediaRecorder = null;
+        }
+
+        // Reset recording state
+        mStartRecording = true;
+        if (recordButton != null) {
+            recordButton.setText("Record");
+        }
+
+        // Initialize animated background
+        View backgroundView = findViewById(R.id.animated_background);
+        if (backgroundView != null) {
+            animationDrawable = (AnimationDrawable) backgroundView.getBackground();
+            animationDrawable.setEnterFadeDuration(2000);
+            animationDrawable.setExitFadeDuration(4000);
+            animationDrawable.start();
+        }
+
+        // Initialize shine effect
+        View shineView = findViewById(R.id.shine_effect);
+        if (shineView != null) {
+            shineAnimator = ObjectAnimator.ofFloat(shineView, "translationX",
+                    -200f, getResources().getDisplayMetrics().widthPixels + 200f);
+            shineAnimator.setDuration(3000);
+            shineAnimator.setInterpolator(new AccelerateDecelerateInterpolator());
+            shineAnimator.setRepeatCount(ValueAnimator.INFINITE);
+            shineAnimator.start();
+        }
+
+        // Listeners for navigation buttons
         left_navigation.setOnClickListener(v -> {
             scrollView.scrollTo(scrollView.getScrollX() - 30, scrollView.getScrollY());
         });
@@ -145,11 +183,45 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         SharedPreferences prefs = getSharedPreferences("FILENO", MODE_PRIVATE);
         recordingno = prefs.getInt("fileno", 1);
 
+        // Validate recording number is in valid range
+        if (recordingno < 1 || recordingno > 6) {
+            recordingno = 1;
+            prefs.edit().putInt("fileno", recordingno).apply();
+        }
+
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+    }
+
+    /**
+     * Clears all previous recordings and resets the recording counter
+     */
+    private void clearOldRecordings() {
+        File file1 = new File(mFilename1);
+        File file2 = new File(mFilename2);
+        File file3 = new File(mFilename3);
+        File file4 = new File(mFilename4);
+        File file5 = new File(mFilename5);
+        File file6 = new File(mFilename6);
+
+        // Delete existing files
+        if (file1.exists()) file1.delete();
+        if (file2.exists()) file2.delete();
+        if (file3.exists()) file3.delete();
+        if (file4.exists()) file4.delete();
+        if (file5.exists()) file5.delete();
+        if (file6.exists()) file6.delete();
+
+        // Reset counter
+        recordingno = 1;
+        SharedPreferences.Editor editor = getSharedPreferences("FILENO", MODE_PRIVATE).edit();
+        editor.putInt("fileno", recordingno);
+        editor.apply();
+
+        Log.d(TAG, "All previous recordings cleared");
     }
 
     private void initializeSoundPool() {
@@ -171,14 +243,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void setupRecordingPaths() {
-        // Crear directorio para las grabaciones en almacenamiento interno
+        // Create directory for recordings in internal storage
         File recordingsDir = new File(getFilesDir(), "MelodyRecordings");
         if (!recordingsDir.exists()) {
             boolean success = recordingsDir.mkdirs();
             Log.d(TAG, "Directory creation result: " + success);
         }
 
-        // Usar constante BASE_DIR para todas las rutas
+        // Use BASE_DIR constant for all paths
         mFilename1 = BASE_DIR + "audiorecordtest1.m4a";
         mFilename2 = BASE_DIR + "audiorecordtest2.m4a";
         mFilename3 = BASE_DIR + "audiorecordtest3.m4a";
@@ -390,11 +462,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onClick(View view) {
-        // Verificar que soundPool no sea null antes de usarlo
+        // Verify soundPool is not null before using it
         if (soundPool == null) {
             Log.e(TAG, "SoundPool is null in onClick");
-            Toast.makeText(this, "Error: SoundPool no inicializado", Toast.LENGTH_SHORT).show();
-            // Reintentar inicializar SoundPool
+            Toast.makeText(this, "Error: SoundPool not initialized", Toast.LENGTH_SHORT).show();
+            // Try to reinitialize SoundPool
             initializeSoundPool();
             return;
         }
@@ -477,17 +549,23 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     public void play(View view) {
-        // Verificar si hay al menos una grabación disponible
+        // Check if at least one recording is available
         boolean hasRecordings = false;
 
-        // Verificar todos los archivos, no solo el primero
+        // Check all files, not just the first one
         File file1 = new File(mFilename1);
         File file2 = new File(mFilename2);
         File file3 = new File(mFilename3);
+        File file4 = new File(mFilename4);
+        File file5 = new File(mFilename5);
+        File file6 = new File(mFilename6);
 
         if ((file1.exists() && file1.length() > 0) ||
                 (file2.exists() && file2.length() > 0) ||
-                (file3.exists() && file3.length() > 0)) {
+                (file3.exists() && file3.length() > 0) ||
+                (file4.exists() && file4.length() > 0) ||
+                (file5.exists() && file5.length() > 0) ||
+                (file6.exists() && file6.length() > 0)) {
             hasRecordings = true;
         }
 
@@ -502,7 +580,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void record(View view) {
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.RECORD_AUDIO)
                 == PackageManager.PERMISSION_GRANTED) {
-            // Ya tiene permisos, procede con la grabación
+            // Already has permissions, proceed with recording
             onRecord(mStartRecording);
 
             if (mStartRecording) {
@@ -513,13 +591,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             mStartRecording = !mStartRecording;
         } else {
-            // Solicitar permisos y esperar la respuesta
+            // Request permissions and wait for response
             requestPermissionLauncher.launch(Manifest.permission.RECORD_AUDIO);
         }
     }
 
     private void startRecording() {
-        // Asegurar que el directorio existe
+        // Ensure directory exists
         File directory = new File(getFilesDir(), "MelodyRecordings");
         if (!directory.exists()) {
             boolean success = directory.mkdirs();
@@ -558,7 +636,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 mediaRecorder.reset();
                 mediaRecorder.release();
 
-                // Verificar que el archivo existe y tiene contenido
+                // Verify file exists and has content
                 File recordedFile = new File(getCurrentFilename());
                 Log.d(TAG, "Recording saved: " + getCurrentFilename() + " Size: " + recordedFile.length() + " bytes");
 
@@ -574,6 +652,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private String getCurrentFilename() {
+        // Ensure recordingno is in valid range (1-6)
+        if (recordingno < 1 || recordingno > 6) {
+            recordingno = 1;
+        }
+
         String currentFile;
         switch (recordingno) {
             case 1: currentFile = mFilename1; break;
@@ -582,18 +665,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case 4: currentFile = mFilename4; break;
             case 5: currentFile = mFilename5; break;
             case 6: currentFile = mFilename6; break;
-            default:
-                currentFile = mFilename1;
-                recordingno = 1;
-                break;
+            default: currentFile = mFilename1; break;
         }
 
-        // Update for next recording
-        int nextRecordingNo = (recordingno % 6) + 1;
+        // Increment for next recording with circular rotation
+        recordingno = (recordingno % 6) + 1;
 
         // Save the new recording number
         SharedPreferences.Editor editor = getSharedPreferences("FILENO", MODE_PRIVATE).edit();
-        editor.putInt("fileno", nextRecordingNo);
+        editor.putInt("fileno", recordingno);
         editor.apply();
 
         return currentFile;
@@ -620,10 +700,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void onResume() {
         super.onResume();
 
-        // Reinicializar soundPool si es null
+        // Reinitialize soundPool if null
         if (soundPool == null) {
             Log.d(TAG, "Reinitializing SoundPool in onResume");
             initializeSoundPool();
+        }
+
+        // Resume animations if they exist
+        if (animationDrawable != null && !animationDrawable.isRunning()) {
+            animationDrawable.start();
+        }
+
+        if (shineAnimator != null && shineAnimator.isPaused()) {
+            shineAnimator.resume();
         }
     }
 
@@ -635,13 +724,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             mStartRecording = true;
             recordButton.setText("Record");
         }
+
+        // Pause animations
+        if (shineAnimator != null) {
+            shineAnimator.pause();
+        }
     }
 
     @Override
     protected void onStop() {
         super.onStop();
 
-        // Mejor manejo del soundPool
+        // Better handling of soundPool
         if (soundPool != null) {
             try {
                 soundPool.release();
@@ -659,6 +753,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if (mediaRecorder != null) {
             mediaRecorder.release();
             mediaRecorder = null;
+        }
+
+        // Clean up animations
+        if (shineAnimator != null) {
+            shineAnimator.cancel();
+            shineAnimator = null;
         }
     }
 }

@@ -54,7 +54,8 @@ This app is IN PROGRESS and  transforms your Android device into a virtual piano
 
 ## 🎥 Demo
 
-=== IN PROGRESSS ===
+[![MelodyKeys Demo](https://user-images.githubusercontent.com/your-username/your-image-id.png)](https://vimeo.com/1081564940/03ad71e624 "MelodyKeys Demo")
+
 
 ---
 

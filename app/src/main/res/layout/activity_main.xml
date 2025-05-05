@@ -306,8 +306,13 @@
                 android:layout_toLeftOf="@id/keyA7" android:stateListAnimator="@null" android:textIsSelectable="false"/>
             <TextView android:id="@+id/labelA7" style="@style/style_for_TectView_ketText7" android:text="A7"
                 android:layout_toLeftOf="@id/keyB7" android:stateListAnimator="@null" android:textIsSelectable="false"/>
-            <TextView android:id="@+id/labelB7" style="@style/style_for_TectView_ketText7" android:text="B7"
-                android:layout_toLeftOf="@id/keyC7" android:stateListAnimator="@null" android:textIsSelectable="false"/>
+
+            <TextView
+                android:id="@+id/labelB7"
+                style="@style/style_for_TectView_ketText7"
+                android:layout_toLeftOf="@id/keyC7"
+                android:stateListAnimator="@null"
+                android:textIsSelectable="false" />
         </RelativeLayout>
     </HorizontalScrollView>
 </RelativeLayout>

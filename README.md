@@ -54,7 +54,8 @@ This app is IN PROGRESS and  transforms your Android device into a virtual piano
 
 ## 🎥 Demo
 
-[![MelodyKeys Demo](https://github.com/Ornella-Gigante/MelodyKeys/blob/main/image_1.png.png)(https://vimeo.com/1081564940/03ad71e624 "MelodyKeys Demo")
+[![MelodyKeys Demo](https://github.com/Ornella-Gigante/MelodyKeys/blob/main/image_1.png?raw=true)](https://vimeo.com/1081564940/03ad71e624 "MelodyKeys Demo")
+
 
 
 ---

@@ -3,7 +3,8 @@
 
 
 Welcome to **MelodyKeys**!🎶✨
-This app is IN PROGRESS and  transforms your Android device into a virtual piano, offering a fun and interactive way to create music. Whether you're a beginner or an experienced musician, this app lets you unleash your creativity with ease 🎵
+This app that transforms your Android device into a virtual piano, offering a fun and interactive way to create music. Whether you're a beginner or an experienced musician, this app lets you unleash your creativity with ease 🎵
+The launcher is IN PROGRESS.
 
 
 ---
